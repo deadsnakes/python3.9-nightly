@@ -197,6 +197,13 @@ now raises :exc:`ImportError` instead of :exc:`ValueError` for invalid relative
 import attempts.
 (Contributed by Ngalim Siregar in :issue:`37444`.)
 
+signal
+------
+
+Exposed the Linux-specific :func:`signal.pidfd_send_signal` for sending to
+signals to a process using a file descriptor instead of a pid. (:issue:`38712`)
+
+
 Optimizations
 =============
 
@@ -210,6 +217,7 @@ Build and C API Changes
   ``PyThreadState.recursion_depth`` field. Remove ``_Py_CheckRecursionLimit``
   from the stable ABI.
   (Contributed by Victor Stinner in :issue:`38644`.)
+
 * Add a new public :c:func:`PyObject_CallNoArgs` function to the C API, which
   calls a callable Python object without any arguments. It is the most efficient
   way to call a callable Python object without any argument.
@@ -218,6 +226,14 @@ Build and C API Changes
 * The global variable :c:data:`PyStructSequence_UnnamedField` is now a constant
   and refers to a constant string.
   (Contributed by Serhiy Storchaka in :issue:`38650`.)
+
+* Exclude ``PyFPE_START_PROTECT()`` and ``PyFPE_END_PROTECT()`` macros of
+  ``pyfpe.h`` from ``Py_LIMITED_API`` (stable API).
+  (Contributed by Victor Stinner in :issue:`38835`.)
+
+* Remove ``PyMethod_ClearFreeList()`` and ``PyCFunction_ClearFreeList()``
+  functions: the free lists of bound method objects have been removed.
+  (Contributed by Inada Naoki and Victor Stinner in :issue:`37340`.)
 
 
 Deprecated
