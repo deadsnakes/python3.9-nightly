@@ -648,9 +648,11 @@ pycore_init_builtins(PyThreadState *tstate)
     if (interp->builtins_copy == NULL) {
         goto error;
     }
+    Py_DECREF(bimod);
     return _PyStatus_OK();
 
 error:
+    Py_XDECREF(bimod);
     return _PyStatus_ERR("can't initialize builtins module");
 }
 
@@ -1251,16 +1253,15 @@ finalize_interp_clear(PyThreadState *tstate)
 {
     int is_main_interp = _Py_IsMainInterpreter(tstate);
 
-    /* bpo-36854: Explicitly clear the codec registry
-       and trigger a GC collection */
     PyInterpreterState *interp = tstate->interp;
-    Py_CLEAR(interp->codec_search_path);
-    Py_CLEAR(interp->codec_search_cache);
-    Py_CLEAR(interp->codec_error_registry);
-    _PyGC_CollectNoFail();
 
     /* Clear interpreter state and all thread states */
     PyInterpreterState_Clear(tstate->interp);
+
+    /* Trigger a GC collection on subinterpreters*/
+    if (!is_main_interp) {
+        _PyGC_CollectNoFail();
+    }
 
     finalize_interp_types(tstate, is_main_interp);
 
