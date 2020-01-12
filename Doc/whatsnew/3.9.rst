@@ -177,6 +177,20 @@ with this change. The overridden methods of :class:`~imaplib.IMAP4_SSL` and
 :class:`~imaplib.IMAP4_stream` were applied to this change.
 (Contributed by Dong-hee Na in :issue:`38615`.)
 
+math
+----
+
+Add :func:`math.nextafter`: return the next floating-point value after *x*
+towards *y*.
+(Contributed by Victor Stinner in :issue:`39288`.)
+
+nntplib
+-------
+
+:class:`~nntplib.NNTP` and :class:`~nntplib.NNTP_SSL` now raise a :class:`ValueError`
+if the given timeout for their constructor is zero to prevent the creation of
+a non-blocking socket. (Contributed by Dong-hee Na in :issue:`39259`.)
+
 os
 --
 
