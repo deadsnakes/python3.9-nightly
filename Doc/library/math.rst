@@ -213,6 +213,21 @@ Number-theoretic and representation functions
    of *x* and are floats.
 
 
+.. function:: nextafter(x, y)
+
+   Return the next floating-point value after *x* towards *y*.
+
+   If *x* is equal to *y*, return *y*.
+
+   Examples:
+
+   * ``math.nextafter(x, math.inf)`` goes up: towards positive infinity.
+   * ``math.nextafter(x, -math.inf)`` goes down: towards minus infinity.
+   * ``math.nextafter(x, 0.0)`` goes towards zero.
+   * ``math.nextafter(x, math.copysign(math.inf, x))`` goes away from zero.
+
+   .. versionadded:: 3.9
+
 .. function:: perm(n, k=None)
 
    Return the number of ways to choose *k* items from *n* items
