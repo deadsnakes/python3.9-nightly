@@ -159,6 +159,13 @@ Added constants :data:`~fcntl.F_OFD_GETLK`, :data:`~fcntl.F_OFD_SETLK`
 and :data:`~fcntl.F_OFD_SETLKW`.
 (Contributed by Dong-hee Na in :issue:`38602`.)
 
+ftplib
+-------
+
+:class:`~ftplib.FTP` and :class:`~ftplib.FTP_TLS` now raise a :class:`ValueError`
+if the given timeout for their constructor is zero to prevent the creation of
+a non-blocking socket. (Contributed by Dong-hee Na in :issue:`39259`.)
+
 gc
 --
 
@@ -166,6 +173,10 @@ When the garbage collector makes a collection in which some objects resurrect
 (they are reachable from outside the isolated cycles after the finalizers have
 been executed), do not block the collection of all objects that are still
 unreachable. (Contributed by Pablo Galindo and Tim Peters in :issue:`38379`.)
+
+Added a new function :func:`gc.is_finalized` to check if an object has been
+finalized by the garbage collector. (Contributed by Pablo Galindo in
+:issue:`39322`.)
 
 imaplib
 -------
@@ -251,6 +262,13 @@ To improve consistency with import statements, :func:`importlib.util.resolve_nam
 now raises :exc:`ImportError` instead of :exc:`ValueError` for invalid relative
 import attempts.
 (Contributed by Ngalim Siregar in :issue:`37444`.)
+
+smtplib
+-------
+
+:class:`~smtplib.SMTP` and :class:`~smtplib.SMTP_SSL` now raise a :class:`ValueError`
+if the given timeout for their constructor is zero to prevent the creation of
+a non-blocking socket. (Contributed by Dong-hee Na in :issue:`39259`.)
 
 signal
 ------
