@@ -819,17 +819,20 @@ dir_fd_converter(PyObject *o, void *p)
     }
 }
 
-#ifdef HAVE_PUTENV
+/* Windows _wputenv() and setenv() copy the arguments and so don't require
+   the caller to manage the variable memory. Only Unix putenv() requires
+   putenv_dict. */
+#if defined(HAVE_PUTENV) && !defined(MS_WINDOWS) && !defined(HAVE_SETENV)
 #  define PY_PUTENV_DICT
 #endif
 
 typedef struct {
     PyObject *billion;
 #ifdef PY_PUTENV_DICT
-    /* putenv() and _wputenv() requires that the caller manages the environment
-       variable memory. Use a Python dictionary for that: name => env, where
-       env is a string like "name=value". On Windows, dict keys and values are
-       Unicode strings. On Unix, they are bytes strings. */
+    /* putenv() requires that the caller manages the environment variable
+       memory. Use a Python dictionary for that: name => env, where env is a
+       string like "name=value". On Windows, dict keys and values are Unicode
+       strings. On Unix, they are bytes strings. */
     PyObject *putenv_dict;
 #endif
     PyObject *DirEntryType;
@@ -10079,8 +10082,6 @@ posix_putenv_dict_setitem(PyObject *name, PyObject *value)
 #endif  /* PY_PUTENV_DICT */
 
 
-#ifdef HAVE_PUTENV
-
 #ifdef MS_WINDOWS
 /*[clinic input]
 os.putenv
@@ -10130,15 +10131,16 @@ os_putenv_impl(PyObject *module, PyObject *name, PyObject *value)
         posix_error();
         goto error;
     }
+    Py_DECREF(unicode);
 
-    posix_putenv_dict_setitem(name, unicode);
     Py_RETURN_NONE;
 
 error:
     Py_DECREF(unicode);
     return NULL;
 }
-#else /* MS_WINDOWS */
+/* repeat !defined(MS_WINDOWS) to workaround an Argument Clinic issue */
+#elif (defined(HAVE_SETENV) || defined(HAVE_PUTENV)) && !defined(MS_WINDOWS)
 /*[clinic input]
 os.putenv
 
@@ -10153,8 +10155,6 @@ static PyObject *
 os_putenv_impl(PyObject *module, PyObject *name, PyObject *value)
 /*[clinic end generated code: output=d29a567d6b2327d2 input=a97bc6152f688d31]*/
 {
-    PyObject *bytes = NULL;
-    char *env;
     const char *name_string = PyBytes_AS_STRING(name);
     const char *value_string = PyBytes_AS_STRING(value);
 
@@ -10162,69 +10162,31 @@ os_putenv_impl(PyObject *module, PyObject *name, PyObject *value)
         PyErr_SetString(PyExc_ValueError, "illegal environment variable name");
         return NULL;
     }
-    bytes = PyBytes_FromFormat("%s=%s", name_string, value_string);
+
+#ifdef HAVE_SETENV
+    if (setenv(name_string, value_string, 1)) {
+        return posix_error();
+    }
+#else
+    PyObject *bytes = PyBytes_FromFormat("%s=%s", name_string, value_string);
     if (bytes == NULL) {
         return NULL;
     }
 
-    env = PyBytes_AS_STRING(bytes);
+    char *env = PyBytes_AS_STRING(bytes);
     if (putenv(env)) {
         Py_DECREF(bytes);
         return posix_error();
     }
 
     posix_putenv_dict_setitem(name, bytes);
-    Py_RETURN_NONE;
-}
-#endif /* MS_WINDOWS */
-#endif /* HAVE_PUTENV */
-
-
-#ifdef MS_WINDOWS
-/*[clinic input]
-os.unsetenv
-    name: unicode
-    /
-
-Delete an environment variable.
-[clinic start generated code]*/
-
-static PyObject *
-os_unsetenv_impl(PyObject *module, PyObject *name)
-/*[clinic end generated code: output=54c4137ab1834f02 input=4d6a1747cc526d2f]*/
-{
-    /* PyUnicode_AsWideCharString() rejects embedded null characters */
-    wchar_t *name_str = PyUnicode_AsWideCharString(name, NULL);
-    if (name_str == NULL) {
-        return NULL;
-    }
-
-    BOOL ok = SetEnvironmentVariableW(name_str, NULL);
-    PyMem_Free(name_str);
-
-    if (!ok) {
-        return PyErr_SetFromWindowsErr(0);
-    }
-
-#ifdef PY_PUTENV_DICT
-    /* Remove the key from putenv_dict;
-     * this will cause it to be collected.  This has to
-     * happen after the real unsetenv() call because the
-     * old value was still accessible until then.
-     */
-    if (PyDict_DelItem(_posixstate(module)->putenv_dict, name)) {
-        /* really not much we can do; just leak */
-        if (!PyErr_ExceptionMatches(PyExc_KeyError)) {
-            return NULL;
-        }
-        PyErr_Clear();
-    }
 #endif
-
     Py_RETURN_NONE;
 }
-/* repeat !defined(MS_WINDOWS) to workaround an Argument Clinic issue */
-#elif defined(HAVE_UNSETENV) && !defined(MS_WINDOWS)
+#endif  /* defined(HAVE_SETENV) || defined(HAVE_PUTENV) */
+
+
+#ifdef HAVE_UNSETENV
 /*[clinic input]
 os.unsetenv
     name: FSConverter
