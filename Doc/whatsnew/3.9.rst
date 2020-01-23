@@ -216,9 +216,6 @@ Exposed the Linux-specific :func:`os.pidfd_open` (:issue:`38692`) and
 :data:`os.P_PIDFD` (:issue:`38713`) for process management with file
 descriptors.
 
-The :func:`os.unsetenv` function is now also available on Windows.
-(Contributed by Victor Stinner in :issue:`39413`.)
-
 poplib
 ------
 
@@ -353,8 +350,25 @@ Deprecated
   deprecated and will be removed in version 3.11.
   (Contributed by Yury Selivanov and Kyle Stanley in :issue:`34790`.)
 
+* binhex4 and hexbin4 standards are now deprecated. The :`binhex` module
+  and the following :mod:`binascii` functions are now deprecated:
+
+  * :func:`~binascii.b2a_hqx`, :func:`~binascii.a2b_hqx`
+  * :func:`~binascii.rlecode_hqx`, :func:`~binascii.rledecode_hqx`
+  * :func:`~binascii.crc_hqx`
+
+  (Contributed by Victor Stinner in :issue:`39353`.)
+
+
 Removed
 =======
+
+* :class:`nntplib.NNTP`: ``xpath()`` and ``xgtitle()`` methods have been removed.
+  These methods are deprecated since Python 3.3. Generally, these extensions
+  are not supported or not enabled by NNTP server administrators.
+  For ``xgtitle()``, please use :meth:`nntplib.NNTP.descriptions` or
+  :meth:`nntplib.NNTP.description` instead.
+  (Contributed by Dong-hee Na in :issue:`39366`.)
 
 * :class:`array.array`: ``tostring()`` and ``fromstring()`` methods have been
   removed. They were aliases to ``tobytes()`` and ``frombytes()``, deprecated
