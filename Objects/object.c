@@ -93,7 +93,7 @@ static PyObject refchain = {&refchain, &refchain};
  * way, though; exceptions include statically allocated type objects, and
  * statically allocated singletons (like Py_True and Py_None).
  */
-void
+static void
 _Py_AddToAllObjects(PyObject *op, int force)
 {
 #ifdef  Py_DEBUG
@@ -139,9 +139,11 @@ Py_DecRef(PyObject *o)
 PyObject *
 PyObject_Init(PyObject *op, PyTypeObject *tp)
 {
-    if (op == NULL)
+    /* Any changes should be reflected in PyObject_INIT() macro */
+    if (op == NULL) {
         return PyErr_NoMemory();
-    /* Any changes should be reflected in PyObject_INIT (objimpl.h) */
+    }
+
     Py_TYPE(op) = tp;
     if (PyType_GetFlags(tp) & Py_TPFLAGS_HEAPTYPE) {
         Py_INCREF(tp);
@@ -153,9 +155,11 @@ PyObject_Init(PyObject *op, PyTypeObject *tp)
 PyVarObject *
 PyObject_InitVar(PyVarObject *op, PyTypeObject *tp, Py_ssize_t size)
 {
-    if (op == NULL)
+    /* Any changes should be reflected in PyObject_INIT_VAR() macro */
+    if (op == NULL) {
         return (PyVarObject *) PyErr_NoMemory();
-    /* Any changes should be reflected in PyObject_INIT_VAR */
+    }
+
     Py_SIZE(op) = size;
     PyObject_Init((PyObject *)op, tp);
     return op;
@@ -1805,6 +1809,22 @@ _PyTypes_Init(void)
 }
 
 
+void
+_Py_NewReference(PyObject *op)
+{
+    if (_Py_tracemalloc_config.tracing) {
+        _PyTraceMalloc_NewReference(op);
+    }
+#ifdef Py_REF_DEBUG
+    _Py_RefTotal++;
+#endif
+    Py_REFCNT(op) = 1;
+#ifdef Py_TRACE_REFS
+    _Py_AddToAllObjects(op, 1);
+#endif
+}
+
+
 #ifdef Py_TRACE_REFS
 void
 _Py_ForgetReference(PyObject *op)
@@ -2145,8 +2165,6 @@ _PyObject_AssertFailed(PyObject *obj, const char *expr, const char *msg,
     Py_FatalError("_PyObject_AssertFailed");
 }
 
-
-#undef _Py_Dealloc
 
 void
 _Py_Dealloc(PyObject *op)
