@@ -33,8 +33,8 @@ _PyObject_CheckConsistency(PyObject *op, int check_content)
     CHECK(!_PyObject_IsFreed(op));
     CHECK(Py_REFCNT(op) >= 1);
 
-    CHECK(op->ob_type != NULL);
-    _PyType_CheckConsistency(op->ob_type);
+    CHECK(Py_TYPE(op) != NULL);
+    _PyType_CheckConsistency(Py_TYPE(op));
 
     if (PyUnicode_Check(op)) {
         _PyUnicode_CheckConsistency(op, check_content);
@@ -58,7 +58,7 @@ _Py_GetRefTotal(void)
     Py_ssize_t total = _Py_RefTotal;
     o = _PySet_Dummy;
     if (o != NULL)
-        total -= o->ob_refcnt;
+        total -= Py_REFCNT(o);
     return total;
 }
 
@@ -144,7 +144,7 @@ PyObject_Init(PyObject *op, PyTypeObject *tp)
         return PyErr_NoMemory();
     }
 
-    Py_TYPE(op) = tp;
+    Py_SET_TYPE(op, tp);
     if (PyType_GetFlags(tp) & Py_TPFLAGS_HEAPTYPE) {
         Py_INCREF(tp);
     }
@@ -160,7 +160,7 @@ PyObject_InitVar(PyVarObject *op, PyTypeObject *tp, Py_ssize_t size)
         return (PyVarObject *) PyErr_NoMemory();
     }
 
-    Py_SIZE(op) = size;
+    Py_SET_SIZE(op, size);
     PyObject_Init((PyObject *)op, tp);
     return op;
 }
@@ -206,32 +206,33 @@ PyObject_CallFinalizer(PyObject *self)
 int
 PyObject_CallFinalizerFromDealloc(PyObject *self)
 {
-    if (self->ob_refcnt != 0) {
+    if (Py_REFCNT(self) != 0) {
         _PyObject_ASSERT_FAILED_MSG(self,
                                     "PyObject_CallFinalizerFromDealloc called "
                                     "on object with a non-zero refcount");
     }
 
     /* Temporarily resurrect the object. */
-    self->ob_refcnt = 1;
+    Py_SET_REFCNT(self, 1);
 
     PyObject_CallFinalizer(self);
 
     _PyObject_ASSERT_WITH_MSG(self,
-                              self->ob_refcnt > 0,
+                              Py_REFCNT(self) > 0,
                               "refcount is too small");
 
     /* Undo the temporary resurrection; can't use DECREF here, it would
      * cause a recursive call. */
-    if (--self->ob_refcnt == 0) {
+    Py_SET_REFCNT(self, Py_REFCNT(self) - 1);
+    if (Py_REFCNT(self) == 0) {
         return 0;         /* this is the normal path out */
     }
 
     /* tp_finalize resurrected it!  Make it look like the original Py_DECREF
      * never happened. */
-    Py_ssize_t refcnt = self->ob_refcnt;
+    Py_ssize_t refcnt = Py_REFCNT(self);
     _Py_NewReference(self);
-    self->ob_refcnt = refcnt;
+    Py_SET_REFCNT(self, refcnt);
 
     _PyObject_ASSERT(self,
                      (!PyType_IS_GC(Py_TYPE(self))
@@ -263,12 +264,12 @@ PyObject_Print(PyObject *op, FILE *fp, int flags)
         Py_END_ALLOW_THREADS
     }
     else {
-        if (op->ob_refcnt <= 0) {
+        if (Py_REFCNT(op) <= 0) {
             /* XXX(twouters) cast refcount to long until %zd is
                universally available */
             Py_BEGIN_ALLOW_THREADS
             fprintf(fp, "<refcnt %ld at %p>",
-                (long)op->ob_refcnt, (void *)op);
+                (long)Py_REFCNT(op), (void *)op);
             Py_END_ALLOW_THREADS
         }
         else {
@@ -298,7 +299,7 @@ PyObject_Print(PyObject *op, FILE *fp, int flags)
             else {
                 PyErr_Format(PyExc_TypeError,
                              "str() or repr() returned '%.100s'",
-                             s->ob_type->tp_name);
+                             Py_TYPE(s)->tp_name);
                 ret = -1;
             }
             Py_XDECREF(s);
@@ -330,7 +331,7 @@ _Py_BreakPoint(void)
 int
 _PyObject_IsFreed(PyObject *op)
 {
-    if (_PyMem_IsPtrFreed(op) || _PyMem_IsPtrFreed(op->ob_type)) {
+    if (_PyMem_IsPtrFreed(op) || _PyMem_IsPtrFreed(Py_TYPE(op))) {
         return 1;
     }
     /* ignore op->ob_ref: its value can have be modified
@@ -363,7 +364,7 @@ _PyObject_Dump(PyObject* op)
     fprintf(stderr, "object address  : %p\n", (void *)op);
     /* XXX(twouters) cast refcount to long until %zd is
        universally available */
-    fprintf(stderr, "object refcount : %ld\n", (long)op->ob_refcnt);
+    fprintf(stderr, "object refcount : %ld\n", (long)Py_REFCNT(op));
     fflush(stderr);
 
     PyTypeObject *type = Py_TYPE(op);
@@ -405,7 +406,7 @@ PyObject_Repr(PyObject *v)
         return PyUnicode_FromString("<NULL>");
     if (Py_TYPE(v)->tp_repr == NULL)
         return PyUnicode_FromFormat("<%s object at %p>",
-                                    v->ob_type->tp_name, v);
+                                    Py_TYPE(v)->tp_name, v);
 
     PyThreadState *tstate = _PyThreadState_GET();
 #ifdef Py_DEBUG
@@ -421,7 +422,7 @@ PyObject_Repr(PyObject *v)
                                " while getting the repr of an object")) {
         return NULL;
     }
-    res = (*v->ob_type->tp_repr)(v);
+    res = (*Py_TYPE(v)->tp_repr)(v);
     _Py_LeaveRecursiveCall(tstate);
 
     if (res == NULL) {
@@ -430,7 +431,7 @@ PyObject_Repr(PyObject *v)
     if (!PyUnicode_Check(res)) {
         _PyErr_Format(tstate, PyExc_TypeError,
                       "__repr__ returned non-string (type %.200s)",
-                      res->ob_type->tp_name);
+                      Py_TYPE(res)->tp_name);
         Py_DECREF(res);
         return NULL;
     }
@@ -664,22 +665,22 @@ do_richcompare(PyThreadState *tstate, PyObject *v, PyObject *w, int op)
     PyObject *res;
     int checked_reverse_op = 0;
 
-    if (v->ob_type != w->ob_type &&
-        PyType_IsSubtype(w->ob_type, v->ob_type) &&
-        (f = w->ob_type->tp_richcompare) != NULL) {
+    if (Py_TYPE(v) != Py_TYPE(w) &&
+        PyType_IsSubtype(Py_TYPE(w), Py_TYPE(v)) &&
+        (f = Py_TYPE(w)->tp_richcompare) != NULL) {
         checked_reverse_op = 1;
         res = (*f)(w, v, _Py_SwappedOp[op]);
         if (res != Py_NotImplemented)
             return res;
         Py_DECREF(res);
     }
-    if ((f = v->ob_type->tp_richcompare) != NULL) {
+    if ((f = Py_TYPE(v)->tp_richcompare) != NULL) {
         res = (*f)(v, w, op);
         if (res != Py_NotImplemented)
             return res;
         Py_DECREF(res);
     }
-    if (!checked_reverse_op && (f = w->ob_type->tp_richcompare) != NULL) {
+    if (!checked_reverse_op && (f = Py_TYPE(w)->tp_richcompare) != NULL) {
         res = (*f)(w, v, _Py_SwappedOp[op]);
         if (res != Py_NotImplemented)
             return res;
@@ -698,8 +699,8 @@ do_richcompare(PyThreadState *tstate, PyObject *v, PyObject *w, int op)
         _PyErr_Format(tstate, PyExc_TypeError,
                       "'%s' not supported between instances of '%.100s' and '%.100s'",
                       opstrings[op],
-                      v->ob_type->tp_name,
-                      w->ob_type->tp_name);
+                      Py_TYPE(v)->tp_name,
+                      Py_TYPE(w)->tp_name);
         return NULL;
     }
     Py_INCREF(res);
@@ -887,7 +888,7 @@ PyObject_GetAttr(PyObject *v, PyObject *name)
     if (!PyUnicode_Check(name)) {
         PyErr_Format(PyExc_TypeError,
                      "attribute name must be string, not '%.200s'",
-                     name->ob_type->tp_name);
+                     Py_TYPE(name)->tp_name);
         return NULL;
     }
     if (tp->tp_getattro != NULL)
@@ -912,7 +913,7 @@ _PyObject_LookupAttr(PyObject *v, PyObject *name, PyObject **result)
     if (!PyUnicode_Check(name)) {
         PyErr_Format(PyExc_TypeError,
                      "attribute name must be string, not '%.200s'",
-                     name->ob_type->tp_name);
+                     Py_TYPE(name)->tp_name);
         *result = NULL;
         return -1;
     }
@@ -988,7 +989,7 @@ PyObject_SetAttr(PyObject *v, PyObject *name, PyObject *value)
     if (!PyUnicode_Check(name)) {
         PyErr_Format(PyExc_TypeError,
                      "attribute name must be string, not '%.200s'",
-                     name->ob_type->tp_name);
+                     Py_TYPE(name)->tp_name);
         return -1;
     }
     Py_INCREF(name);
@@ -1010,7 +1011,7 @@ PyObject_SetAttr(PyObject *v, PyObject *name, PyObject *value)
         return err;
     }
     Py_DECREF(name);
-    _PyObject_ASSERT(name, name->ob_refcnt >= 1);
+    _PyObject_ASSERT(name, Py_REFCNT(name) >= 1);
     if (tp->tp_getattr == NULL && tp->tp_getattro == NULL)
         PyErr_Format(PyExc_TypeError,
                      "'%.100s' object has no attributes "
@@ -1040,13 +1041,11 @@ _PyObject_GetDictPtr(PyObject *obj)
     if (dictoffset == 0)
         return NULL;
     if (dictoffset < 0) {
-        Py_ssize_t tsize;
-        size_t size;
-
-        tsize = ((PyVarObject *)obj)->ob_size;
-        if (tsize < 0)
+        Py_ssize_t tsize = Py_SIZE(obj);
+        if (tsize < 0) {
             tsize = -tsize;
-        size = _PyObject_VAR_SIZE(tp, tsize);
+        }
+        size_t size = _PyObject_VAR_SIZE(tp, tsize);
 
         dictoffset += (long)size;
         _PyObject_ASSERT(obj, dictoffset > 0);
@@ -1114,9 +1113,9 @@ _PyObject_GetMethod(PyObject *obj, PyObject *name, PyObject **method)
         if (PyType_HasFeature(Py_TYPE(descr), Py_TPFLAGS_METHOD_DESCRIPTOR)) {
             meth_found = 1;
         } else {
-            f = descr->ob_type->tp_descr_get;
+            f = Py_TYPE(descr)->tp_descr_get;
             if (f != NULL && PyDescr_IsData(descr)) {
-                *method = f(descr, obj, (PyObject *)obj->ob_type);
+                *method = f(descr, obj, (PyObject *)Py_TYPE(obj));
                 Py_DECREF(descr);
                 return 0;
             }
@@ -1187,7 +1186,7 @@ _PyObject_GenericGetAttrWithDict(PyObject *obj, PyObject *name,
     if (!PyUnicode_Check(name)){
         PyErr_Format(PyExc_TypeError,
                      "attribute name must be string, not '%.200s'",
-                     name->ob_type->tp_name);
+                     Py_TYPE(name)->tp_name);
         return NULL;
     }
     Py_INCREF(name);
@@ -1202,9 +1201,9 @@ _PyObject_GenericGetAttrWithDict(PyObject *obj, PyObject *name,
     f = NULL;
     if (descr != NULL) {
         Py_INCREF(descr);
-        f = descr->ob_type->tp_descr_get;
+        f = Py_TYPE(descr)->tp_descr_get;
         if (f != NULL && PyDescr_IsData(descr)) {
-            res = f(descr, obj, (PyObject *)obj->ob_type);
+            res = f(descr, obj, (PyObject *)Py_TYPE(obj));
             if (res == NULL && suppress &&
                     PyErr_ExceptionMatches(PyExc_AttributeError)) {
                 PyErr_Clear();
@@ -1218,13 +1217,11 @@ _PyObject_GenericGetAttrWithDict(PyObject *obj, PyObject *name,
         dictoffset = tp->tp_dictoffset;
         if (dictoffset != 0) {
             if (dictoffset < 0) {
-                Py_ssize_t tsize;
-                size_t size;
-
-                tsize = ((PyVarObject *)obj)->ob_size;
-                if (tsize < 0)
+                Py_ssize_t tsize = Py_SIZE(obj);
+                if (tsize < 0) {
                     tsize = -tsize;
-                size = _PyObject_VAR_SIZE(tp, tsize);
+                }
+                size_t size = _PyObject_VAR_SIZE(tp, tsize);
                 _PyObject_ASSERT(obj, size <= PY_SSIZE_T_MAX);
 
                 dictoffset += (Py_ssize_t)size;
@@ -1301,7 +1298,7 @@ _PyObject_GenericSetAttrWithDict(PyObject *obj, PyObject *name,
     if (!PyUnicode_Check(name)){
         PyErr_Format(PyExc_TypeError,
                      "attribute name must be string, not '%.200s'",
-                     name->ob_type->tp_name);
+                     Py_TYPE(name)->tp_name);
         return -1;
     }
 
@@ -1314,7 +1311,7 @@ _PyObject_GenericSetAttrWithDict(PyObject *obj, PyObject *name,
 
     if (descr != NULL) {
         Py_INCREF(descr);
-        f = descr->ob_type->tp_descr_set;
+        f = Py_TYPE(descr)->tp_descr_set;
         if (f != NULL) {
             res = f(descr, obj, value);
             goto done;
@@ -1407,15 +1404,15 @@ PyObject_IsTrue(PyObject *v)
         return 0;
     if (v == Py_None)
         return 0;
-    else if (v->ob_type->tp_as_number != NULL &&
-             v->ob_type->tp_as_number->nb_bool != NULL)
-        res = (*v->ob_type->tp_as_number->nb_bool)(v);
-    else if (v->ob_type->tp_as_mapping != NULL &&
-             v->ob_type->tp_as_mapping->mp_length != NULL)
-        res = (*v->ob_type->tp_as_mapping->mp_length)(v);
-    else if (v->ob_type->tp_as_sequence != NULL &&
-             v->ob_type->tp_as_sequence->sq_length != NULL)
-        res = (*v->ob_type->tp_as_sequence->sq_length)(v);
+    else if (Py_TYPE(v)->tp_as_number != NULL &&
+             Py_TYPE(v)->tp_as_number->nb_bool != NULL)
+        res = (*Py_TYPE(v)->tp_as_number->nb_bool)(v);
+    else if (Py_TYPE(v)->tp_as_mapping != NULL &&
+             Py_TYPE(v)->tp_as_mapping->mp_length != NULL)
+        res = (*Py_TYPE(v)->tp_as_mapping->mp_length)(v);
+    else if (Py_TYPE(v)->tp_as_sequence != NULL &&
+             Py_TYPE(v)->tp_as_sequence->sq_length != NULL)
+        res = (*Py_TYPE(v)->tp_as_sequence->sq_length)(v);
     else
         return 1;
     /* if it is negative, it should be either -1 or -2 */
@@ -1442,7 +1439,7 @@ PyCallable_Check(PyObject *x)
 {
     if (x == NULL)
         return 0;
-    return x->ob_type->tp_call != NULL;
+    return Py_TYPE(x)->tp_call != NULL;
 }
 
 
@@ -1818,7 +1815,7 @@ _Py_NewReference(PyObject *op)
 #ifdef Py_REF_DEBUG
     _Py_RefTotal++;
 #endif
-    Py_REFCNT(op) = 1;
+    Py_SET_REFCNT(op, 1);
 #ifdef Py_TRACE_REFS
     _Py_AddToAllObjects(op, 1);
 #endif
@@ -1829,7 +1826,7 @@ _Py_NewReference(PyObject *op)
 void
 _Py_ForgetReference(PyObject *op)
 {
-    if (op->ob_refcnt < 0) {
+    if (Py_REFCNT(op) < 0) {
         _PyObject_ASSERT_FAILED_MSG(op, "negative refcnt");
     }
 
@@ -1867,7 +1864,7 @@ _Py_PrintReferences(FILE *fp)
     PyObject *op;
     fprintf(fp, "Remaining objects:\n");
     for (op = refchain._ob_next; op != &refchain; op = op->_ob_next) {
-        fprintf(fp, "%p [%" PY_FORMAT_SIZE_T "d] ", (void *)op, op->ob_refcnt);
+        fprintf(fp, "%p [%" PY_FORMAT_SIZE_T "d] ", (void *)op, Py_REFCNT(op));
         if (PyObject_Print(op, fp, 0) != 0)
             PyErr_Clear();
         putc('\n', fp);
@@ -1884,7 +1881,7 @@ _Py_PrintReferenceAddresses(FILE *fp)
     fprintf(fp, "Remaining object addresses:\n");
     for (op = refchain._ob_next; op != &refchain; op = op->_ob_next)
         fprintf(fp, "%p [%" PY_FORMAT_SIZE_T "d] %s\n", (void *)op,
-            op->ob_refcnt, Py_TYPE(op)->tp_name);
+            Py_REFCNT(op), Py_TYPE(op)->tp_name);
 }
 
 PyObject *
@@ -2025,7 +2022,7 @@ _PyTrash_deposit_object(PyObject *op)
 
     _PyObject_ASSERT(op, PyObject_IS_GC(op));
     _PyObject_ASSERT(op, !_PyObject_GC_IS_TRACKED(op));
-    _PyObject_ASSERT(op, op->ob_refcnt == 0);
+    _PyObject_ASSERT(op, Py_REFCNT(op) == 0);
     _PyGCHead_SET_PREV(_Py_AS_GC(op), gcstate->trash_delete_later);
     gcstate->trash_delete_later = op;
 }
@@ -2037,7 +2034,7 @@ _PyTrash_thread_deposit_object(PyObject *op)
     PyThreadState *tstate = _PyThreadState_GET();
     _PyObject_ASSERT(op, PyObject_IS_GC(op));
     _PyObject_ASSERT(op, !_PyObject_GC_IS_TRACKED(op));
-    _PyObject_ASSERT(op, op->ob_refcnt == 0);
+    _PyObject_ASSERT(op, Py_REFCNT(op) == 0);
     _PyGCHead_SET_PREV(_Py_AS_GC(op), tstate->trash_delete_later);
     tstate->trash_delete_later = op;
 }
@@ -2064,7 +2061,7 @@ _PyTrash_destroy_chain(void)
          * assorted non-release builds calling Py_DECREF again ends
          * up distorting allocation statistics.
          */
-        _PyObject_ASSERT(op, op->ob_refcnt == 0);
+        _PyObject_ASSERT(op, Py_REFCNT(op) == 0);
         ++gcstate->trash_delete_nesting;
         (*dealloc)(op);
         --gcstate->trash_delete_nesting;
@@ -2102,7 +2099,7 @@ _PyTrash_thread_destroy_chain(void)
          * assorted non-release builds calling Py_DECREF again ends
          * up distorting allocation statistics.
          */
-        _PyObject_ASSERT(op, op->ob_refcnt == 0);
+        _PyObject_ASSERT(op, Py_REFCNT(op) == 0);
         (*dealloc)(op);
         assert(tstate->trash_delete_nesting == 1);
     }
