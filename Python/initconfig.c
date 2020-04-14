@@ -3,6 +3,7 @@
 #include "pycore_fileutils.h"
 #include "pycore_getopt.h"
 #include "pycore_initconfig.h"
+#include "pycore_interp.h"    // _PyInterpreterState.runtime
 #include "pycore_pathconfig.h"
 #include "pycore_pyerrors.h"
 #include "pycore_pylifecycle.h"
@@ -2595,7 +2596,7 @@ _Py_GetConfigsAsDict(void)
     Py_CLEAR(dict);
 
     /* core config */
-    const PyConfig *config = &tstate->interp->config;
+    const PyConfig *config = _PyInterpreterState_GetConfig(tstate->interp);
     dict = config_as_dict(config);
     if (dict == NULL) {
         goto error;
@@ -2662,7 +2663,7 @@ _Py_DumpPathConfig(PyThreadState *tstate)
             PySys_WriteStderr("\n"); \
         } while (0)
 
-    PyConfig *config = &tstate->interp->config;
+    const PyConfig *config = _PyInterpreterState_GetConfig(tstate->interp);
     DUMP_CONFIG("PYTHONHOME", home);
     DUMP_CONFIG("PYTHONPATH", pythonpath_env);
     DUMP_CONFIG("program name", program_name);
