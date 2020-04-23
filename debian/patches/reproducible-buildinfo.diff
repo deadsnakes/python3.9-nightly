@@ -9,10 +9,10 @@ Subject: reproducible-buildinfo
  1 file changed, 2 insertions(+)
 
 diff --git a/Makefile.pre.in b/Makefile.pre.in
-index 1edfd22..905f5dd 100644
+index 0761b3e..7dab844 100644
 --- a/Makefile.pre.in
 +++ b/Makefile.pre.in
-@@ -758,6 +758,8 @@ Modules/getbuildinfo.o: $(PARSER_OBJS) \
+@@ -772,6 +772,8 @@ Modules/getbuildinfo.o: $(PARSER_OBJS) \
  	      -DGITVERSION="\"`LC_ALL=C $(GITVERSION)`\"" \
  	      -DGITTAG="\"`LC_ALL=C $(GITTAG)`\"" \
  	      -DGITBRANCH="\"`LC_ALL=C $(GITBRANCH)`\"" \
