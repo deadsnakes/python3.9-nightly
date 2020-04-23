@@ -10,15 +10,17 @@
 
    The Visual Studio projects builds _testcapi with Py_BUILD_CORE_MODULE
    macro defined, but only the public C API must be tested here. */
+
 #undef Py_BUILD_CORE_MODULE
+/* Always enable assertions */
+#undef NDEBUG
 
 #define PY_SSIZE_T_CLEAN
 
 #include "Python.h"
 #include "datetime.h"
 #include "marshal.h"
-#include "pythread.h"
-#include "structmember.h"
+#include "structmember.h"         // PyMemberDef
 #include <float.h>
 #include <signal.h>
 

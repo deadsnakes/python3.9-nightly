@@ -10,7 +10,7 @@ extern "C" {
 
 #include "pycore_atomic.h"    /* _Py_atomic_address */
 #include "pycore_gil.h"       /* struct _gil_runtime_state  */
-#include "pycore_pymem.h"     /* struct _gc_runtime_state */
+#include "pycore_gc.h"        /* struct _gc_runtime_state */
 #include "pycore_warnings.h"  /* struct _warnings_runtime_state */
 
 /* ceval state */
@@ -170,7 +170,7 @@ struct _xidregitem {
     struct _xidregitem *next;
 };
 
-PyAPI_FUNC(struct _is*) _PyInterpreterState_LookUpID(PY_INT64_T);
+PyAPI_FUNC(struct _is*) _PyInterpreterState_LookUpID(int64_t);
 
 PyAPI_FUNC(int) _PyInterpreterState_IDInitref(struct _is *);
 PyAPI_FUNC(void) _PyInterpreterState_IDIncref(struct _is *);

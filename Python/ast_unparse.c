@@ -829,7 +829,7 @@ append_named_expr(_PyUnicodeWriter *writer, expr_ty e, int level)
 {
     APPEND_STR_IF(level > PR_TUPLE, "(");
     APPEND_EXPR(e->v.NamedExpr.target, PR_ATOM);
-    APPEND_STR(":=");
+    APPEND_STR(" := ");
     APPEND_EXPR(e->v.NamedExpr.value, PR_ATOM);
     APPEND_STR_IF(level > PR_TUPLE, ")");
     return 0;
@@ -874,6 +874,10 @@ append_ast_expr(_PyUnicodeWriter *writer, expr_ty e, int level)
     case Constant_kind:
         if (e->v.Constant.value == Py_Ellipsis) {
             APPEND_STR_FINISH("...");
+        }
+        if (e->v.Constant.kind != NULL
+            && -1 == _PyUnicodeWriter_WriteStr(writer, e->v.Constant.kind)) {
+            return -1;
         }
         return append_ast_constant(writer, e->v.Constant.value);
     case JoinedStr_kind:
