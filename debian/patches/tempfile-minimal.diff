@@ -9,7 +9,7 @@ Subject: tempfile-minimal
  1 file changed, 141 insertions(+), 2 deletions(-)
 
 diff --git a/Lib/tempfile.py b/Lib/tempfile.py
-index ed15c0f..f439435 100644
+index ba04be8..4da6aa0 100644
 --- a/Lib/tempfile.py
 +++ b/Lib/tempfile.py
 @@ -40,7 +40,146 @@ import functools as _functools
