@@ -71,289 +71,307 @@ static KeywordToken *reserved_keywords[] = {
 #define file_type 1000
 #define interactive_type 1001
 #define eval_type 1002
-#define fstring_type 1003
-#define statements_type 1004
-#define statement_type 1005
-#define statement_newline_type 1006
-#define simple_stmt_type 1007
-#define small_stmt_type 1008
-#define compound_stmt_type 1009
-#define assignment_type 1010
-#define augassign_type 1011
-#define global_stmt_type 1012
-#define nonlocal_stmt_type 1013
-#define yield_stmt_type 1014
-#define assert_stmt_type 1015
-#define del_stmt_type 1016
-#define import_stmt_type 1017
-#define import_name_type 1018
-#define import_from_type 1019
-#define import_from_targets_type 1020
-#define import_from_as_names_type 1021
-#define import_from_as_name_type 1022
-#define dotted_as_names_type 1023
-#define dotted_as_name_type 1024
-#define dotted_name_type 1025  // Left-recursive
-#define if_stmt_type 1026
-#define elif_stmt_type 1027
-#define else_block_type 1028
-#define while_stmt_type 1029
-#define for_stmt_type 1030
-#define with_stmt_type 1031
-#define with_item_type 1032
-#define try_stmt_type 1033
-#define except_block_type 1034
-#define finally_block_type 1035
-#define return_stmt_type 1036
-#define raise_stmt_type 1037
-#define function_def_type 1038
-#define function_def_raw_type 1039
-#define params_type 1040
-#define parameters_type 1041
-#define slash_without_default_type 1042
-#define slash_with_default_type 1043
-#define star_etc_type 1044
-#define name_with_optional_default_type 1045
-#define names_with_default_type 1046
-#define name_with_default_type 1047
-#define plain_names_type 1048
-#define plain_name_type 1049
-#define kwds_type 1050
-#define annotation_type 1051
-#define decorators_type 1052
-#define class_def_type 1053
-#define class_def_raw_type 1054
-#define block_type 1055
-#define expressions_list_type 1056
-#define star_expressions_type 1057
-#define star_expression_type 1058
-#define star_named_expressions_type 1059
-#define star_named_expression_type 1060
-#define named_expression_type 1061
-#define annotated_rhs_type 1062
-#define expressions_type 1063
-#define expression_type 1064
-#define lambdef_type 1065
-#define lambda_parameters_type 1066
-#define lambda_slash_without_default_type 1067
-#define lambda_slash_with_default_type 1068
-#define lambda_star_etc_type 1069
-#define lambda_name_with_optional_default_type 1070
-#define lambda_names_with_default_type 1071
-#define lambda_name_with_default_type 1072
-#define lambda_plain_names_type 1073
-#define lambda_plain_name_type 1074
-#define lambda_kwds_type 1075
-#define disjunction_type 1076
-#define conjunction_type 1077
-#define inversion_type 1078
-#define comparison_type 1079
-#define compare_op_bitwise_or_pair_type 1080
-#define eq_bitwise_or_type 1081
-#define noteq_bitwise_or_type 1082
-#define lte_bitwise_or_type 1083
-#define lt_bitwise_or_type 1084
-#define gte_bitwise_or_type 1085
-#define gt_bitwise_or_type 1086
-#define notin_bitwise_or_type 1087
-#define in_bitwise_or_type 1088
-#define isnot_bitwise_or_type 1089
-#define is_bitwise_or_type 1090
-#define bitwise_or_type 1091  // Left-recursive
-#define bitwise_xor_type 1092  // Left-recursive
-#define bitwise_and_type 1093  // Left-recursive
-#define shift_expr_type 1094  // Left-recursive
-#define sum_type 1095  // Left-recursive
-#define term_type 1096  // Left-recursive
-#define factor_type 1097
-#define power_type 1098
-#define await_primary_type 1099
-#define primary_type 1100  // Left-recursive
-#define slices_type 1101
-#define slice_type 1102
-#define atom_type 1103
-#define strings_type 1104
-#define list_type 1105
-#define listcomp_type 1106
-#define tuple_type 1107
-#define group_type 1108
-#define genexp_type 1109
-#define set_type 1110
-#define setcomp_type 1111
-#define dict_type 1112
-#define dictcomp_type 1113
-#define kvpairs_type 1114
-#define kvpair_type 1115
-#define for_if_clauses_type 1116
-#define yield_expr_type 1117
-#define arguments_type 1118
-#define args_type 1119
-#define kwargs_type 1120
-#define starred_expression_type 1121
-#define kwarg_or_starred_type 1122
-#define kwarg_or_double_starred_type 1123
-#define star_targets_type 1124
-#define star_targets_seq_type 1125
-#define star_target_type 1126
-#define star_atom_type 1127
-#define inside_paren_ann_assign_target_type 1128
-#define ann_assign_subscript_attribute_target_type 1129
-#define del_targets_type 1130
-#define del_target_type 1131
-#define del_t_atom_type 1132
-#define targets_type 1133
-#define target_type 1134
-#define t_primary_type 1135  // Left-recursive
-#define t_lookahead_type 1136
-#define t_atom_type 1137
-#define incorrect_arguments_type 1138
-#define invalid_named_expression_type 1139
-#define invalid_assignment_type 1140
-#define invalid_block_type 1141
-#define invalid_comprehension_type 1142
-#define invalid_parameters_type 1143
-#define _loop0_1_type 1144
-#define _loop1_2_type 1145
-#define _loop0_4_type 1146
-#define _gather_3_type 1147
-#define _tmp_5_type 1148
-#define _tmp_6_type 1149
-#define _tmp_7_type 1150
-#define _tmp_8_type 1151
-#define _tmp_9_type 1152
-#define _tmp_10_type 1153
-#define _tmp_11_type 1154
-#define _tmp_12_type 1155
-#define _loop1_13_type 1156
-#define _tmp_14_type 1157
-#define _tmp_15_type 1158
-#define _loop0_17_type 1159
-#define _gather_16_type 1160
-#define _loop0_19_type 1161
-#define _gather_18_type 1162
-#define _tmp_20_type 1163
-#define _loop0_21_type 1164
-#define _loop1_22_type 1165
-#define _loop0_24_type 1166
-#define _gather_23_type 1167
-#define _tmp_25_type 1168
-#define _loop0_27_type 1169
-#define _gather_26_type 1170
-#define _tmp_28_type 1171
-#define _loop0_30_type 1172
-#define _gather_29_type 1173
-#define _loop0_32_type 1174
-#define _gather_31_type 1175
-#define _tmp_33_type 1176
-#define _loop1_34_type 1177
-#define _tmp_35_type 1178
-#define _tmp_36_type 1179
-#define _tmp_37_type 1180
-#define _tmp_38_type 1181
-#define _tmp_39_type 1182
-#define _tmp_40_type 1183
-#define _tmp_41_type 1184
-#define _tmp_42_type 1185
-#define _tmp_43_type 1186
-#define _tmp_44_type 1187
-#define _tmp_45_type 1188
-#define _tmp_46_type 1189
-#define _loop0_47_type 1190
-#define _tmp_48_type 1191
-#define _loop1_49_type 1192
-#define _tmp_50_type 1193
-#define _tmp_51_type 1194
-#define _loop0_53_type 1195
-#define _gather_52_type 1196
-#define _loop0_55_type 1197
-#define _gather_54_type 1198
-#define _tmp_56_type 1199
-#define _loop1_57_type 1200
-#define _tmp_58_type 1201
-#define _loop0_60_type 1202
-#define _gather_59_type 1203
-#define _loop1_61_type 1204
-#define _loop0_63_type 1205
-#define _gather_62_type 1206
-#define _loop1_64_type 1207
-#define _tmp_65_type 1208
-#define _tmp_66_type 1209
-#define _tmp_67_type 1210
-#define _tmp_68_type 1211
-#define _tmp_69_type 1212
-#define _tmp_70_type 1213
-#define _tmp_71_type 1214
-#define _tmp_72_type 1215
-#define _tmp_73_type 1216
-#define _loop0_74_type 1217
-#define _tmp_75_type 1218
-#define _loop1_76_type 1219
-#define _tmp_77_type 1220
-#define _tmp_78_type 1221
-#define _loop0_80_type 1222
-#define _gather_79_type 1223
-#define _loop0_82_type 1224
-#define _gather_81_type 1225
-#define _loop1_83_type 1226
-#define _loop1_84_type 1227
-#define _loop1_85_type 1228
-#define _tmp_86_type 1229
-#define _loop0_88_type 1230
-#define _gather_87_type 1231
-#define _tmp_89_type 1232
-#define _tmp_90_type 1233
-#define _tmp_91_type 1234
-#define _tmp_92_type 1235
-#define _loop1_93_type 1236
-#define _tmp_94_type 1237
-#define _tmp_95_type 1238
-#define _loop0_97_type 1239
-#define _gather_96_type 1240
-#define _loop1_98_type 1241
-#define _tmp_99_type 1242
-#define _tmp_100_type 1243
-#define _loop0_102_type 1244
-#define _gather_101_type 1245
-#define _loop0_104_type 1246
-#define _gather_103_type 1247
-#define _loop0_106_type 1248
-#define _gather_105_type 1249
-#define _loop0_108_type 1250
-#define _gather_107_type 1251
-#define _loop0_109_type 1252
-#define _loop0_111_type 1253
-#define _gather_110_type 1254
-#define _tmp_112_type 1255
-#define _loop0_114_type 1256
-#define _gather_113_type 1257
-#define _loop0_116_type 1258
-#define _gather_115_type 1259
-#define _tmp_117_type 1260
-#define _tmp_118_type 1261
-#define _tmp_119_type 1262
-#define _tmp_120_type 1263
-#define _tmp_121_type 1264
-#define _tmp_122_type 1265
-#define _tmp_123_type 1266
-#define _tmp_124_type 1267
-#define _tmp_125_type 1268
-#define _tmp_126_type 1269
-#define _tmp_127_type 1270
-#define _tmp_128_type 1271
-#define _tmp_129_type 1272
-#define _tmp_130_type 1273
-#define _tmp_131_type 1274
-#define _tmp_132_type 1275
-#define _tmp_133_type 1276
-#define _tmp_134_type 1277
-#define _tmp_135_type 1278
-#define _loop0_136_type 1279
-#define _tmp_137_type 1280
+#define func_type_type 1003
+#define fstring_type 1004
+#define type_expressions_type 1005
+#define statements_type 1006
+#define statement_type 1007
+#define statement_newline_type 1008
+#define simple_stmt_type 1009
+#define small_stmt_type 1010
+#define compound_stmt_type 1011
+#define assignment_type 1012
+#define augassign_type 1013
+#define global_stmt_type 1014
+#define nonlocal_stmt_type 1015
+#define yield_stmt_type 1016
+#define assert_stmt_type 1017
+#define del_stmt_type 1018
+#define import_stmt_type 1019
+#define import_name_type 1020
+#define import_from_type 1021
+#define import_from_targets_type 1022
+#define import_from_as_names_type 1023
+#define import_from_as_name_type 1024
+#define dotted_as_names_type 1025
+#define dotted_as_name_type 1026
+#define dotted_name_type 1027  // Left-recursive
+#define if_stmt_type 1028
+#define elif_stmt_type 1029
+#define else_block_type 1030
+#define while_stmt_type 1031
+#define for_stmt_type 1032
+#define with_stmt_type 1033
+#define with_item_type 1034
+#define try_stmt_type 1035
+#define except_block_type 1036
+#define finally_block_type 1037
+#define return_stmt_type 1038
+#define raise_stmt_type 1039
+#define function_def_type 1040
+#define function_def_raw_type 1041
+#define func_type_comment_type 1042
+#define params_type 1043
+#define parameters_type 1044
+#define slash_no_default_type 1045
+#define slash_with_default_type 1046
+#define star_etc_type 1047
+#define kwds_type 1048
+#define param_no_default_type 1049
+#define param_with_default_type 1050
+#define param_maybe_default_type 1051
+#define param_type 1052
+#define annotation_type 1053
+#define default_type 1054
+#define decorators_type 1055
+#define class_def_type 1056
+#define class_def_raw_type 1057
+#define block_type 1058
+#define expressions_list_type 1059
+#define star_expressions_type 1060
+#define star_expression_type 1061
+#define star_named_expressions_type 1062
+#define star_named_expression_type 1063
+#define named_expression_type 1064
+#define annotated_rhs_type 1065
+#define expressions_type 1066
+#define expression_type 1067
+#define lambdef_type 1068
+#define lambda_parameters_type 1069
+#define lambda_slash_without_default_type 1070
+#define lambda_slash_with_default_type 1071
+#define lambda_star_etc_type 1072
+#define lambda_name_with_optional_default_type 1073
+#define lambda_names_with_default_type 1074
+#define lambda_name_with_default_type 1075
+#define lambda_plain_names_type 1076
+#define lambda_plain_name_type 1077
+#define lambda_kwds_type 1078
+#define disjunction_type 1079
+#define conjunction_type 1080
+#define inversion_type 1081
+#define comparison_type 1082
+#define compare_op_bitwise_or_pair_type 1083
+#define eq_bitwise_or_type 1084
+#define noteq_bitwise_or_type 1085
+#define lte_bitwise_or_type 1086
+#define lt_bitwise_or_type 1087
+#define gte_bitwise_or_type 1088
+#define gt_bitwise_or_type 1089
+#define notin_bitwise_or_type 1090
+#define in_bitwise_or_type 1091
+#define isnot_bitwise_or_type 1092
+#define is_bitwise_or_type 1093
+#define bitwise_or_type 1094  // Left-recursive
+#define bitwise_xor_type 1095  // Left-recursive
+#define bitwise_and_type 1096  // Left-recursive
+#define shift_expr_type 1097  // Left-recursive
+#define sum_type 1098  // Left-recursive
+#define term_type 1099  // Left-recursive
+#define factor_type 1100
+#define power_type 1101
+#define await_primary_type 1102
+#define primary_type 1103  // Left-recursive
+#define slices_type 1104
+#define slice_type 1105
+#define atom_type 1106
+#define strings_type 1107
+#define list_type 1108
+#define listcomp_type 1109
+#define tuple_type 1110
+#define group_type 1111
+#define genexp_type 1112
+#define set_type 1113
+#define setcomp_type 1114
+#define dict_type 1115
+#define dictcomp_type 1116
+#define kvpairs_type 1117
+#define kvpair_type 1118
+#define for_if_clauses_type 1119
+#define for_if_clause_type 1120
+#define yield_expr_type 1121
+#define arguments_type 1122
+#define args_type 1123
+#define kwargs_type 1124
+#define starred_expression_type 1125
+#define kwarg_or_starred_type 1126
+#define kwarg_or_double_starred_type 1127
+#define star_targets_type 1128
+#define star_targets_seq_type 1129
+#define star_target_type 1130
+#define star_atom_type 1131
+#define inside_paren_ann_assign_target_type 1132
+#define ann_assign_subscript_attribute_target_type 1133
+#define del_targets_type 1134
+#define del_target_type 1135
+#define del_t_atom_type 1136
+#define targets_type 1137
+#define target_type 1138
+#define t_primary_type 1139  // Left-recursive
+#define t_lookahead_type 1140
+#define t_atom_type 1141
+#define incorrect_arguments_type 1142
+#define invalid_named_expression_type 1143
+#define invalid_assignment_type 1144
+#define invalid_block_type 1145
+#define invalid_comprehension_type 1146
+#define invalid_parameters_type 1147
+#define invalid_double_type_comments_type 1148
+#define _loop0_1_type 1149
+#define _loop0_2_type 1150
+#define _loop0_4_type 1151
+#define _gather_3_type 1152
+#define _loop0_6_type 1153
+#define _gather_5_type 1154
+#define _loop0_8_type 1155
+#define _gather_7_type 1156
+#define _loop0_10_type 1157
+#define _gather_9_type 1158
+#define _loop1_11_type 1159
+#define _loop0_13_type 1160
+#define _gather_12_type 1161
+#define _tmp_14_type 1162
+#define _tmp_15_type 1163
+#define _tmp_16_type 1164
+#define _tmp_17_type 1165
+#define _tmp_18_type 1166
+#define _tmp_19_type 1167
+#define _tmp_20_type 1168
+#define _tmp_21_type 1169
+#define _loop1_22_type 1170
+#define _tmp_23_type 1171
+#define _tmp_24_type 1172
+#define _loop0_26_type 1173
+#define _gather_25_type 1174
+#define _loop0_28_type 1175
+#define _gather_27_type 1176
+#define _tmp_29_type 1177
+#define _loop0_30_type 1178
+#define _loop1_31_type 1179
+#define _loop0_33_type 1180
+#define _gather_32_type 1181
+#define _tmp_34_type 1182
+#define _loop0_36_type 1183
+#define _gather_35_type 1184
+#define _tmp_37_type 1185
+#define _loop0_39_type 1186
+#define _gather_38_type 1187
+#define _loop0_41_type 1188
+#define _gather_40_type 1189
+#define _loop0_43_type 1190
+#define _gather_42_type 1191
+#define _loop0_45_type 1192
+#define _gather_44_type 1193
+#define _tmp_46_type 1194
+#define _loop1_47_type 1195
+#define _tmp_48_type 1196
+#define _tmp_49_type 1197
+#define _tmp_50_type 1198
+#define _tmp_51_type 1199
+#define _tmp_52_type 1200
+#define _loop0_53_type 1201
+#define _loop0_54_type 1202
+#define _loop0_55_type 1203
+#define _loop1_56_type 1204
+#define _loop0_57_type 1205
+#define _loop1_58_type 1206
+#define _loop1_59_type 1207
+#define _loop1_60_type 1208
+#define _loop0_61_type 1209
+#define _loop1_62_type 1210
+#define _loop0_63_type 1211
+#define _loop1_64_type 1212
+#define _loop0_65_type 1213
+#define _loop1_66_type 1214
+#define _loop1_67_type 1215
+#define _tmp_68_type 1216
+#define _loop0_70_type 1217
+#define _gather_69_type 1218
+#define _loop1_71_type 1219
+#define _loop0_73_type 1220
+#define _gather_72_type 1221
+#define _loop1_74_type 1222
+#define _tmp_75_type 1223
+#define _tmp_76_type 1224
+#define _tmp_77_type 1225
+#define _tmp_78_type 1226
+#define _tmp_79_type 1227
+#define _tmp_80_type 1228
+#define _tmp_81_type 1229
+#define _tmp_82_type 1230
+#define _tmp_83_type 1231
+#define _loop0_84_type 1232
+#define _tmp_85_type 1233
+#define _loop1_86_type 1234
+#define _tmp_87_type 1235
+#define _tmp_88_type 1236
+#define _loop0_90_type 1237
+#define _gather_89_type 1238
+#define _loop0_92_type 1239
+#define _gather_91_type 1240
+#define _loop1_93_type 1241
+#define _loop1_94_type 1242
+#define _loop1_95_type 1243
+#define _tmp_96_type 1244
+#define _loop0_98_type 1245
+#define _gather_97_type 1246
+#define _tmp_99_type 1247
+#define _tmp_100_type 1248
+#define _tmp_101_type 1249
+#define _tmp_102_type 1250
+#define _loop1_103_type 1251
+#define _tmp_104_type 1252
+#define _tmp_105_type 1253
+#define _loop0_107_type 1254
+#define _gather_106_type 1255
+#define _loop1_108_type 1256
+#define _loop0_109_type 1257
+#define _loop0_110_type 1258
+#define _tmp_111_type 1259
+#define _tmp_112_type 1260
+#define _loop0_114_type 1261
+#define _gather_113_type 1262
+#define _loop0_116_type 1263
+#define _gather_115_type 1264
+#define _loop0_118_type 1265
+#define _gather_117_type 1266
+#define _loop0_120_type 1267
+#define _gather_119_type 1268
+#define _loop0_121_type 1269
+#define _loop0_123_type 1270
+#define _gather_122_type 1271
+#define _tmp_124_type 1272
+#define _loop0_126_type 1273
+#define _gather_125_type 1274
+#define _loop0_128_type 1275
+#define _gather_127_type 1276
+#define _tmp_129_type 1277
+#define _tmp_130_type 1278
+#define _tmp_131_type 1279
+#define _tmp_132_type 1280
+#define _tmp_133_type 1281
+#define _loop0_134_type 1282
+#define _tmp_135_type 1283
+#define _tmp_136_type 1284
+#define _tmp_137_type 1285
+#define _tmp_138_type 1286
+#define _tmp_139_type 1287
+#define _tmp_140_type 1288
+#define _tmp_141_type 1289
+#define _tmp_142_type 1290
+#define _tmp_143_type 1291
+#define _tmp_144_type 1292
+#define _tmp_145_type 1293
+#define _tmp_146_type 1294
+#define _tmp_147_type 1295
+#define _loop1_148_type 1296
 
 static mod_ty file_rule(Parser *p);
 static mod_ty interactive_rule(Parser *p);
 static mod_ty eval_rule(Parser *p);
+static mod_ty func_type_rule(Parser *p);
 static expr_ty fstring_rule(Parser *p);
+static asdl_seq* type_expressions_rule(Parser *p);
 static asdl_seq* statements_rule(Parser *p);
 static asdl_seq* statement_rule(Parser *p);
 static asdl_seq* statement_newline_rule(Parser *p);
@@ -390,18 +408,19 @@ static stmt_ty return_stmt_rule(Parser *p);
 static stmt_ty raise_stmt_rule(Parser *p);
 static stmt_ty function_def_rule(Parser *p);
 static stmt_ty function_def_raw_rule(Parser *p);
+static PyObject* func_type_comment_rule(Parser *p);
 static arguments_ty params_rule(Parser *p);
 static arguments_ty parameters_rule(Parser *p);
-static asdl_seq* slash_without_default_rule(Parser *p);
+static asdl_seq* slash_no_default_rule(Parser *p);
 static SlashWithDefault* slash_with_default_rule(Parser *p);
 static StarEtc* star_etc_rule(Parser *p);
-static NameDefaultPair* name_with_optional_default_rule(Parser *p);
-static asdl_seq* names_with_default_rule(Parser *p);
-static NameDefaultPair* name_with_default_rule(Parser *p);
-static asdl_seq* plain_names_rule(Parser *p);
-static arg_ty plain_name_rule(Parser *p);
 static arg_ty kwds_rule(Parser *p);
+static arg_ty param_no_default_rule(Parser *p);
+static NameDefaultPair* param_with_default_rule(Parser *p);
+static NameDefaultPair* param_maybe_default_rule(Parser *p);
+static arg_ty param_rule(Parser *p);
 static expr_ty annotation_rule(Parser *p);
+static expr_ty default_rule(Parser *p);
 static asdl_seq* decorators_rule(Parser *p);
 static stmt_ty class_def_rule(Parser *p);
 static stmt_ty class_def_raw_rule(Parser *p);
@@ -467,6 +486,7 @@ static expr_ty dictcomp_rule(Parser *p);
 static asdl_seq* kvpairs_rule(Parser *p);
 static KeyValuePair* kvpair_rule(Parser *p);
 static asdl_seq* for_if_clauses_rule(Parser *p);
+static comprehension_ty for_if_clause_rule(Parser *p);
 static expr_ty yield_expr_rule(Parser *p);
 static expr_ty arguments_rule(Parser *p);
 static expr_ty args_rule(Parser *p);
@@ -494,143 +514,155 @@ static void *invalid_assignment_rule(Parser *p);
 static void *invalid_block_rule(Parser *p);
 static void *invalid_comprehension_rule(Parser *p);
 static void *invalid_parameters_rule(Parser *p);
+static void *invalid_double_type_comments_rule(Parser *p);
 static asdl_seq *_loop0_1_rule(Parser *p);
-static asdl_seq *_loop1_2_rule(Parser *p);
+static asdl_seq *_loop0_2_rule(Parser *p);
 static asdl_seq *_loop0_4_rule(Parser *p);
 static asdl_seq *_gather_3_rule(Parser *p);
-static void *_tmp_5_rule(Parser *p);
-static void *_tmp_6_rule(Parser *p);
-static void *_tmp_7_rule(Parser *p);
-static void *_tmp_8_rule(Parser *p);
-static void *_tmp_9_rule(Parser *p);
-static void *_tmp_10_rule(Parser *p);
-static void *_tmp_11_rule(Parser *p);
-static void *_tmp_12_rule(Parser *p);
-static asdl_seq *_loop1_13_rule(Parser *p);
+static asdl_seq *_loop0_6_rule(Parser *p);
+static asdl_seq *_gather_5_rule(Parser *p);
+static asdl_seq *_loop0_8_rule(Parser *p);
+static asdl_seq *_gather_7_rule(Parser *p);
+static asdl_seq *_loop0_10_rule(Parser *p);
+static asdl_seq *_gather_9_rule(Parser *p);
+static asdl_seq *_loop1_11_rule(Parser *p);
+static asdl_seq *_loop0_13_rule(Parser *p);
+static asdl_seq *_gather_12_rule(Parser *p);
 static void *_tmp_14_rule(Parser *p);
 static void *_tmp_15_rule(Parser *p);
-static asdl_seq *_loop0_17_rule(Parser *p);
-static asdl_seq *_gather_16_rule(Parser *p);
-static asdl_seq *_loop0_19_rule(Parser *p);
-static asdl_seq *_gather_18_rule(Parser *p);
+static void *_tmp_16_rule(Parser *p);
+static void *_tmp_17_rule(Parser *p);
+static void *_tmp_18_rule(Parser *p);
+static void *_tmp_19_rule(Parser *p);
 static void *_tmp_20_rule(Parser *p);
-static asdl_seq *_loop0_21_rule(Parser *p);
+static void *_tmp_21_rule(Parser *p);
 static asdl_seq *_loop1_22_rule(Parser *p);
-static asdl_seq *_loop0_24_rule(Parser *p);
-static asdl_seq *_gather_23_rule(Parser *p);
-static void *_tmp_25_rule(Parser *p);
-static asdl_seq *_loop0_27_rule(Parser *p);
-static asdl_seq *_gather_26_rule(Parser *p);
-static void *_tmp_28_rule(Parser *p);
+static void *_tmp_23_rule(Parser *p);
+static void *_tmp_24_rule(Parser *p);
+static asdl_seq *_loop0_26_rule(Parser *p);
+static asdl_seq *_gather_25_rule(Parser *p);
+static asdl_seq *_loop0_28_rule(Parser *p);
+static asdl_seq *_gather_27_rule(Parser *p);
+static void *_tmp_29_rule(Parser *p);
 static asdl_seq *_loop0_30_rule(Parser *p);
-static asdl_seq *_gather_29_rule(Parser *p);
-static asdl_seq *_loop0_32_rule(Parser *p);
-static asdl_seq *_gather_31_rule(Parser *p);
-static void *_tmp_33_rule(Parser *p);
-static asdl_seq *_loop1_34_rule(Parser *p);
-static void *_tmp_35_rule(Parser *p);
-static void *_tmp_36_rule(Parser *p);
+static asdl_seq *_loop1_31_rule(Parser *p);
+static asdl_seq *_loop0_33_rule(Parser *p);
+static asdl_seq *_gather_32_rule(Parser *p);
+static void *_tmp_34_rule(Parser *p);
+static asdl_seq *_loop0_36_rule(Parser *p);
+static asdl_seq *_gather_35_rule(Parser *p);
 static void *_tmp_37_rule(Parser *p);
-static void *_tmp_38_rule(Parser *p);
-static void *_tmp_39_rule(Parser *p);
-static void *_tmp_40_rule(Parser *p);
-static void *_tmp_41_rule(Parser *p);
-static void *_tmp_42_rule(Parser *p);
-static void *_tmp_43_rule(Parser *p);
-static void *_tmp_44_rule(Parser *p);
-static void *_tmp_45_rule(Parser *p);
+static asdl_seq *_loop0_39_rule(Parser *p);
+static asdl_seq *_gather_38_rule(Parser *p);
+static asdl_seq *_loop0_41_rule(Parser *p);
+static asdl_seq *_gather_40_rule(Parser *p);
+static asdl_seq *_loop0_43_rule(Parser *p);
+static asdl_seq *_gather_42_rule(Parser *p);
+static asdl_seq *_loop0_45_rule(Parser *p);
+static asdl_seq *_gather_44_rule(Parser *p);
 static void *_tmp_46_rule(Parser *p);
-static asdl_seq *_loop0_47_rule(Parser *p);
+static asdl_seq *_loop1_47_rule(Parser *p);
 static void *_tmp_48_rule(Parser *p);
-static asdl_seq *_loop1_49_rule(Parser *p);
+static void *_tmp_49_rule(Parser *p);
 static void *_tmp_50_rule(Parser *p);
 static void *_tmp_51_rule(Parser *p);
+static void *_tmp_52_rule(Parser *p);
 static asdl_seq *_loop0_53_rule(Parser *p);
-static asdl_seq *_gather_52_rule(Parser *p);
+static asdl_seq *_loop0_54_rule(Parser *p);
 static asdl_seq *_loop0_55_rule(Parser *p);
-static asdl_seq *_gather_54_rule(Parser *p);
-static void *_tmp_56_rule(Parser *p);
-static asdl_seq *_loop1_57_rule(Parser *p);
-static void *_tmp_58_rule(Parser *p);
-static asdl_seq *_loop0_60_rule(Parser *p);
-static asdl_seq *_gather_59_rule(Parser *p);
-static asdl_seq *_loop1_61_rule(Parser *p);
+static asdl_seq *_loop1_56_rule(Parser *p);
+static asdl_seq *_loop0_57_rule(Parser *p);
+static asdl_seq *_loop1_58_rule(Parser *p);
+static asdl_seq *_loop1_59_rule(Parser *p);
+static asdl_seq *_loop1_60_rule(Parser *p);
+static asdl_seq *_loop0_61_rule(Parser *p);
+static asdl_seq *_loop1_62_rule(Parser *p);
 static asdl_seq *_loop0_63_rule(Parser *p);
-static asdl_seq *_gather_62_rule(Parser *p);
 static asdl_seq *_loop1_64_rule(Parser *p);
-static void *_tmp_65_rule(Parser *p);
-static void *_tmp_66_rule(Parser *p);
-static void *_tmp_67_rule(Parser *p);
+static asdl_seq *_loop0_65_rule(Parser *p);
+static asdl_seq *_loop1_66_rule(Parser *p);
+static asdl_seq *_loop1_67_rule(Parser *p);
 static void *_tmp_68_rule(Parser *p);
-static void *_tmp_69_rule(Parser *p);
-static void *_tmp_70_rule(Parser *p);
-static void *_tmp_71_rule(Parser *p);
-static void *_tmp_72_rule(Parser *p);
-static void *_tmp_73_rule(Parser *p);
-static asdl_seq *_loop0_74_rule(Parser *p);
+static asdl_seq *_loop0_70_rule(Parser *p);
+static asdl_seq *_gather_69_rule(Parser *p);
+static asdl_seq *_loop1_71_rule(Parser *p);
+static asdl_seq *_loop0_73_rule(Parser *p);
+static asdl_seq *_gather_72_rule(Parser *p);
+static asdl_seq *_loop1_74_rule(Parser *p);
 static void *_tmp_75_rule(Parser *p);
-static asdl_seq *_loop1_76_rule(Parser *p);
+static void *_tmp_76_rule(Parser *p);
 static void *_tmp_77_rule(Parser *p);
 static void *_tmp_78_rule(Parser *p);
-static asdl_seq *_loop0_80_rule(Parser *p);
-static asdl_seq *_gather_79_rule(Parser *p);
-static asdl_seq *_loop0_82_rule(Parser *p);
-static asdl_seq *_gather_81_rule(Parser *p);
-static asdl_seq *_loop1_83_rule(Parser *p);
-static asdl_seq *_loop1_84_rule(Parser *p);
-static asdl_seq *_loop1_85_rule(Parser *p);
-static void *_tmp_86_rule(Parser *p);
-static asdl_seq *_loop0_88_rule(Parser *p);
-static asdl_seq *_gather_87_rule(Parser *p);
-static void *_tmp_89_rule(Parser *p);
-static void *_tmp_90_rule(Parser *p);
-static void *_tmp_91_rule(Parser *p);
-static void *_tmp_92_rule(Parser *p);
+static void *_tmp_79_rule(Parser *p);
+static void *_tmp_80_rule(Parser *p);
+static void *_tmp_81_rule(Parser *p);
+static void *_tmp_82_rule(Parser *p);
+static void *_tmp_83_rule(Parser *p);
+static asdl_seq *_loop0_84_rule(Parser *p);
+static void *_tmp_85_rule(Parser *p);
+static asdl_seq *_loop1_86_rule(Parser *p);
+static void *_tmp_87_rule(Parser *p);
+static void *_tmp_88_rule(Parser *p);
+static asdl_seq *_loop0_90_rule(Parser *p);
+static asdl_seq *_gather_89_rule(Parser *p);
+static asdl_seq *_loop0_92_rule(Parser *p);
+static asdl_seq *_gather_91_rule(Parser *p);
 static asdl_seq *_loop1_93_rule(Parser *p);
-static void *_tmp_94_rule(Parser *p);
-static void *_tmp_95_rule(Parser *p);
-static asdl_seq *_loop0_97_rule(Parser *p);
-static asdl_seq *_gather_96_rule(Parser *p);
-static asdl_seq *_loop1_98_rule(Parser *p);
+static asdl_seq *_loop1_94_rule(Parser *p);
+static asdl_seq *_loop1_95_rule(Parser *p);
+static void *_tmp_96_rule(Parser *p);
+static asdl_seq *_loop0_98_rule(Parser *p);
+static asdl_seq *_gather_97_rule(Parser *p);
 static void *_tmp_99_rule(Parser *p);
 static void *_tmp_100_rule(Parser *p);
-static asdl_seq *_loop0_102_rule(Parser *p);
-static asdl_seq *_gather_101_rule(Parser *p);
-static asdl_seq *_loop0_104_rule(Parser *p);
-static asdl_seq *_gather_103_rule(Parser *p);
-static asdl_seq *_loop0_106_rule(Parser *p);
-static asdl_seq *_gather_105_rule(Parser *p);
-static asdl_seq *_loop0_108_rule(Parser *p);
-static asdl_seq *_gather_107_rule(Parser *p);
+static void *_tmp_101_rule(Parser *p);
+static void *_tmp_102_rule(Parser *p);
+static asdl_seq *_loop1_103_rule(Parser *p);
+static void *_tmp_104_rule(Parser *p);
+static void *_tmp_105_rule(Parser *p);
+static asdl_seq *_loop0_107_rule(Parser *p);
+static asdl_seq *_gather_106_rule(Parser *p);
+static asdl_seq *_loop1_108_rule(Parser *p);
 static asdl_seq *_loop0_109_rule(Parser *p);
-static asdl_seq *_loop0_111_rule(Parser *p);
-static asdl_seq *_gather_110_rule(Parser *p);
+static asdl_seq *_loop0_110_rule(Parser *p);
+static void *_tmp_111_rule(Parser *p);
 static void *_tmp_112_rule(Parser *p);
 static asdl_seq *_loop0_114_rule(Parser *p);
 static asdl_seq *_gather_113_rule(Parser *p);
 static asdl_seq *_loop0_116_rule(Parser *p);
 static asdl_seq *_gather_115_rule(Parser *p);
-static void *_tmp_117_rule(Parser *p);
-static void *_tmp_118_rule(Parser *p);
-static void *_tmp_119_rule(Parser *p);
-static void *_tmp_120_rule(Parser *p);
-static void *_tmp_121_rule(Parser *p);
-static void *_tmp_122_rule(Parser *p);
-static void *_tmp_123_rule(Parser *p);
+static asdl_seq *_loop0_118_rule(Parser *p);
+static asdl_seq *_gather_117_rule(Parser *p);
+static asdl_seq *_loop0_120_rule(Parser *p);
+static asdl_seq *_gather_119_rule(Parser *p);
+static asdl_seq *_loop0_121_rule(Parser *p);
+static asdl_seq *_loop0_123_rule(Parser *p);
+static asdl_seq *_gather_122_rule(Parser *p);
 static void *_tmp_124_rule(Parser *p);
-static void *_tmp_125_rule(Parser *p);
-static void *_tmp_126_rule(Parser *p);
-static void *_tmp_127_rule(Parser *p);
-static void *_tmp_128_rule(Parser *p);
+static asdl_seq *_loop0_126_rule(Parser *p);
+static asdl_seq *_gather_125_rule(Parser *p);
+static asdl_seq *_loop0_128_rule(Parser *p);
+static asdl_seq *_gather_127_rule(Parser *p);
 static void *_tmp_129_rule(Parser *p);
 static void *_tmp_130_rule(Parser *p);
 static void *_tmp_131_rule(Parser *p);
 static void *_tmp_132_rule(Parser *p);
 static void *_tmp_133_rule(Parser *p);
-static void *_tmp_134_rule(Parser *p);
+static asdl_seq *_loop0_134_rule(Parser *p);
 static void *_tmp_135_rule(Parser *p);
-static asdl_seq *_loop0_136_rule(Parser *p);
+static void *_tmp_136_rule(Parser *p);
 static void *_tmp_137_rule(Parser *p);
+static void *_tmp_138_rule(Parser *p);
+static void *_tmp_139_rule(Parser *p);
+static void *_tmp_140_rule(Parser *p);
+static void *_tmp_141_rule(Parser *p);
+static void *_tmp_142_rule(Parser *p);
+static void *_tmp_143_rule(Parser *p);
+static void *_tmp_144_rule(Parser *p);
+static void *_tmp_145_rule(Parser *p);
+static void *_tmp_146_rule(Parser *p);
+static void *_tmp_147_rule(Parser *p);
+static asdl_seq *_loop1_148_rule(Parser *p);
 
 
 // file: statements? $
@@ -644,14 +676,14 @@ file_rule(Parser *p)
     int mark = p->mark;
     { // statements? $
         void *a;
-        void *endmarker_var;
+        Token * endmarker_var;
         if (
             (a = statements_rule(p), 1)
             &&
             (endmarker_var = _PyPegen_expect_token(p, ENDMARKER))
         )
         {
-            res = Module ( a , NULL , p -> arena );
+            res = _PyPegen_make_module ( p , a );
             if (res == NULL && PyErr_Occurred()) {
                 p->error_indicator = 1;
                 return NULL;
@@ -706,7 +738,7 @@ eval_rule(Parser *p)
     { // expressions NEWLINE* $
         asdl_seq * _loop0_1_var;
         expr_ty a;
-        void *endmarker_var;
+        Token * endmarker_var;
         if (
             (a = expressions_rule(p))
             &&
@@ -716,6 +748,53 @@ eval_rule(Parser *p)
         )
         {
             res = Expression ( a , p -> arena );
+            if (res == NULL && PyErr_Occurred()) {
+                p->error_indicator = 1;
+                return NULL;
+            }
+            goto done;
+        }
+        p->mark = mark;
+    }
+    res = NULL;
+  done:
+    return res;
+}
+
+// func_type: '(' type_expressions? ')' '->' expression NEWLINE* $
+static mod_ty
+func_type_rule(Parser *p)
+{
+    if (p->error_indicator) {
+        return NULL;
+    }
+    mod_ty res = NULL;
+    int mark = p->mark;
+    { // '(' type_expressions? ')' '->' expression NEWLINE* $
+        asdl_seq * _loop0_2_var;
+        void *a;
+        expr_ty b;
+        Token * endmarker_var;
+        Token * literal;
+        Token * literal_1;
+        Token * literal_2;
+        if (
+            (literal = _PyPegen_expect_token(p, 7))
+            &&
+            (a = type_expressions_rule(p), 1)
+            &&
+            (literal_1 = _PyPegen_expect_token(p, 8))
+            &&
+            (literal_2 = _PyPegen_expect_token(p, 51))
+            &&
+            (b = expression_rule(p))
+            &&
+            (_loop0_2_var = _loop0_2_rule(p))
+            &&
+            (endmarker_var = _PyPegen_expect_token(p, ENDMARKER))
+        )
+        {
+            res = FunctionType ( a , b , p -> arena );
             if (res == NULL && PyErr_Occurred()) {
                 p->error_indicator = 1;
                 return NULL;
@@ -754,6 +833,116 @@ fstring_rule(Parser *p)
     return res;
 }
 
+// type_expressions:
+//     | ','.expression+ ',' '*' expression ',' '**' expression
+//     | ','.expression+ ',' '*' expression
+//     | ','.expression+ ',' '**' expression
+//     | ','.expression+
+static asdl_seq*
+type_expressions_rule(Parser *p)
+{
+    if (p->error_indicator) {
+        return NULL;
+    }
+    asdl_seq* res = NULL;
+    int mark = p->mark;
+    { // ','.expression+ ',' '*' expression ',' '**' expression
+        asdl_seq * a;
+        expr_ty b;
+        expr_ty c;
+        Token * literal;
+        Token * literal_1;
+        Token * literal_2;
+        Token * literal_3;
+        if (
+            (a = _gather_3_rule(p))
+            &&
+            (literal = _PyPegen_expect_token(p, 12))
+            &&
+            (literal_1 = _PyPegen_expect_token(p, 16))
+            &&
+            (b = expression_rule(p))
+            &&
+            (literal_2 = _PyPegen_expect_token(p, 12))
+            &&
+            (literal_3 = _PyPegen_expect_token(p, 35))
+            &&
+            (c = expression_rule(p))
+        )
+        {
+            res = _PyPegen_seq_append_to_end ( p , CHECK ( _PyPegen_seq_append_to_end ( p , a , b ) ) , c );
+            if (res == NULL && PyErr_Occurred()) {
+                p->error_indicator = 1;
+                return NULL;
+            }
+            goto done;
+        }
+        p->mark = mark;
+    }
+    { // ','.expression+ ',' '*' expression
+        asdl_seq * a;
+        expr_ty b;
+        Token * literal;
+        Token * literal_1;
+        if (
+            (a = _gather_5_rule(p))
+            &&
+            (literal = _PyPegen_expect_token(p, 12))
+            &&
+            (literal_1 = _PyPegen_expect_token(p, 16))
+            &&
+            (b = expression_rule(p))
+        )
+        {
+            res = _PyPegen_seq_append_to_end ( p , a , b );
+            if (res == NULL && PyErr_Occurred()) {
+                p->error_indicator = 1;
+                return NULL;
+            }
+            goto done;
+        }
+        p->mark = mark;
+    }
+    { // ','.expression+ ',' '**' expression
+        asdl_seq * a;
+        expr_ty b;
+        Token * literal;
+        Token * literal_1;
+        if (
+            (a = _gather_7_rule(p))
+            &&
+            (literal = _PyPegen_expect_token(p, 12))
+            &&
+            (literal_1 = _PyPegen_expect_token(p, 35))
+            &&
+            (b = expression_rule(p))
+        )
+        {
+            res = _PyPegen_seq_append_to_end ( p , a , b );
+            if (res == NULL && PyErr_Occurred()) {
+                p->error_indicator = 1;
+                return NULL;
+            }
+            goto done;
+        }
+        p->mark = mark;
+    }
+    { // ','.expression+
+        asdl_seq * _gather_9_var;
+        if (
+            (_gather_9_var = _gather_9_rule(p))
+        )
+        {
+            res = _gather_9_var;
+            goto done;
+        }
+        p->mark = mark;
+    }
+    res = NULL;
+  done:
+    return res;
+}
+
 // statements: statement+
 static asdl_seq*
 statements_rule(Parser *p)
@@ -766,7 +955,7 @@ statements_rule(Parser *p)
     { // statement+
         asdl_seq * a;
         if (
-            (a = _loop1_2_rule(p))
+            (a = _loop1_11_rule(p))
         )
         {
             res = _PyPegen_seq_flatten ( p , a );
@@ -842,7 +1031,7 @@ statement_newline_rule(Parser *p)
     UNUSED(start_col_offset); // Only used by EXTRA macro
     { // compound_stmt NEWLINE
         stmt_ty a;
-        void *newline_var;
+        Token * newline_var;
         if (
             (a = compound_stmt_rule(p))
             &&
@@ -870,7 +1059,7 @@ statement_newline_rule(Parser *p)
         p->mark = mark;
     }
     { // NEWLINE
-        void *newline_var;
+        Token * newline_var;
         if (
             (newline_var = _PyPegen_expect_token(p, NEWLINE))
         )
@@ -893,7 +1082,7 @@ statement_newline_rule(Parser *p)
         p->mark = mark;
     }
     { // $
-        void *endmarker_var;
+        Token * endmarker_var;
         if (
             (endmarker_var = _PyPegen_expect_token(p, ENDMARKER))
         )
@@ -923,7 +1112,7 @@ simple_stmt_rule(Parser *p)
     int mark = p->mark;
     { // small_stmt !';' NEWLINE
         stmt_ty a;
-        void *newline_var;
+        Token * newline_var;
         if (
             (a = small_stmt_rule(p))
             &&
@@ -943,11 +1132,11 @@ simple_stmt_rule(Parser *p)
     }
     { // ';'.small_stmt+ ';'? NEWLINE
         asdl_seq * a;
-        void *newline_var;
+        Token * newline_var;
         void *opt_var;
         UNUSED(opt_var); // Silence compiler warnings
         if (
-            (a = _gather_3_rule(p))
+            (a = _gather_12_rule(p))
             &&
             (opt_var = _PyPegen_expect_token(p, 13), 1)
             &&
@@ -1050,7 +1239,7 @@ small_stmt_rule(Parser *p)
     { // &('import' | 'from') import_stmt
         stmt_ty import_stmt_var;
         if (
-            _PyPegen_lookahead(1, _tmp_5_rule, p)
+            _PyPegen_lookahead(1, _tmp_14_rule, p)
             &&
             (import_stmt_var = import_stmt_rule(p))
         )
@@ -1074,7 +1263,7 @@ small_stmt_rule(Parser *p)
         p->mark = mark;
     }
     { // 'pass'
-        void *keyword;
+        Token * keyword;
         if (
             (keyword = _PyPegen_expect_token(p, 502))
         )
@@ -1136,7 +1325,7 @@ small_stmt_rule(Parser *p)
         p->mark = mark;
     }
     { // 'break'
-        void *keyword;
+        Token * keyword;
         if (
             (keyword = _PyPegen_expect_token(p, 506))
         )
@@ -1159,7 +1348,7 @@ small_stmt_rule(Parser *p)
         p->mark = mark;
     }
     { // 'continue'
-        void *keyword;
+        Token * keyword;
         if (
             (keyword = _PyPegen_expect_token(p, 507))
         )
@@ -1232,7 +1421,7 @@ compound_stmt_rule(Parser *p)
     { // &('def' | '@' | ASYNC) function_def
         stmt_ty function_def_var;
         if (
-            _PyPegen_lookahead(1, _tmp_6_rule, p)
+            _PyPegen_lookahead(1, _tmp_15_rule, p)
             &&
             (function_def_var = function_def_rule(p))
         )
@@ -1258,7 +1447,7 @@ compound_stmt_rule(Parser *p)
     { // &('class' | '@') class_def
         stmt_ty class_def_var;
         if (
-            _PyPegen_lookahead(1, _tmp_7_rule, p)
+            _PyPegen_lookahead(1, _tmp_16_rule, p)
             &&
             (class_def_var = class_def_rule(p))
         )
@@ -1271,7 +1460,7 @@ compound_stmt_rule(Parser *p)
     { // &('with' | ASYNC) with_stmt
         stmt_ty with_stmt_var;
         if (
-            _PyPegen_lookahead(1, _tmp_8_rule, p)
+            _PyPegen_lookahead(1, _tmp_17_rule, p)
             &&
             (with_stmt_var = with_stmt_rule(p))
         )
@@ -1284,7 +1473,7 @@ compound_stmt_rule(Parser *p)
     { // &('for' | ASYNC) for_stmt
         stmt_ty for_stmt_var;
         if (
-            _PyPegen_lookahead(1, _tmp_9_rule, p)
+            _PyPegen_lookahead(1, _tmp_18_rule, p)
             &&
             (for_stmt_var = for_stmt_rule(p))
         )
@@ -1328,7 +1517,7 @@ compound_stmt_rule(Parser *p)
 // assignment:
 //     | NAME ':' expression ['=' annotated_rhs]
 //     | ('(' inside_paren_ann_assign_target ')' | ann_assign_subscript_attribute_target) ':' expression ['=' annotated_rhs]
-//     | ((star_targets '='))+ (yield_expr | star_expressions)
+//     | ((star_targets '='))+ (yield_expr | star_expressions) TYPE_COMMENT?
 //     | target augassign (yield_expr | star_expressions)
 //     | invalid_assignment
 static void *
@@ -1351,7 +1540,7 @@ assignment_rule(Parser *p)
         expr_ty a;
         expr_ty b;
         void *c;
-        void *literal;
+        Token * literal;
         if (
             (a = _PyPegen_name_token(p))
             &&
@@ -1359,7 +1548,7 @@ assignment_rule(Parser *p)
             &&
             (b = expression_rule(p))
             &&
-            (c = _tmp_10_rule(p), 1)
+            (c = _tmp_19_rule(p), 1)
         )
         {
             Token *token = _PyPegen_get_last_nonnwhitespace_token(p);
@@ -1370,7 +1559,7 @@ assignment_rule(Parser *p)
             UNUSED(end_lineno); // Only used by EXTRA macro
             int end_col_offset = token->end_col_offset;
             UNUSED(end_col_offset); // Only used by EXTRA macro
-            res = _Py_AnnAssign ( CHECK ( _PyPegen_set_expr_context ( p , a , Store ) ) , b , c , 1 , EXTRA );
+            res = CHECK_VERSION ( 6 , "Variable annotation syntax is" , _Py_AnnAssign ( CHECK ( _PyPegen_set_expr_context ( p , a , Store ) ) , b , c , 1 , EXTRA ) );
             if (res == NULL && PyErr_Occurred()) {
                 p->error_indicator = 1;
                 return NULL;
@@ -1383,15 +1572,15 @@ assignment_rule(Parser *p)
         void *a;
         expr_ty b;
         void *c;
-        void *literal;
+        Token * literal;
         if (
-            (a = _tmp_11_rule(p))
+            (a = _tmp_20_rule(p))
             &&
             (literal = _PyPegen_expect_token(p, 11))
             &&
             (b = expression_rule(p))
             &&
-            (c = _tmp_12_rule(p), 1)
+            (c = _tmp_21_rule(p), 1)
         )
         {
             Token *token = _PyPegen_get_last_nonnwhitespace_token(p);
@@ -1402,7 +1591,7 @@ assignment_rule(Parser *p)
             UNUSED(end_lineno); // Only used by EXTRA macro
             int end_col_offset = token->end_col_offset;
             UNUSED(end_col_offset); // Only used by EXTRA macro
-            res = _Py_AnnAssign ( a , b , c , 0 , EXTRA );
+            res = CHECK_VERSION ( 6 , "Variable annotations syntax is" , _Py_AnnAssign ( a , b , c , 0 , EXTRA ) );
             if (res == NULL && PyErr_Occurred()) {
                 p->error_indicator = 1;
                 return NULL;
@@ -1411,13 +1600,16 @@ assignment_rule(Parser *p)
         }
         p->mark = mark;
     }
-    { // ((star_targets '='))+ (yield_expr | star_expressions)
+    { // ((star_targets '='))+ (yield_expr | star_expressions) TYPE_COMMENT?
         asdl_seq * a;
         void *b;
+        void *tc;
         if (
-            (a = _loop1_13_rule(p))
+            (a = _loop1_22_rule(p))
             &&
-            (b = _tmp_14_rule(p))
+            (b = _tmp_23_rule(p))
+            &&
+            (tc = _PyPegen_expect_token(p, TYPE_COMMENT), 1)
         )
         {
             Token *token = _PyPegen_get_last_nonnwhitespace_token(p);
@@ -1428,7 +1620,7 @@ assignment_rule(Parser *p)
             UNUSED(end_lineno); // Only used by EXTRA macro
             int end_col_offset = token->end_col_offset;
             UNUSED(end_col_offset); // Only used by EXTRA macro
-            res = _Py_Assign ( a , b , NULL , EXTRA );
+            res = _Py_Assign ( a , b , NEW_TYPE_COMMENT ( p , tc ) , EXTRA );
             if (res == NULL && PyErr_Occurred()) {
                 p->error_indicator = 1;
                 return NULL;
@@ -1446,7 +1638,7 @@ assignment_rule(Parser *p)
             &&
             (b = augassign_rule(p))
             &&
-            (c = _tmp_15_rule(p))
+            (c = _tmp_24_rule(p))
         )
         {
             Token *token = _PyPegen_get_last_nonnwhitespace_token(p);
@@ -1505,7 +1697,7 @@ augassign_rule(Parser *p)
     AugOperator* res = NULL;
     int mark = p->mark;
     { // '+='
-        void *literal;
+        Token * literal;
         if (
             (literal = _PyPegen_expect_token(p, 36))
         )
@@ -1520,7 +1712,7 @@ augassign_rule(Parser *p)
         p->mark = mark;
     }
     { // '-='
-        void *literal;
+        Token * literal;
         if (
             (literal = _PyPegen_expect_token(p, 37))
         )
@@ -1535,7 +1727,7 @@ augassign_rule(Parser *p)
         p->mark = mark;
     }
     { // '*='
-        void *literal;
+        Token * literal;
         if (
             (literal = _PyPegen_expect_token(p, 38))
         )
@@ -1550,12 +1742,12 @@ augassign_rule(Parser *p)
         p->mark = mark;
     }
     { // '@='
-        void *literal;
+        Token * literal;
         if (
             (literal = _PyPegen_expect_token(p, 50))
         )
         {
-            res = _PyPegen_augoperator ( p , MatMult );
+            res = CHECK_VERSION ( 5 , "The '@' operator is" , _PyPegen_augoperator ( p , MatMult ) );
             if (res == NULL && PyErr_Occurred()) {
                 p->error_indicator = 1;
                 return NULL;
@@ -1565,7 +1757,7 @@ augassign_rule(Parser *p)
         p->mark = mark;
     }
     { // '/='
-        void *literal;
+        Token * literal;
         if (
             (literal = _PyPegen_expect_token(p, 39))
         )
@@ -1580,7 +1772,7 @@ augassign_rule(Parser *p)
         p->mark = mark;
     }
     { // '%='
-        void *literal;
+        Token * literal;
         if (
             (literal = _PyPegen_expect_token(p, 40))
         )
@@ -1595,7 +1787,7 @@ augassign_rule(Parser *p)
         p->mark = mark;
     }
     { // '&='
-        void *literal;
+        Token * literal;
         if (
             (literal = _PyPegen_expect_token(p, 41))
         )
@@ -1610,7 +1802,7 @@ augassign_rule(Parser *p)
         p->mark = mark;
     }
     { // '|='
-        void *literal;
+        Token * literal;
         if (
             (literal = _PyPegen_expect_token(p, 42))
         )
@@ -1625,7 +1817,7 @@ augassign_rule(Parser *p)
         p->mark = mark;
     }
     { // '^='
-        void *literal;
+        Token * literal;
         if (
             (literal = _PyPegen_expect_token(p, 43))
         )
@@ -1640,7 +1832,7 @@ augassign_rule(Parser *p)
         p->mark = mark;
     }
     { // '<<='
-        void *literal;
+        Token * literal;
         if (
             (literal = _PyPegen_expect_token(p, 44))
         )
@@ -1655,7 +1847,7 @@ augassign_rule(Parser *p)
         p->mark = mark;
     }
     { // '>>='
-        void *literal;
+        Token * literal;
         if (
             (literal = _PyPegen_expect_token(p, 45))
         )
@@ -1670,7 +1862,7 @@ augassign_rule(Parser *p)
         p->mark = mark;
     }
     { // '**='
-        void *literal;
+        Token * literal;
         if (
             (literal = _PyPegen_expect_token(p, 46))
         )
@@ -1685,7 +1877,7 @@ augassign_rule(Parser *p)
         p->mark = mark;
     }
     { // '//='
-        void *literal;
+        Token * literal;
         if (
             (literal = _PyPegen_expect_token(p, 48))
         )
@@ -1723,11 +1915,11 @@ global_stmt_rule(Parser *p)
     UNUSED(start_col_offset); // Only used by EXTRA macro
     { // 'global' ','.NAME+
         asdl_seq * a;
-        void *keyword;
+        Token * keyword;
         if (
             (keyword = _PyPegen_expect_token(p, 508))
             &&
-            (a = _gather_16_rule(p))
+            (a = _gather_25_rule(p))
         )
         {
             Token *token = _PyPegen_get_last_nonnwhitespace_token(p);
@@ -1771,11 +1963,11 @@ nonlocal_stmt_rule(Parser *p)
     UNUSED(start_col_offset); // Only used by EXTRA macro
     { // 'nonlocal' ','.NAME+
         asdl_seq * a;
-        void *keyword;
+        Token * keyword;
         if (
             (keyword = _PyPegen_expect_token(p, 509))
             &&
-            (a = _gather_18_rule(p))
+            (a = _gather_27_rule(p))
         )
         {
             Token *token = _PyPegen_get_last_nonnwhitespace_token(p);
@@ -1865,13 +2057,13 @@ assert_stmt_rule(Parser *p)
     { // 'assert' expression [',' expression]
         expr_ty a;
         void *b;
-        void *keyword;
+        Token * keyword;
         if (
             (keyword = _PyPegen_expect_token(p, 505))
             &&
             (a = expression_rule(p))
             &&
-            (b = _tmp_20_rule(p), 1)
+            (b = _tmp_29_rule(p), 1)
         )
         {
             Token *token = _PyPegen_get_last_nonnwhitespace_token(p);
@@ -1915,7 +2107,7 @@ del_stmt_rule(Parser *p)
     UNUSED(start_col_offset); // Only used by EXTRA macro
     { // 'del' del_targets
         asdl_seq* a;
-        void *keyword;
+        Token * keyword;
         if (
             (keyword = _PyPegen_expect_token(p, 503))
             &&
@@ -1999,7 +2191,7 @@ import_name_rule(Parser *p)
     UNUSED(start_col_offset); // Only used by EXTRA macro
     { // 'import' dotted_as_names
         asdl_seq* a;
-        void *keyword;
+        Token * keyword;
         if (
             (keyword = _PyPegen_expect_token(p, 513))
             &&
@@ -2051,12 +2243,12 @@ import_from_rule(Parser *p)
         asdl_seq * a;
         expr_ty b;
         asdl_seq* c;
-        void *keyword;
-        void *keyword_1;
+        Token * keyword;
+        Token * keyword_1;
         if (
             (keyword = _PyPegen_expect_token(p, 514))
             &&
-            (a = _loop0_21_rule(p))
+            (a = _loop0_30_rule(p))
             &&
             (b = dotted_name_rule(p))
             &&
@@ -2085,12 +2277,12 @@ import_from_rule(Parser *p)
     { // 'from' (('.' | '...'))+ 'import' import_from_targets
         asdl_seq * a;
         asdl_seq* b;
-        void *keyword;
-        void *keyword_1;
+        Token * keyword;
+        Token * keyword_1;
         if (
             (keyword = _PyPegen_expect_token(p, 514))
             &&
-            (a = _loop1_22_rule(p))
+            (a = _loop1_31_rule(p))
             &&
             (keyword_1 = _PyPegen_expect_token(p, 513))
             &&
@@ -2130,8 +2322,8 @@ import_from_targets_rule(Parser *p)
     int mark = p->mark;
     { // '(' import_from_as_names ','? ')'
         asdl_seq* a;
-        void *literal;
-        void *literal_1;
+        Token * literal;
+        Token * literal_1;
         void *opt_var;
         UNUSED(opt_var); // Silence compiler warnings
         if (
@@ -2165,7 +2357,7 @@ import_from_targets_rule(Parser *p)
         p->mark = mark;
     }
     { // '*'
-        void *literal;
+        Token * literal;
         if (
             (literal = _PyPegen_expect_token(p, 16))
         )
@@ -2196,7 +2388,7 @@ import_from_as_names_rule(Parser *p)
     { // ','.import_from_as_name+
         asdl_seq * a;
         if (
-            (a = _gather_23_rule(p))
+            (a = _gather_32_rule(p))
         )
         {
             res = a;
@@ -2228,7 +2420,7 @@ import_from_as_name_rule(Parser *p)
         if (
             (a = _PyPegen_name_token(p))
             &&
-            (b = _tmp_25_rule(p), 1)
+            (b = _tmp_34_rule(p), 1)
         )
         {
             res = _Py_alias ( a -> v . Name . id , ( b ) ? ( ( expr_ty ) b ) -> v . Name . id : NULL , p -> arena );
@@ -2257,7 +2449,7 @@ dotted_as_names_rule(Parser *p)
     { // ','.dotted_as_name+
         asdl_seq * a;
         if (
-            (a = _gather_26_rule(p))
+            (a = _gather_35_rule(p))
         )
         {
             res = a;
@@ -2289,7 +2481,7 @@ dotted_as_name_rule(Parser *p)
         if (
             (a = dotted_name_rule(p))
             &&
-            (b = _tmp_28_rule(p), 1)
+            (b = _tmp_37_rule(p), 1)
         )
         {
             res = _Py_alias ( a -> v . Name . id , ( b ) ? ( ( expr_ty ) b ) -> v . Name . id : NULL , p -> arena );
@@ -2343,7 +2535,7 @@ dotted_name_raw(Parser *p)
     { // dotted_name '.' NAME
         expr_ty a;
         expr_ty b;
-        void *literal;
+        Token * literal;
         if (
             (a = dotted_name_rule(p))
             &&
@@ -2400,8 +2592,8 @@ if_stmt_rule(Parser *p)
         expr_ty a;
         asdl_seq* b;
         stmt_ty c;
-        void *keyword;
-        void *literal;
+        Token * keyword;
+        Token * literal;
         if (
             (keyword = _PyPegen_expect_token(p, 510))
             &&
@@ -2435,8 +2627,8 @@ if_stmt_rule(Parser *p)
         expr_ty a;
         asdl_seq* b;
         void *c;
-        void *keyword;
-        void *literal;
+        Token * keyword;
+        Token * literal;
         if (
             (keyword = _PyPegen_expect_token(p, 510))
             &&
@@ -2494,8 +2686,8 @@ elif_stmt_rule(Parser *p)
         expr_ty a;
         asdl_seq* b;
         stmt_ty c;
-        void *keyword;
-        void *literal;
+        Token * keyword;
+        Token * literal;
         if (
             (keyword = _PyPegen_expect_token(p, 515))
             &&
@@ -2529,8 +2721,8 @@ elif_stmt_rule(Parser *p)
         expr_ty a;
         asdl_seq* b;
         void *c;
-        void *keyword;
-        void *literal;
+        Token * keyword;
+        Token * literal;
         if (
             (keyword = _PyPegen_expect_token(p, 515))
             &&
@@ -2576,8 +2768,8 @@ else_block_rule(Parser *p)
     int mark = p->mark;
     { // 'else' ':' block
         asdl_seq* b;
-        void *keyword;
-        void *literal;
+        Token * keyword;
+        Token * literal;
         if (
             (keyword = _PyPegen_expect_token(p, 516))
             &&
@@ -2621,8 +2813,8 @@ while_stmt_rule(Parser *p)
         expr_ty a;
         asdl_seq* b;
         void *c;
-        void *keyword;
-        void *literal;
+        Token * keyword;
+        Token * literal;
         if (
             (keyword = _PyPegen_expect_token(p, 512))
             &&
@@ -2657,7 +2849,9 @@ while_stmt_rule(Parser *p)
     return res;
 }
 
-// for_stmt: ASYNC? 'for' star_targets 'in' star_expressions ':' block else_block?
+// for_stmt:
+//     | 'for' star_targets 'in' star_expressions ':' TYPE_COMMENT? block else_block?
+//     | ASYNC 'for' star_targets 'in' star_expressions ':' TYPE_COMMENT? block else_block?
 static stmt_ty
 for_stmt_rule(Parser *p)
 {
@@ -2674,18 +2868,16 @@ for_stmt_rule(Parser *p)
     UNUSED(start_lineno); // Only used by EXTRA macro
     int start_col_offset = p->tokens[mark]->col_offset;
     UNUSED(start_col_offset); // Only used by EXTRA macro
-    { // ASYNC? 'for' star_targets 'in' star_expressions ':' block else_block?
+    { // 'for' star_targets 'in' star_expressions ':' TYPE_COMMENT? block else_block?
         asdl_seq* b;
         void *el;
         expr_ty ex;
-        void *is_async;
-        void *keyword;
-        void *keyword_1;
-        void *literal;
+        Token * keyword;
+        Token * keyword_1;
+        Token * literal;
         expr_ty t;
+        void *tc;
         if (
-            (is_async = _PyPegen_expect_token(p, ASYNC), 1)
-            &&
             (keyword = _PyPegen_expect_token(p, 517))
             &&
             (t = star_targets_rule(p))
@@ -2695,6 +2887,8 @@ for_stmt_rule(Parser *p)
             (ex = star_expressions_rule(p))
             &&
             (literal = _PyPegen_expect_token(p, 11))
+            &&
+            (tc = _PyPegen_expect_token(p, TYPE_COMMENT), 1)
             &&
             (b = block_rule(p))
             &&
@@ -2709,7 +2903,54 @@ for_stmt_rule(Parser *p)
             UNUSED(end_lineno); // Only used by EXTRA macro
             int end_col_offset = token->end_col_offset;
             UNUSED(end_col_offset); // Only used by EXTRA macro
-            res = ( is_async ? _Py_AsyncFor : _Py_For ) ( t , ex , b , el , NULL , EXTRA );
+            res = _Py_For ( t , ex , b , el , NEW_TYPE_COMMENT ( p , tc ) , EXTRA );
+            if (res == NULL && PyErr_Occurred()) {
+                p->error_indicator = 1;
+                return NULL;
+            }
+            goto done;
+        }
+        p->mark = mark;
+    }
+    { // ASYNC 'for' star_targets 'in' star_expressions ':' TYPE_COMMENT? block else_block?
+        Token * async_var;
+        asdl_seq* b;
+        void *el;
+        expr_ty ex;
+        Token * keyword;
+        Token * keyword_1;
+        Token * literal;
+        expr_ty t;
+        void *tc;
+        if (
+            (async_var = _PyPegen_expect_token(p, ASYNC))
+            &&
+            (keyword = _PyPegen_expect_token(p, 517))
+            &&
+            (t = star_targets_rule(p))
+            &&
+            (keyword_1 = _PyPegen_expect_token(p, 518))
+            &&
+            (ex = star_expressions_rule(p))
+            &&
+            (literal = _PyPegen_expect_token(p, 11))
+            &&
+            (tc = _PyPegen_expect_token(p, TYPE_COMMENT), 1)
+            &&
+            (b = block_rule(p))
+            &&
+            (el = else_block_rule(p), 1)
+        )
+        {
+            Token *token = _PyPegen_get_last_nonnwhitespace_token(p);
+            if (token == NULL) {
+                return NULL;
+            }
+            int end_lineno = token->end_lineno;
+            UNUSED(end_lineno); // Only used by EXTRA macro
+            int end_col_offset = token->end_col_offset;
+            UNUSED(end_col_offset); // Only used by EXTRA macro
+            res = CHECK_VERSION ( 5 , "Async for loops are" , _Py_AsyncFor ( t , ex , b , el , NEW_TYPE_COMMENT ( p , tc ) , EXTRA ) );
             if (res == NULL && PyErr_Occurred()) {
                 p->error_indicator = 1;
                 return NULL;
@@ -2724,8 +2965,10 @@ for_stmt_rule(Parser *p)
 }
 
 // with_stmt:
-//     | ASYNC? 'with' '(' ','.with_item+ ')' ':' block
-//     | ASYNC? 'with' ','.with_item+ ':' block
+//     | 'with' '(' ','.with_item+ ')' ':' block
+//     | 'with' ','.with_item+ ':' TYPE_COMMENT? block
+//     | ASYNC 'with' '(' ','.with_item+ ')' ':' block
+//     | ASYNC 'with' ','.with_item+ ':' TYPE_COMMENT? block
 static stmt_ty
 with_stmt_rule(Parser *p)
 {
@@ -2742,22 +2985,19 @@ with_stmt_rule(Parser *p)
     UNUSED(start_lineno); // Only used by EXTRA macro
     int start_col_offset = p->tokens[mark]->col_offset;
     UNUSED(start_col_offset); // Only used by EXTRA macro
-    { // ASYNC? 'with' '(' ','.with_item+ ')' ':' block
+    { // 'with' '(' ','.with_item+ ')' ':' block
         asdl_seq * a;
         asdl_seq* b;
-        void *is_async;
-        void *keyword;
-        void *literal;
-        void *literal_1;
-        void *literal_2;
+        Token * keyword;
+        Token * literal;
+        Token * literal_1;
+        Token * literal_2;
         if (
-            (is_async = _PyPegen_expect_token(p, ASYNC), 1)
-            &&
             (keyword = _PyPegen_expect_token(p, 519))
             &&
             (literal = _PyPegen_expect_token(p, 7))
             &&
-            (a = _gather_29_rule(p))
+            (a = _gather_38_rule(p))
             &&
             (literal_1 = _PyPegen_expect_token(p, 8))
             &&
@@ -2774,7 +3014,7 @@ with_stmt_rule(Parser *p)
             UNUSED(end_lineno); // Only used by EXTRA macro
             int end_col_offset = token->end_col_offset;
             UNUSED(end_col_offset); // Only used by EXTRA macro
-            res = ( is_async ? _Py_AsyncWith : _Py_With ) ( a , b , NULL , EXTRA );
+            res = _Py_With ( a , b , NULL , EXTRA );
             if (res == NULL && PyErr_Occurred()) {
                 p->error_indicator = 1;
                 return NULL;
@@ -2783,20 +3023,20 @@ with_stmt_rule(Parser *p)
         }
         p->mark = mark;
     }
-    { // ASYNC? 'with' ','.with_item+ ':' block
+    { // 'with' ','.with_item+ ':' TYPE_COMMENT? block
         asdl_seq * a;
         asdl_seq* b;
-        void *is_async;
-        void *keyword;
-        void *literal;
+        Token * keyword;
+        Token * literal;
+        void *tc;
         if (
-            (is_async = _PyPegen_expect_token(p, ASYNC), 1)
-            &&
             (keyword = _PyPegen_expect_token(p, 519))
             &&
-            (a = _gather_31_rule(p))
+            (a = _gather_40_rule(p))
             &&
             (literal = _PyPegen_expect_token(p, 11))
+            &&
+            (tc = _PyPegen_expect_token(p, TYPE_COMMENT), 1)
             &&
             (b = block_rule(p))
         )
@@ -2809,7 +3049,86 @@ with_stmt_rule(Parser *p)
             UNUSED(end_lineno); // Only used by EXTRA macro
             int end_col_offset = token->end_col_offset;
             UNUSED(end_col_offset); // Only used by EXTRA macro
-            res = ( is_async ? _Py_AsyncWith : _Py_With ) ( a , b , NULL , EXTRA );
+            res = _Py_With ( a , b , NEW_TYPE_COMMENT ( p , tc ) , EXTRA );
+            if (res == NULL && PyErr_Occurred()) {
+                p->error_indicator = 1;
+                return NULL;
+            }
+            goto done;
+        }
+        p->mark = mark;
+    }
+    { // ASYNC 'with' '(' ','.with_item+ ')' ':' block
+        asdl_seq * a;
+        Token * async_var;
+        asdl_seq* b;
+        Token * keyword;
+        Token * literal;
+        Token * literal_1;
+        Token * literal_2;
+        if (
+            (async_var = _PyPegen_expect_token(p, ASYNC))
+            &&
+            (keyword = _PyPegen_expect_token(p, 519))
+            &&
+            (literal = _PyPegen_expect_token(p, 7))
+            &&
+            (a = _gather_42_rule(p))
+            &&
+            (literal_1 = _PyPegen_expect_token(p, 8))
+            &&
+            (literal_2 = _PyPegen_expect_token(p, 11))
+            &&
+            (b = block_rule(p))
+        )
+        {
+            Token *token = _PyPegen_get_last_nonnwhitespace_token(p);
+            if (token == NULL) {
+                return NULL;
+            }
+            int end_lineno = token->end_lineno;
+            UNUSED(end_lineno); // Only used by EXTRA macro
+            int end_col_offset = token->end_col_offset;
+            UNUSED(end_col_offset); // Only used by EXTRA macro
+            res = CHECK_VERSION ( 5 , "Async with statements are" , _Py_AsyncWith ( a , b , NULL , EXTRA ) );
+            if (res == NULL && PyErr_Occurred()) {
+                p->error_indicator = 1;
+                return NULL;
+            }
+            goto done;
+        }
+        p->mark = mark;
+    }
+    { // ASYNC 'with' ','.with_item+ ':' TYPE_COMMENT? block
+        asdl_seq * a;
+        Token * async_var;
+        asdl_seq* b;
+        Token * keyword;
+        Token * literal;
+        void *tc;
+        if (
+            (async_var = _PyPegen_expect_token(p, ASYNC))
+            &&
+            (keyword = _PyPegen_expect_token(p, 519))
+            &&
+            (a = _gather_44_rule(p))
+            &&
+            (literal = _PyPegen_expect_token(p, 11))
+            &&
+            (tc = _PyPegen_expect_token(p, TYPE_COMMENT), 1)
+            &&
+            (b = block_rule(p))
+        )
+        {
+            Token *token = _PyPegen_get_last_nonnwhitespace_token(p);
+            if (token == NULL) {
+                return NULL;
+            }
+            int end_lineno = token->end_lineno;
+            UNUSED(end_lineno); // Only used by EXTRA macro
+            int end_col_offset = token->end_col_offset;
+            UNUSED(end_col_offset); // Only used by EXTRA macro
+            res = CHECK_VERSION ( 5 , "Async with statements are" , _Py_AsyncWith ( a , b , NEW_TYPE_COMMENT ( p , tc ) , EXTRA ) );
             if (res == NULL && PyErr_Occurred()) {
                 p->error_indicator = 1;
                 return NULL;
@@ -2838,7 +3157,7 @@ with_item_rule(Parser *p)
         if (
             (e = expression_rule(p))
             &&
-            (o = _tmp_33_rule(p), 1)
+            (o = _tmp_46_rule(p), 1)
         )
         {
             res = _Py_withitem ( e , o , p -> arena );
@@ -2877,8 +3196,8 @@ try_stmt_rule(Parser *p)
     { // 'try' ':' block finally_block
         asdl_seq* b;
         asdl_seq* f;
-        void *keyword;
-        void *literal;
+        Token * keyword;
+        Token * literal;
         if (
             (keyword = _PyPegen_expect_token(p, 511))
             &&
@@ -2911,8 +3230,8 @@ try_stmt_rule(Parser *p)
         void *el;
         asdl_seq * ex;
         void *f;
-        void *keyword;
-        void *literal;
+        Token * keyword;
+        Token * literal;
         if (
             (keyword = _PyPegen_expect_token(p, 511))
             &&
@@ -2920,7 +3239,7 @@ try_stmt_rule(Parser *p)
             &&
             (b = block_rule(p))
             &&
-            (ex = _loop1_34_rule(p))
+            (ex = _loop1_47_rule(p))
             &&
             (el = else_block_rule(p), 1)
             &&
@@ -2969,15 +3288,15 @@ except_block_rule(Parser *p)
     { // 'except' expression ['as' target] ':' block
         asdl_seq* b;
         expr_ty e;
-        void *keyword;
-        void *literal;
+        Token * keyword;
+        Token * literal;
         void *t;
         if (
             (keyword = _PyPegen_expect_token(p, 520))
             &&
             (e = expression_rule(p))
             &&
-            (t = _tmp_35_rule(p), 1)
+            (t = _tmp_48_rule(p), 1)
             &&
             (literal = _PyPegen_expect_token(p, 11))
             &&
@@ -3003,8 +3322,8 @@ except_block_rule(Parser *p)
     }
     { // 'except' ':' block
         asdl_seq* b;
-        void *keyword;
-        void *literal;
+        Token * keyword;
+        Token * literal;
         if (
             (keyword = _PyPegen_expect_token(p, 520))
             &&
@@ -3046,8 +3365,8 @@ finally_block_rule(Parser *p)
     int mark = p->mark;
     { // 'finally' ':' block
         asdl_seq* a;
-        void *keyword;
-        void *literal;
+        Token * keyword;
+        Token * literal;
         if (
             (keyword = _PyPegen_expect_token(p, 521))
             &&
@@ -3089,7 +3408,7 @@ return_stmt_rule(Parser *p)
     UNUSED(start_col_offset); // Only used by EXTRA macro
     { // 'return' star_expressions?
         void *a;
-        void *keyword;
+        Token * keyword;
         if (
             (keyword = _PyPegen_expect_token(p, 500))
             &&
@@ -3138,13 +3457,13 @@ raise_stmt_rule(Parser *p)
     { // 'raise' expression ['from' expression]
         expr_ty a;
         void *b;
-        void *keyword;
+        Token * keyword;
         if (
             (keyword = _PyPegen_expect_token(p, 501))
             &&
             (a = expression_rule(p))
             &&
-            (b = _tmp_36_rule(p), 1)
+            (b = _tmp_49_rule(p), 1)
         )
         {
             Token *token = _PyPegen_get_last_nonnwhitespace_token(p);
@@ -3165,7 +3484,7 @@ raise_stmt_rule(Parser *p)
         p->mark = mark;
     }
     { // 'raise'
-        void *keyword;
+        Token * keyword;
         if (
             (keyword = _PyPegen_expect_token(p, 501))
         )
@@ -3235,7 +3554,9 @@ function_def_rule(Parser *p)
     return res;
 }
 
-// function_def_raw: ASYNC? 'def' NAME '(' params? ')' ['->' annotation] ':' block
+// function_def_raw:
+//     | 'def' NAME '(' params? ')' ['->' expression] ':' func_type_comment? block
+//     | ASYNC 'def' NAME '(' params? ')' ['->' expression] ':' func_type_comment? block
 static stmt_ty
 function_def_raw_rule(Parser *p)
 {
@@ -3252,19 +3573,17 @@ function_def_raw_rule(Parser *p)
     UNUSED(start_lineno); // Only used by EXTRA macro
     int start_col_offset = p->tokens[mark]->col_offset;
     UNUSED(start_col_offset); // Only used by EXTRA macro
-    { // ASYNC? 'def' NAME '(' params? ')' ['->' annotation] ':' block
+    { // 'def' NAME '(' params? ')' ['->' expression] ':' func_type_comment? block
         void *a;
         asdl_seq* b;
-        void *is_async;
-        void *keyword;
-        void *literal;
-        void *literal_1;
-        void *literal_2;
+        Token * keyword;
+        Token * literal;
+        Token * literal_1;
+        Token * literal_2;
         expr_ty n;
         void *params;
+        void *tc;
         if (
-            (is_async = _PyPegen_expect_token(p, ASYNC), 1)
-            &&
             (keyword = _PyPegen_expect_token(p, 522))
             &&
             (n = _PyPegen_name_token(p))
@@ -3275,9 +3594,11 @@ function_def_raw_rule(Parser *p)
             &&
             (literal_1 = _PyPegen_expect_token(p, 8))
             &&
-            (a = _tmp_37_rule(p), 1)
+            (a = _tmp_50_rule(p), 1)
             &&
             (literal_2 = _PyPegen_expect_token(p, 11))
+            &&
+            (tc = func_type_comment_rule(p), 1)
             &&
             (b = block_rule(p))
         )
@@ -3290,11 +3611,120 @@ function_def_raw_rule(Parser *p)
             UNUSED(end_lineno); // Only used by EXTRA macro
             int end_col_offset = token->end_col_offset;
             UNUSED(end_col_offset); // Only used by EXTRA macro
-            res = ( is_async ? _Py_AsyncFunctionDef : _Py_FunctionDef ) ( n -> v . Name . id , ( params ) ? params : CHECK ( _PyPegen_empty_arguments ( p ) ) , b , NULL , a , NULL , EXTRA );
+            res = _Py_FunctionDef ( n -> v . Name . id , ( params ) ? params : CHECK ( _PyPegen_empty_arguments ( p ) ) , b , NULL , a , NEW_TYPE_COMMENT ( p , tc ) , EXTRA );
             if (res == NULL && PyErr_Occurred()) {
                 p->error_indicator = 1;
                 return NULL;
             }
+            goto done;
+        }
+        p->mark = mark;
+    }
+    { // ASYNC 'def' NAME '(' params? ')' ['->' expression] ':' func_type_comment? block
+        void *a;
+        Token * async_var;
+        asdl_seq* b;
+        Token * keyword;
+        Token * literal;
+        Token * literal_1;
+        Token * literal_2;
+        expr_ty n;
+        void *params;
+        void *tc;
+        if (
+            (async_var = _PyPegen_expect_token(p, ASYNC))
+            &&
+            (keyword = _PyPegen_expect_token(p, 522))
+            &&
+            (n = _PyPegen_name_token(p))
+            &&
+            (literal = _PyPegen_expect_token(p, 7))
+            &&
+            (params = params_rule(p), 1)
+            &&
+            (literal_1 = _PyPegen_expect_token(p, 8))
+            &&
+            (a = _tmp_51_rule(p), 1)
+            &&
+            (literal_2 = _PyPegen_expect_token(p, 11))
+            &&
+            (tc = func_type_comment_rule(p), 1)
+            &&
+            (b = block_rule(p))
+        )
+        {
+            Token *token = _PyPegen_get_last_nonnwhitespace_token(p);
+            if (token == NULL) {
+                return NULL;
+            }
+            int end_lineno = token->end_lineno;
+            UNUSED(end_lineno); // Only used by EXTRA macro
+            int end_col_offset = token->end_col_offset;
+            UNUSED(end_col_offset); // Only used by EXTRA macro
+            res = CHECK_VERSION ( 5 , "Async functions are" , _Py_AsyncFunctionDef ( n -> v . Name . id , ( params ) ? params : CHECK ( _PyPegen_empty_arguments ( p ) ) , b , NULL , a , NEW_TYPE_COMMENT ( p , tc ) , EXTRA ) );
+            if (res == NULL && PyErr_Occurred()) {
+                p->error_indicator = 1;
+                return NULL;
+            }
+            goto done;
+        }
+        p->mark = mark;
+    }
+    res = NULL;
+  done:
+    return res;
+}
+
+// func_type_comment:
+//     | NEWLINE TYPE_COMMENT &(NEWLINE INDENT)
+//     | invalid_double_type_comments
+//     | TYPE_COMMENT
+static PyObject*
+func_type_comment_rule(Parser *p)
+{
+    if (p->error_indicator) {
+        return NULL;
+    }
+    PyObject* res = NULL;
+    int mark = p->mark;
+    { // NEWLINE TYPE_COMMENT &(NEWLINE INDENT)
+        Token * newline_var;
+        Token * t;
+        if (
+            (newline_var = _PyPegen_expect_token(p, NEWLINE))
+            &&
+            (t = _PyPegen_expect_token(p, TYPE_COMMENT))
+            &&
+            _PyPegen_lookahead(1, _tmp_52_rule, p)
+        )
+        {
+            res = t;
+            if (res == NULL && PyErr_Occurred()) {
+                p->error_indicator = 1;
+                return NULL;
+            }
+            goto done;
+        }
+        p->mark = mark;
+    }
+    { // invalid_double_type_comments
+        void *invalid_double_type_comments_var;
+        if (
+            (invalid_double_type_comments_var = invalid_double_type_comments_rule(p))
+        )
+        {
+            res = invalid_double_type_comments_var;
+            goto done;
+        }
+        p->mark = mark;
+    }
+    { // TYPE_COMMENT
+        Token * type_comment_var;
+        if (
+            (type_comment_var = _PyPegen_expect_token(p, TYPE_COMMENT))
+        )
+        {
+            res = type_comment_var;
             goto done;
         }
         p->mark = mark;
@@ -3341,10 +3771,10 @@ params_rule(Parser *p)
 }
 
 // parameters:
-//     | slash_without_default [',' plain_names] [',' names_with_default] [',' star_etc?]
-//     | slash_with_default [',' names_with_default] [',' star_etc?]
-//     | plain_names [',' names_with_default] [',' star_etc?]
-//     | names_with_default [',' star_etc?]
+//     | slash_no_default param_no_default* param_with_default* star_etc?
+//     | slash_with_default param_with_default* star_etc?
+//     | param_no_default+ param_with_default* star_etc?
+//     | param_with_default+ star_etc?
 //     | star_etc
 static arguments_ty
 parameters_rule(Parser *p)
@@ -3354,19 +3784,19 @@ parameters_rule(Parser *p)
     }
     arguments_ty res = NULL;
     int mark = p->mark;
-    { // slash_without_default [',' plain_names] [',' names_with_default] [',' star_etc?]
+    { // slash_no_default param_no_default* param_with_default* star_etc?
         asdl_seq* a;
-        void *b;
-        void *c;
+        asdl_seq * b;
+        asdl_seq * c;
         void *d;
         if (
-            (a = slash_without_default_rule(p))
+            (a = slash_no_default_rule(p))
             &&
-            (b = _tmp_38_rule(p), 1)
+            (b = _loop0_53_rule(p))
             &&
-            (c = _tmp_39_rule(p), 1)
+            (c = _loop0_54_rule(p))
             &&
-            (d = _tmp_40_rule(p), 1)
+            (d = star_etc_rule(p), 1)
         )
         {
             res = _PyPegen_make_arguments ( p , a , NULL , b , c , d );
@@ -3378,16 +3808,16 @@ parameters_rule(Parser *p)
         }
         p->mark = mark;
     }
-    { // slash_with_default [',' names_with_default] [',' star_etc?]
+    { // slash_with_default param_with_default* star_etc?
         SlashWithDefault* a;
-        void *b;
+        asdl_seq * b;
         void *c;
         if (
             (a = slash_with_default_rule(p))
             &&
-            (b = _tmp_41_rule(p), 1)
+            (b = _loop0_55_rule(p))
             &&
-            (c = _tmp_42_rule(p), 1)
+            (c = star_etc_rule(p), 1)
         )
         {
             res = _PyPegen_make_arguments ( p , NULL , a , NULL , b , c );
@@ -3399,16 +3829,16 @@ parameters_rule(Parser *p)
         }
         p->mark = mark;
     }
-    { // plain_names [',' names_with_default] [',' star_etc?]
-        asdl_seq* a;
-        void *b;
+    { // param_no_default+ param_with_default* star_etc?
+        asdl_seq * a;
+        asdl_seq * b;
         void *c;
         if (
-            (a = plain_names_rule(p))
+            (a = _loop1_56_rule(p))
             &&
-            (b = _tmp_43_rule(p), 1)
+            (b = _loop0_57_rule(p))
             &&
-            (c = _tmp_44_rule(p), 1)
+            (c = star_etc_rule(p), 1)
         )
         {
             res = _PyPegen_make_arguments ( p , NULL , NULL , a , b , c );
@@ -3420,13 +3850,13 @@ parameters_rule(Parser *p)
         }
         p->mark = mark;
     }
-    { // names_with_default [',' star_etc?]
-        asdl_seq* a;
+    { // param_with_default+ star_etc?
+        asdl_seq * a;
         void *b;
         if (
-            (a = names_with_default_rule(p))
+            (a = _loop1_58_rule(p))
             &&
-            (b = _tmp_45_rule(p), 1)
+            (b = star_etc_rule(p), 1)
         )
         {
             res = _PyPegen_make_arguments ( p , NULL , NULL , NULL , a , b );
@@ -3458,25 +3888,45 @@ parameters_rule(Parser *p)
     return res;
 }
 
-// slash_without_default: plain_names ',' '/'
+// slash_no_default: param_no_default+ '/' ',' | param_no_default+ '/' &')'
 static asdl_seq*
-slash_without_default_rule(Parser *p)
+slash_no_default_rule(Parser *p)
 {
     if (p->error_indicator) {
         return NULL;
     }
     asdl_seq* res = NULL;
     int mark = p->mark;
-    { // plain_names ',' '/'
-        asdl_seq* a;
-        void *literal;
-        void *literal_1;
+    { // param_no_default+ '/' ','
+        asdl_seq * a;
+        Token * literal;
+        Token * literal_1;
         if (
-            (a = plain_names_rule(p))
+            (a = _loop1_59_rule(p))
             &&
-            (literal = _PyPegen_expect_token(p, 12))
+            (literal = _PyPegen_expect_token(p, 17))
             &&
-            (literal_1 = _PyPegen_expect_token(p, 17))
+            (literal_1 = _PyPegen_expect_token(p, 12))
+        )
+        {
+            res = a;
+            if (res == NULL && PyErr_Occurred()) {
+                p->error_indicator = 1;
+                return NULL;
+            }
+            goto done;
+        }
+        p->mark = mark;
+    }
+    { // param_no_default+ '/' &')'
+        asdl_seq * a;
+        Token * literal;
+        if (
+            (a = _loop1_60_rule(p))
+            &&
+            (literal = _PyPegen_expect_token(p, 17))
+            &&
+            _PyPegen_lookahead_with_int(1, _PyPegen_expect_token, p, 8)
         )
         {
             res = a;
@@ -3493,7 +3943,9 @@ slash_without_default_rule(Parser *p)
     return res;
 }
 
-// slash_with_default: [plain_names ','] names_with_default ',' '/'
+// slash_with_default:
+//     | param_no_default* param_with_default+ '/' ','
+//     | param_no_default* param_with_default+ '/' &')'
 static SlashWithDefault*
 slash_with_default_rule(Parser *p)
 {
@@ -3502,19 +3954,42 @@ slash_with_default_rule(Parser *p)
     }
     SlashWithDefault* res = NULL;
     int mark = p->mark;
-    { // [plain_names ','] names_with_default ',' '/'
-        void *a;
-        asdl_seq* b;
-        void *literal;
-        void *literal_1;
+    { // param_no_default* param_with_default+ '/' ','
+        asdl_seq * a;
+        asdl_seq * b;
+        Token * literal;
+        Token * literal_1;
         if (
-            (a = _tmp_46_rule(p), 1)
+            (a = _loop0_61_rule(p))
             &&
-            (b = names_with_default_rule(p))
+            (b = _loop1_62_rule(p))
             &&
-            (literal = _PyPegen_expect_token(p, 12))
+            (literal = _PyPegen_expect_token(p, 17))
             &&
-            (literal_1 = _PyPegen_expect_token(p, 17))
+            (literal_1 = _PyPegen_expect_token(p, 12))
+        )
+        {
+            res = _PyPegen_slash_with_default ( p , a , b );
+            if (res == NULL && PyErr_Occurred()) {
+                p->error_indicator = 1;
+                return NULL;
+            }
+            goto done;
+        }
+        p->mark = mark;
+    }
+    { // param_no_default* param_with_default+ '/' &')'
+        asdl_seq * a;
+        asdl_seq * b;
+        Token * literal;
+        if (
+            (a = _loop0_63_rule(p))
+            &&
+            (b = _loop1_64_rule(p))
+            &&
+            (literal = _PyPegen_expect_token(p, 17))
+            &&
+            _PyPegen_lookahead_with_int(1, _PyPegen_expect_token, p, 8)
         )
         {
             res = _PyPegen_slash_with_default ( p , a , b );
@@ -3532,9 +4007,9 @@ slash_with_default_rule(Parser *p)
 }
 
 // star_etc:
-//     | '*' plain_name name_with_optional_default* [',' kwds] ','?
-//     | '*' name_with_optional_default+ [',' kwds] ','?
-//     | kwds ','?
+//     | '*' param_no_default param_maybe_default* kwds?
+//     | '*' ',' param_maybe_default+ kwds?
+//     | kwds
 static StarEtc*
 star_etc_rule(Parser *p)
 {
@@ -3543,23 +4018,19 @@ star_etc_rule(Parser *p)
     }
     StarEtc* res = NULL;
     int mark = p->mark;
-    { // '*' plain_name name_with_optional_default* [',' kwds] ','?
+    { // '*' param_no_default param_maybe_default* kwds?
         arg_ty a;
         asdl_seq * b;
         void *c;
-        void *literal;
-        void *opt_var;
-        UNUSED(opt_var); // Silence compiler warnings
+        Token * literal;
         if (
             (literal = _PyPegen_expect_token(p, 16))
             &&
-            (a = plain_name_rule(p))
+            (a = param_no_default_rule(p))
             &&
-            (b = _loop0_47_rule(p))
+            (b = _loop0_65_rule(p))
             &&
-            (c = _tmp_48_rule(p), 1)
-            &&
-            (opt_var = _PyPegen_expect_token(p, 12), 1)
+            (c = kwds_rule(p), 1)
         )
         {
             res = _PyPegen_star_etc ( p , a , b , c );
@@ -3571,20 +4042,19 @@ star_etc_rule(Parser *p)
         }
         p->mark = mark;
     }
-    { // '*' name_with_optional_default+ [',' kwds] ','?
+    { // '*' ',' param_maybe_default+ kwds?
         asdl_seq * b;
         void *c;
-        void *literal;
-        void *opt_var;
-        UNUSED(opt_var); // Silence compiler warnings
+        Token * literal;
+        Token * literal_1;
         if (
             (literal = _PyPegen_expect_token(p, 16))
             &&
-            (b = _loop1_49_rule(p))
+            (literal_1 = _PyPegen_expect_token(p, 12))
             &&
-            (c = _tmp_50_rule(p), 1)
+            (b = _loop1_66_rule(p))
             &&
-            (opt_var = _PyPegen_expect_token(p, 12), 1)
+            (c = kwds_rule(p), 1)
         )
         {
             res = _PyPegen_star_etc ( p , NULL , b , c );
@@ -3596,14 +4066,10 @@ star_etc_rule(Parser *p)
         }
         p->mark = mark;
     }
-    { // kwds ','?
+    { // kwds
         arg_ty a;
-        void *opt_var;
-        UNUSED(opt_var); // Silence compiler warnings
         if (
             (a = kwds_rule(p))
-            &&
-            (opt_var = _PyPegen_expect_token(p, 12), 1)
         )
         {
             res = _PyPegen_star_etc ( p , NULL , NULL , a );
@@ -3620,28 +4086,60 @@ star_etc_rule(Parser *p)
     return res;
 }
 
-// name_with_optional_default: ',' plain_name ['=' expression]
-static NameDefaultPair*
-name_with_optional_default_rule(Parser *p)
+// kwds: '**' param_no_default
+static arg_ty
+kwds_rule(Parser *p)
 {
     if (p->error_indicator) {
         return NULL;
     }
-    NameDefaultPair* res = NULL;
+    arg_ty res = NULL;
     int mark = p->mark;
-    { // ',' plain_name ['=' expression]
+    { // '**' param_no_default
         arg_ty a;
-        void *b;
-        void *literal;
+        Token * literal;
         if (
+            (literal = _PyPegen_expect_token(p, 35))
+            &&
+            (a = param_no_default_rule(p))
+        )
+        {
+            res = a;
+            if (res == NULL && PyErr_Occurred()) {
+                p->error_indicator = 1;
+                return NULL;
+            }
+            goto done;
+        }
+        p->mark = mark;
+    }
+    res = NULL;
+  done:
+    return res;
+}
+
+// param_no_default: param ',' TYPE_COMMENT? | param TYPE_COMMENT? &')'
+static arg_ty
+param_no_default_rule(Parser *p)
+{
+    if (p->error_indicator) {
+        return NULL;
+    }
+    arg_ty res = NULL;
+    int mark = p->mark;
+    { // param ',' TYPE_COMMENT?
+        arg_ty a;
+        Token * literal;
+        void *tc;
+        if (
+            (a = param_rule(p))
+            &&
             (literal = _PyPegen_expect_token(p, 12))
             &&
-            (a = plain_name_rule(p))
-            &&
-            (b = _tmp_51_rule(p), 1)
+            (tc = _PyPegen_expect_token(p, TYPE_COMMENT), 1)
         )
         {
-            res = _PyPegen_name_default_pair ( p , a , b );
+            res = _PyPegen_add_type_comment_to_arg ( p , a , tc );
             if (res == NULL && PyErr_Occurred()) {
                 p->error_indicator = 1;
                 return NULL;
@@ -3650,27 +4148,18 @@ name_with_optional_default_rule(Parser *p)
         }
         p->mark = mark;
     }
-    res = NULL;
-  done:
-    return res;
-}
-
-// names_with_default: ','.name_with_default+
-static asdl_seq*
-names_with_default_rule(Parser *p)
-{
-    if (p->error_indicator) {
-        return NULL;
-    }
-    asdl_seq* res = NULL;
-    int mark = p->mark;
-    { // ','.name_with_default+
-        asdl_seq * a;
+    { // param TYPE_COMMENT? &')'
+        arg_ty a;
+        void *tc;
         if (
-            (a = _gather_52_rule(p))
+            (a = param_rule(p))
+            &&
+            (tc = _PyPegen_expect_token(p, TYPE_COMMENT), 1)
+            &&
+            _PyPegen_lookahead_with_int(1, _PyPegen_expect_token, p, 8)
         )
         {
-            res = a;
+            res = _PyPegen_add_type_comment_to_arg ( p , a , tc );
             if (res == NULL && PyErr_Occurred()) {
                 p->error_indicator = 1;
                 return NULL;
@@ -3684,28 +4173,54 @@ names_with_default_rule(Parser *p)
     return res;
 }
 
-// name_with_default: plain_name '=' expression
+// param_with_default: param default ',' TYPE_COMMENT? | param default TYPE_COMMENT? &')'
 static NameDefaultPair*
-name_with_default_rule(Parser *p)
+param_with_default_rule(Parser *p)
 {
     if (p->error_indicator) {
         return NULL;
     }
     NameDefaultPair* res = NULL;
     int mark = p->mark;
-    { // plain_name '=' expression
-        expr_ty e;
-        void *literal;
-        arg_ty n;
+    { // param default ',' TYPE_COMMENT?
+        arg_ty a;
+        expr_ty c;
+        Token * literal;
+        void *tc;
         if (
-            (n = plain_name_rule(p))
+            (a = param_rule(p))
             &&
-            (literal = _PyPegen_expect_token(p, 22))
+            (c = default_rule(p))
             &&
-            (e = expression_rule(p))
+            (literal = _PyPegen_expect_token(p, 12))
+            &&
+            (tc = _PyPegen_expect_token(p, TYPE_COMMENT), 1)
         )
         {
-            res = _PyPegen_name_default_pair ( p , n , e );
+            res = _PyPegen_name_default_pair ( p , a , c , tc );
+            if (res == NULL && PyErr_Occurred()) {
+                p->error_indicator = 1;
+                return NULL;
+            }
+            goto done;
+        }
+        p->mark = mark;
+    }
+    { // param default TYPE_COMMENT? &')'
+        arg_ty a;
+        expr_ty c;
+        void *tc;
+        if (
+            (a = param_rule(p))
+            &&
+            (c = default_rule(p))
+            &&
+            (tc = _PyPegen_expect_token(p, TYPE_COMMENT), 1)
+            &&
+            _PyPegen_lookahead_with_int(1, _PyPegen_expect_token, p, 8)
+        )
+        {
+            res = _PyPegen_name_default_pair ( p , a , c , tc );
             if (res == NULL && PyErr_Occurred()) {
                 p->error_indicator = 1;
                 return NULL;
@@ -3719,24 +4234,56 @@ name_with_default_rule(Parser *p)
     return res;
 }
 
-// plain_names: ','.(plain_name !'=')+
-static asdl_seq*
-plain_names_rule(Parser *p)
+// param_maybe_default:
+//     | param default? ',' TYPE_COMMENT?
+//     | param default? TYPE_COMMENT? &')'
+static NameDefaultPair*
+param_maybe_default_rule(Parser *p)
 {
     if (p->error_indicator) {
         return NULL;
     }
-    asdl_seq* res = NULL;
-    if (_PyPegen_is_memoized(p, plain_names_type, &res))
-        return res;
+    NameDefaultPair* res = NULL;
     int mark = p->mark;
-    { // ','.(plain_name !'=')+
-        asdl_seq * a;
+    { // param default? ',' TYPE_COMMENT?
+        arg_ty a;
+        void *c;
+        Token * literal;
+        void *tc;
         if (
-            (a = _gather_54_rule(p))
+            (a = param_rule(p))
+            &&
+            (c = default_rule(p), 1)
+            &&
+            (literal = _PyPegen_expect_token(p, 12))
+            &&
+            (tc = _PyPegen_expect_token(p, TYPE_COMMENT), 1)
         )
         {
-            res = a;
+            res = _PyPegen_name_default_pair ( p , a , c , tc );
+            if (res == NULL && PyErr_Occurred()) {
+                p->error_indicator = 1;
+                return NULL;
+            }
+            goto done;
+        }
+        p->mark = mark;
+    }
+    { // param default? TYPE_COMMENT? &')'
+        arg_ty a;
+        void *c;
+        void *tc;
+        if (
+            (a = param_rule(p))
+            &&
+            (c = default_rule(p), 1)
+            &&
+            (tc = _PyPegen_expect_token(p, TYPE_COMMENT), 1)
+            &&
+            _PyPegen_lookahead_with_int(1, _PyPegen_expect_token, p, 8)
+        )
+        {
+            res = _PyPegen_name_default_pair ( p , a , c , tc );
             if (res == NULL && PyErr_Occurred()) {
                 p->error_indicator = 1;
                 return NULL;
@@ -3747,13 +4294,12 @@ plain_names_rule(Parser *p)
     }
     res = NULL;
   done:
-    _PyPegen_insert_memo(p, mark, plain_names_type, res);
     return res;
 }
 
-// plain_name: NAME [':' annotation]
+// param: NAME annotation?
 static arg_ty
-plain_name_rule(Parser *p)
+param_rule(Parser *p)
 {
     if (p->error_indicator) {
         return NULL;
@@ -3768,13 +4314,13 @@ plain_name_rule(Parser *p)
     UNUSED(start_lineno); // Only used by EXTRA macro
     int start_col_offset = p->tokens[mark]->col_offset;
     UNUSED(start_col_offset); // Only used by EXTRA macro
-    { // NAME [':' annotation]
+    { // NAME annotation?
         expr_ty a;
         void *b;
         if (
             (a = _PyPegen_name_token(p))
             &&
-            (b = _tmp_56_rule(p), 1)
+            (b = annotation_rule(p), 1)
         )
         {
             Token *token = _PyPegen_get_last_nonnwhitespace_token(p);
@@ -3799,22 +4345,22 @@ plain_name_rule(Parser *p)
     return res;
 }
 
-// kwds: '**' plain_name
-static arg_ty
-kwds_rule(Parser *p)
+// annotation: ':' expression
+static expr_ty
+annotation_rule(Parser *p)
 {
     if (p->error_indicator) {
         return NULL;
     }
-    arg_ty res = NULL;
+    expr_ty res = NULL;
     int mark = p->mark;
-    { // '**' plain_name
-        arg_ty a;
-        void *literal;
+    { // ':' expression
+        expr_ty a;
+        Token * literal;
         if (
-            (literal = _PyPegen_expect_token(p, 35))
+            (literal = _PyPegen_expect_token(p, 11))
             &&
-            (a = plain_name_rule(p))
+            (a = expression_rule(p))
         )
         {
             res = a;
@@ -3831,22 +4377,29 @@ kwds_rule(Parser *p)
     return res;
 }
 
-// annotation: expression
+// default: '=' expression
 static expr_ty
-annotation_rule(Parser *p)
+default_rule(Parser *p)
 {
     if (p->error_indicator) {
         return NULL;
     }
     expr_ty res = NULL;
     int mark = p->mark;
-    { // expression
-        expr_ty expression_var;
+    { // '=' expression
+        expr_ty a;
+        Token * literal;
         if (
-            (expression_var = expression_rule(p))
+            (literal = _PyPegen_expect_token(p, 22))
+            &&
+            (a = expression_rule(p))
         )
         {
-            res = expression_var;
+            res = a;
+            if (res == NULL && PyErr_Occurred()) {
+                p->error_indicator = 1;
+                return NULL;
+            }
             goto done;
         }
         p->mark = mark;
@@ -3868,7 +4421,7 @@ decorators_rule(Parser *p)
     { // (('@' named_expression NEWLINE))+
         asdl_seq * a;
         if (
-            (a = _loop1_57_rule(p))
+            (a = _loop1_67_rule(p))
         )
         {
             res = a;
@@ -3949,14 +4502,14 @@ class_def_raw_rule(Parser *p)
         expr_ty a;
         void *b;
         asdl_seq* c;
-        void *keyword;
-        void *literal;
+        Token * keyword;
+        Token * literal;
         if (
             (keyword = _PyPegen_expect_token(p, 523))
             &&
             (a = _PyPegen_name_token(p))
             &&
-            (b = _tmp_58_rule(p), 1)
+            (b = _tmp_68_rule(p), 1)
             &&
             (literal = _PyPegen_expect_token(p, 11))
             &&
@@ -3998,9 +4551,9 @@ block_rule(Parser *p)
     int mark = p->mark;
     { // NEWLINE INDENT statements DEDENT
         asdl_seq* a;
-        void *dedent_var;
-        void *indent_var;
-        void *newline_var;
+        Token * dedent_var;
+        Token * indent_var;
+        Token * newline_var;
         if (
             (newline_var = _PyPegen_expect_token(p, NEWLINE))
             &&
@@ -4062,7 +4615,7 @@ expressions_list_rule(Parser *p)
         void *opt_var;
         UNUSED(opt_var); // Silence compiler warnings
         if (
-            (a = _gather_59_rule(p))
+            (a = _gather_69_rule(p))
             &&
             (opt_var = _PyPegen_expect_token(p, 12), 1)
         )
@@ -4109,7 +4662,7 @@ star_expressions_rule(Parser *p)
         if (
             (a = star_expression_rule(p))
             &&
-            (b = _loop1_61_rule(p))
+            (b = _loop1_71_rule(p))
             &&
             (opt_var = _PyPegen_expect_token(p, 12), 1)
         )
@@ -4133,7 +4686,7 @@ star_expressions_rule(Parser *p)
     }
     { // star_expression ','
         expr_ty a;
-        void *literal;
+        Token * literal;
         if (
             (a = star_expression_rule(p))
             &&
@@ -4194,7 +4747,7 @@ star_expression_rule(Parser *p)
     UNUSED(start_col_offset); // Only used by EXTRA macro
     { // '*' bitwise_or
         expr_ty a;
-        void *literal;
+        Token * literal;
         if (
             (literal = _PyPegen_expect_token(p, 16))
             &&
@@ -4249,7 +4802,7 @@ star_named_expressions_rule(Parser *p)
         void *opt_var;
         UNUSED(opt_var); // Silence compiler warnings
         if (
-            (a = _gather_62_rule(p))
+            (a = _gather_72_rule(p))
             &&
             (opt_var = _PyPegen_expect_token(p, 12), 1)
         )
@@ -4287,7 +4840,7 @@ star_named_expression_rule(Parser *p)
     UNUSED(start_col_offset); // Only used by EXTRA macro
     { // '*' bitwise_or
         expr_ty a;
-        void *literal;
+        Token * literal;
         if (
             (literal = _PyPegen_expect_token(p, 16))
             &&
@@ -4347,7 +4900,7 @@ named_expression_rule(Parser *p)
     { // NAME ':=' expression
         expr_ty a;
         expr_ty b;
-        void *literal;
+        Token * literal;
         if (
             (a = _PyPegen_name_token(p))
             &&
@@ -4463,7 +5016,7 @@ expressions_rule(Parser *p)
         if (
             (a = expression_rule(p))
             &&
-            (b = _loop1_64_rule(p))
+            (b = _loop1_74_rule(p))
             &&
             (opt_var = _PyPegen_expect_token(p, 12), 1)
         )
@@ -4487,7 +5040,7 @@ expressions_rule(Parser *p)
     }
     { // expression ','
         expr_ty a;
-        void *literal;
+        Token * literal;
         if (
             (a = expression_rule(p))
             &&
@@ -4550,8 +5103,8 @@ expression_rule(Parser *p)
         expr_ty a;
         expr_ty b;
         expr_ty c;
-        void *keyword;
-        void *keyword_1;
+        Token * keyword;
+        Token * keyword_1;
         if (
             (a = disjunction_rule(p))
             &&
@@ -4629,8 +5182,8 @@ lambdef_rule(Parser *p)
     { // 'lambda' lambda_parameters? ':' expression
         void *a;
         expr_ty b;
-        void *keyword;
-        void *literal;
+        Token * keyword;
+        Token * literal;
         if (
             (keyword = _PyPegen_expect_token(p, 524))
             &&
@@ -4685,11 +5238,11 @@ lambda_parameters_rule(Parser *p)
         if (
             (a = lambda_slash_without_default_rule(p))
             &&
-            (b = _tmp_65_rule(p), 1)
+            (b = _tmp_75_rule(p), 1)
             &&
-            (c = _tmp_66_rule(p), 1)
+            (c = _tmp_76_rule(p), 1)
             &&
-            (d = _tmp_67_rule(p), 1)
+            (d = _tmp_77_rule(p), 1)
         )
         {
             res = _PyPegen_make_arguments ( p , a , NULL , b , c , d );
@@ -4708,9 +5261,9 @@ lambda_parameters_rule(Parser *p)
         if (
             (a = lambda_slash_with_default_rule(p))
             &&
-            (b = _tmp_68_rule(p), 1)
+            (b = _tmp_78_rule(p), 1)
             &&
-            (c = _tmp_69_rule(p), 1)
+            (c = _tmp_79_rule(p), 1)
         )
         {
             res = _PyPegen_make_arguments ( p , NULL , a , NULL , b , c );
@@ -4729,9 +5282,9 @@ lambda_parameters_rule(Parser *p)
         if (
             (a = lambda_plain_names_rule(p))
             &&
-            (b = _tmp_70_rule(p), 1)
+            (b = _tmp_80_rule(p), 1)
             &&
-            (c = _tmp_71_rule(p), 1)
+            (c = _tmp_81_rule(p), 1)
         )
         {
             res = _PyPegen_make_arguments ( p , NULL , NULL , a , b , c );
@@ -4749,7 +5302,7 @@ lambda_parameters_rule(Parser *p)
         if (
             (a = lambda_names_with_default_rule(p))
             &&
-            (b = _tmp_72_rule(p), 1)
+            (b = _tmp_82_rule(p), 1)
         )
         {
             res = _PyPegen_make_arguments ( p , NULL , NULL , NULL , a , b );
@@ -4792,8 +5345,8 @@ lambda_slash_without_default_rule(Parser *p)
     int mark = p->mark;
     { // lambda_plain_names ',' '/'
         asdl_seq* a;
-        void *literal;
-        void *literal_1;
+        Token * literal;
+        Token * literal_1;
         if (
             (a = lambda_plain_names_rule(p))
             &&
@@ -4828,10 +5381,10 @@ lambda_slash_with_default_rule(Parser *p)
     { // [lambda_plain_names ','] lambda_names_with_default ',' '/'
         void *a;
         asdl_seq* b;
-        void *literal;
-        void *literal_1;
+        Token * literal;
+        Token * literal_1;
         if (
-            (a = _tmp_73_rule(p), 1)
+            (a = _tmp_83_rule(p), 1)
             &&
             (b = lambda_names_with_default_rule(p))
             &&
@@ -4870,7 +5423,7 @@ lambda_star_etc_rule(Parser *p)
         arg_ty a;
         asdl_seq * b;
         void *c;
-        void *literal;
+        Token * literal;
         void *opt_var;
         UNUSED(opt_var); // Silence compiler warnings
         if (
@@ -4878,9 +5431,9 @@ lambda_star_etc_rule(Parser *p)
             &&
             (a = lambda_plain_name_rule(p))
             &&
-            (b = _loop0_74_rule(p))
+            (b = _loop0_84_rule(p))
             &&
-            (c = _tmp_75_rule(p), 1)
+            (c = _tmp_85_rule(p), 1)
             &&
             (opt_var = _PyPegen_expect_token(p, 12), 1)
         )
@@ -4897,15 +5450,15 @@ lambda_star_etc_rule(Parser *p)
     { // '*' lambda_name_with_optional_default+ [',' lambda_kwds] ','?
         asdl_seq * b;
         void *c;
-        void *literal;
+        Token * literal;
         void *opt_var;
         UNUSED(opt_var); // Silence compiler warnings
         if (
             (literal = _PyPegen_expect_token(p, 16))
             &&
-            (b = _loop1_76_rule(p))
+            (b = _loop1_86_rule(p))
             &&
-            (c = _tmp_77_rule(p), 1)
+            (c = _tmp_87_rule(p), 1)
             &&
             (opt_var = _PyPegen_expect_token(p, 12), 1)
         )
@@ -4955,16 +5508,16 @@ lambda_name_with_optional_default_rule(Parser *p)
     { // ',' lambda_plain_name ['=' expression]
         arg_ty a;
         void *b;
-        void *literal;
+        Token * literal;
         if (
             (literal = _PyPegen_expect_token(p, 12))
             &&
             (a = lambda_plain_name_rule(p))
             &&
-            (b = _tmp_78_rule(p), 1)
+            (b = _tmp_88_rule(p), 1)
         )
         {
-            res = _PyPegen_name_default_pair ( p , a , b );
+            res = _PyPegen_name_default_pair ( p , a , b , NULL );
             if (res == NULL && PyErr_Occurred()) {
                 p->error_indicator = 1;
                 return NULL;
@@ -4990,7 +5543,7 @@ lambda_names_with_default_rule(Parser *p)
     { // ','.lambda_name_with_default+
         asdl_seq * a;
         if (
-            (a = _gather_79_rule(p))
+            (a = _gather_89_rule(p))
         )
         {
             res = a;
@@ -5018,7 +5571,7 @@ lambda_name_with_default_rule(Parser *p)
     int mark = p->mark;
     { // lambda_plain_name '=' expression
         expr_ty e;
-        void *literal;
+        Token * literal;
         arg_ty n;
         if (
             (n = lambda_plain_name_rule(p))
@@ -5028,7 +5581,7 @@ lambda_name_with_default_rule(Parser *p)
             (e = expression_rule(p))
         )
         {
-            res = _PyPegen_name_default_pair ( p , n , e );
+            res = _PyPegen_name_default_pair ( p , n , e , NULL );
             if (res == NULL && PyErr_Occurred()) {
                 p->error_indicator = 1;
                 return NULL;
@@ -5054,7 +5607,7 @@ lambda_plain_names_rule(Parser *p)
     { // ','.(lambda_plain_name !'=')+
         asdl_seq * a;
         if (
-            (a = _gather_81_rule(p))
+            (a = _gather_91_rule(p))
         )
         {
             res = a;
@@ -5127,7 +5680,7 @@ lambda_kwds_rule(Parser *p)
     int mark = p->mark;
     { // '**' lambda_plain_name
         arg_ty a;
-        void *literal;
+        Token * literal;
         if (
             (literal = _PyPegen_expect_token(p, 35))
             &&
@@ -5173,7 +5726,7 @@ disjunction_rule(Parser *p)
         if (
             (a = conjunction_rule(p))
             &&
-            (b = _loop1_83_rule(p))
+            (b = _loop1_93_rule(p))
         )
         {
             Token *token = _PyPegen_get_last_nonnwhitespace_token(p);
@@ -5235,7 +5788,7 @@ conjunction_rule(Parser *p)
         if (
             (a = inversion_rule(p))
             &&
-            (b = _loop1_84_rule(p))
+            (b = _loop1_94_rule(p))
         )
         {
             Token *token = _PyPegen_get_last_nonnwhitespace_token(p);
@@ -5293,7 +5846,7 @@ inversion_rule(Parser *p)
     UNUSED(start_col_offset); // Only used by EXTRA macro
     { // 'not' inversion
         expr_ty a;
-        void *keyword;
+        Token * keyword;
         if (
             (keyword = _PyPegen_expect_token(p, 525))
             &&
@@ -5357,7 +5910,7 @@ comparison_rule(Parser *p)
         if (
             (a = bitwise_or_rule(p))
             &&
-            (b = _loop1_85_rule(p))
+            (b = _loop1_95_rule(p))
         )
         {
             Token *token = _PyPegen_get_last_nonnwhitespace_token(p);
@@ -5538,7 +6091,7 @@ eq_bitwise_or_rule(Parser *p)
     int mark = p->mark;
     { // '==' bitwise_or
         expr_ty a;
-        void *literal;
+        Token * literal;
         if (
             (literal = _PyPegen_expect_token(p, 27))
             &&
@@ -5569,10 +6122,10 @@ noteq_bitwise_or_rule(Parser *p)
     CmpopExprPair* res = NULL;
     int mark = p->mark;
     { // ('!=') bitwise_or
-        void *_tmp_86_var;
+        void *_tmp_96_var;
         expr_ty a;
         if (
-            (_tmp_86_var = _tmp_86_rule(p))
+            (_tmp_96_var = _tmp_96_rule(p))
             &&
             (a = bitwise_or_rule(p))
         )
@@ -5602,7 +6155,7 @@ lte_bitwise_or_rule(Parser *p)
     int mark = p->mark;
     { // '<=' bitwise_or
         expr_ty a;
-        void *literal;
+        Token * literal;
         if (
             (literal = _PyPegen_expect_token(p, 29))
             &&
@@ -5634,7 +6187,7 @@ lt_bitwise_or_rule(Parser *p)
     int mark = p->mark;
     { // '<' bitwise_or
         expr_ty a;
-        void *literal;
+        Token * literal;
         if (
             (literal = _PyPegen_expect_token(p, 20))
             &&
@@ -5666,7 +6219,7 @@ gte_bitwise_or_rule(Parser *p)
     int mark = p->mark;
     { // '>=' bitwise_or
         expr_ty a;
-        void *literal;
+        Token * literal;
         if (
             (literal = _PyPegen_expect_token(p, 30))
             &&
@@ -5698,7 +6251,7 @@ gt_bitwise_or_rule(Parser *p)
     int mark = p->mark;
     { // '>' bitwise_or
         expr_ty a;
-        void *literal;
+        Token * literal;
         if (
             (literal = _PyPegen_expect_token(p, 21))
             &&
@@ -5730,8 +6283,8 @@ notin_bitwise_or_rule(Parser *p)
     int mark = p->mark;
     { // 'not' 'in' bitwise_or
         expr_ty a;
-        void *keyword;
-        void *keyword_1;
+        Token * keyword;
+        Token * keyword_1;
         if (
             (keyword = _PyPegen_expect_token(p, 525))
             &&
@@ -5765,7 +6318,7 @@ in_bitwise_or_rule(Parser *p)
     int mark = p->mark;
     { // 'in' bitwise_or
         expr_ty a;
-        void *keyword;
+        Token * keyword;
         if (
             (keyword = _PyPegen_expect_token(p, 518))
             &&
@@ -5797,8 +6350,8 @@ isnot_bitwise_or_rule(Parser *p)
     int mark = p->mark;
     { // 'is' 'not' bitwise_or
         expr_ty a;
-        void *keyword;
-        void *keyword_1;
+        Token * keyword;
+        Token * keyword_1;
         if (
             (keyword = _PyPegen_expect_token(p, 526))
             &&
@@ -5832,7 +6385,7 @@ is_bitwise_or_rule(Parser *p)
     int mark = p->mark;
     { // 'is' bitwise_or
         expr_ty a;
-        void *keyword;
+        Token * keyword;
         if (
             (keyword = _PyPegen_expect_token(p, 526))
             &&
@@ -5898,7 +6451,7 @@ bitwise_or_raw(Parser *p)
     { // bitwise_or '|' bitwise_xor
         expr_ty a;
         expr_ty b;
-        void *literal;
+        Token * literal;
         if (
             (a = bitwise_or_rule(p))
             &&
@@ -5985,7 +6538,7 @@ bitwise_xor_raw(Parser *p)
     { // bitwise_xor '^' bitwise_and
         expr_ty a;
         expr_ty b;
-        void *literal;
+        Token * literal;
         if (
             (a = bitwise_xor_rule(p))
             &&
@@ -6072,7 +6625,7 @@ bitwise_and_raw(Parser *p)
     { // bitwise_and '&' shift_expr
         expr_ty a;
         expr_ty b;
-        void *literal;
+        Token * literal;
         if (
             (a = bitwise_and_rule(p))
             &&
@@ -6159,7 +6712,7 @@ shift_expr_raw(Parser *p)
     { // shift_expr '<<' sum
         expr_ty a;
         expr_ty b;
-        void *literal;
+        Token * literal;
         if (
             (a = shift_expr_rule(p))
             &&
@@ -6188,7 +6741,7 @@ shift_expr_raw(Parser *p)
     { // shift_expr '>>' sum
         expr_ty a;
         expr_ty b;
-        void *literal;
+        Token * literal;
         if (
             (a = shift_expr_rule(p))
             &&
@@ -6275,7 +6828,7 @@ sum_raw(Parser *p)
     { // sum '+' term
         expr_ty a;
         expr_ty b;
-        void *literal;
+        Token * literal;
         if (
             (a = sum_rule(p))
             &&
@@ -6304,7 +6857,7 @@ sum_raw(Parser *p)
     { // sum '-' term
         expr_ty a;
         expr_ty b;
-        void *literal;
+        Token * literal;
         if (
             (a = sum_rule(p))
             &&
@@ -6397,7 +6950,7 @@ term_raw(Parser *p)
     { // term '*' factor
         expr_ty a;
         expr_ty b;
-        void *literal;
+        Token * literal;
         if (
             (a = term_rule(p))
             &&
@@ -6426,7 +6979,7 @@ term_raw(Parser *p)
     { // term '/' factor
         expr_ty a;
         expr_ty b;
-        void *literal;
+        Token * literal;
         if (
             (a = term_rule(p))
             &&
@@ -6455,7 +7008,7 @@ term_raw(Parser *p)
     { // term '//' factor
         expr_ty a;
         expr_ty b;
-        void *literal;
+        Token * literal;
         if (
             (a = term_rule(p))
             &&
@@ -6484,7 +7037,7 @@ term_raw(Parser *p)
     { // term '%' factor
         expr_ty a;
         expr_ty b;
-        void *literal;
+        Token * literal;
         if (
             (a = term_rule(p))
             &&
@@ -6513,7 +7066,7 @@ term_raw(Parser *p)
     { // term '@' factor
         expr_ty a;
         expr_ty b;
-        void *literal;
+        Token * literal;
         if (
             (a = term_rule(p))
             &&
@@ -6530,7 +7083,7 @@ term_raw(Parser *p)
             UNUSED(end_lineno); // Only used by EXTRA macro
             int end_col_offset = token->end_col_offset;
             UNUSED(end_col_offset); // Only used by EXTRA macro
-            res = _Py_BinOp ( a , MatMult , b , EXTRA );
+            res = CHECK_VERSION ( 5 , "The '@' operator is" , _Py_BinOp ( a , MatMult , b , EXTRA ) );
             if (res == NULL && PyErr_Occurred()) {
                 p->error_indicator = 1;
                 return NULL;
@@ -6576,7 +7129,7 @@ factor_rule(Parser *p)
     UNUSED(start_col_offset); // Only used by EXTRA macro
     { // '+' factor
         expr_ty a;
-        void *literal;
+        Token * literal;
         if (
             (literal = _PyPegen_expect_token(p, 14))
             &&
@@ -6602,7 +7155,7 @@ factor_rule(Parser *p)
     }
     { // '-' factor
         expr_ty a;
-        void *literal;
+        Token * literal;
         if (
             (literal = _PyPegen_expect_token(p, 15))
             &&
@@ -6628,7 +7181,7 @@ factor_rule(Parser *p)
     }
     { // '~' factor
         expr_ty a;
-        void *literal;
+        Token * literal;
         if (
             (literal = _PyPegen_expect_token(p, 31))
             &&
@@ -6689,7 +7242,7 @@ power_rule(Parser *p)
     { // await_primary '**' factor
         expr_ty a;
         expr_ty b;
-        void *literal;
+        Token * literal;
         if (
             (a = await_primary_rule(p))
             &&
@@ -6752,7 +7305,7 @@ await_primary_rule(Parser *p)
     UNUSED(start_col_offset); // Only used by EXTRA macro
     { // AWAIT primary
         expr_ty a;
-        void *await_var;
+        Token * await_var;
         if (
             (await_var = _PyPegen_expect_token(p, AWAIT))
             &&
@@ -6767,7 +7320,7 @@ await_primary_rule(Parser *p)
             UNUSED(end_lineno); // Only used by EXTRA macro
             int end_col_offset = token->end_col_offset;
             UNUSED(end_col_offset); // Only used by EXTRA macro
-            res = _Py_Await ( a , EXTRA );
+            res = CHECK_VERSION ( 5 , "Await expressions are" , _Py_Await ( a , EXTRA ) );
             if (res == NULL && PyErr_Occurred()) {
                 p->error_indicator = 1;
                 return NULL;
@@ -6843,7 +7396,7 @@ primary_raw(Parser *p)
     { // primary '.' NAME
         expr_ty a;
         expr_ty b;
-        void *literal;
+        Token * literal;
         if (
             (a = primary_rule(p))
             &&
@@ -6898,8 +7451,8 @@ primary_raw(Parser *p)
     { // primary '(' arguments? ')'
         expr_ty a;
         void *b;
-        void *literal;
-        void *literal_1;
+        Token * literal;
+        Token * literal_1;
         if (
             (a = primary_rule(p))
             &&
@@ -6930,8 +7483,8 @@ primary_raw(Parser *p)
     { // primary '[' slices ']'
         expr_ty a;
         expr_ty b;
-        void *literal;
-        void *literal_1;
+        Token * literal;
+        Token * literal_1;
         if (
             (a = primary_rule(p))
             &&
@@ -7014,7 +7567,7 @@ slices_rule(Parser *p)
         void *opt_var;
         UNUSED(opt_var); // Silence compiler warnings
         if (
-            (a = _gather_87_rule(p))
+            (a = _gather_97_rule(p))
             &&
             (opt_var = _PyPegen_expect_token(p, 12), 1)
         )
@@ -7062,7 +7615,7 @@ slice_rule(Parser *p)
         void *a;
         void *b;
         void *c;
-        void *literal;
+        Token * literal;
         if (
             (a = expression_rule(p), 1)
             &&
@@ -7070,7 +7623,7 @@ slice_rule(Parser *p)
             &&
             (b = expression_rule(p), 1)
             &&
-            (c = _tmp_89_rule(p), 1)
+            (c = _tmp_99_rule(p), 1)
         )
         {
             Token *token = _PyPegen_get_last_nonnwhitespace_token(p);
@@ -7150,7 +7703,7 @@ atom_rule(Parser *p)
         p->mark = mark;
     }
     { // 'True'
-        void *keyword;
+        Token * keyword;
         if (
             (keyword = _PyPegen_expect_token(p, 527))
         )
@@ -7173,7 +7726,7 @@ atom_rule(Parser *p)
         p->mark = mark;
     }
     { // 'False'
-        void *keyword;
+        Token * keyword;
         if (
             (keyword = _PyPegen_expect_token(p, 528))
         )
@@ -7196,7 +7749,7 @@ atom_rule(Parser *p)
         p->mark = mark;
     }
     { // 'None'
-        void *keyword;
+        Token * keyword;
         if (
             (keyword = _PyPegen_expect_token(p, 529))
         )
@@ -7219,7 +7772,7 @@ atom_rule(Parser *p)
         p->mark = mark;
     }
     { // '__new_parser__'
-        void *keyword;
+        Token * keyword;
         if (
             (keyword = _PyPegen_expect_token(p, 530))
         )
@@ -7258,46 +7811,46 @@ atom_rule(Parser *p)
         p->mark = mark;
     }
     { // &'(' (tuple | group | genexp)
-        void *_tmp_90_var;
+        void *_tmp_100_var;
         if (
             _PyPegen_lookahead_with_int(1, _PyPegen_expect_token, p, 7)
             &&
-            (_tmp_90_var = _tmp_90_rule(p))
+            (_tmp_100_var = _tmp_100_rule(p))
         )
         {
-            res = _tmp_90_var;
+            res = _tmp_100_var;
             goto done;
         }
         p->mark = mark;
     }
     { // &'[' (list | listcomp)
-        void *_tmp_91_var;
+        void *_tmp_101_var;
         if (
             _PyPegen_lookahead_with_int(1, _PyPegen_expect_token, p, 9)
             &&
-            (_tmp_91_var = _tmp_91_rule(p))
+            (_tmp_101_var = _tmp_101_rule(p))
         )
         {
-            res = _tmp_91_var;
+            res = _tmp_101_var;
             goto done;
         }
         p->mark = mark;
     }
     { // &'{' (dict | set | dictcomp | setcomp)
-        void *_tmp_92_var;
+        void *_tmp_102_var;
         if (
             _PyPegen_lookahead_with_int(1, _PyPegen_expect_token, p, 25)
             &&
-            (_tmp_92_var = _tmp_92_rule(p))
+            (_tmp_102_var = _tmp_102_rule(p))
         )
         {
-            res = _tmp_92_var;
+            res = _tmp_102_var;
             goto done;
         }
         p->mark = mark;
     }
     { // '...'
-        void *literal;
+        Token * literal;
         if (
             (literal = _PyPegen_expect_token(p, 52))
         )
@@ -7338,7 +7891,7 @@ strings_rule(Parser *p)
     { // STRING+
         asdl_seq * a;
         if (
-            (a = _loop1_93_rule(p))
+            (a = _loop1_103_rule(p))
         )
         {
             res = _PyPegen_concatenate_strings ( p , a );
@@ -7375,8 +7928,8 @@ list_rule(Parser *p)
     UNUSED(start_col_offset); // Only used by EXTRA macro
     { // '[' star_named_expressions? ']'
         void *a;
-        void *literal;
-        void *literal_1;
+        Token * literal;
+        Token * literal_1;
         if (
             (literal = _PyPegen_expect_token(p, 9))
             &&
@@ -7427,8 +7980,8 @@ listcomp_rule(Parser *p)
     { // '[' named_expression for_if_clauses ']'
         expr_ty a;
         asdl_seq* b;
-        void *literal;
-        void *literal_1;
+        Token * literal;
+        Token * literal_1;
         if (
             (literal = _PyPegen_expect_token(p, 9))
             &&
@@ -7491,12 +8044,12 @@ tuple_rule(Parser *p)
     UNUSED(start_col_offset); // Only used by EXTRA macro
     { // '(' [star_named_expression ',' star_named_expressions?] ')'
         void *a;
-        void *literal;
-        void *literal_1;
+        Token * literal;
+        Token * literal_1;
         if (
             (literal = _PyPegen_expect_token(p, 7))
             &&
-            (a = _tmp_94_rule(p), 1)
+            (a = _tmp_104_rule(p), 1)
             &&
             (literal_1 = _PyPegen_expect_token(p, 8))
         )
@@ -7534,12 +8087,12 @@ group_rule(Parser *p)
     int mark = p->mark;
     { // '(' (yield_expr | named_expression) ')'
         void *a;
-        void *literal;
-        void *literal_1;
+        Token * literal;
+        Token * literal_1;
         if (
             (literal = _PyPegen_expect_token(p, 7))
             &&
-            (a = _tmp_95_rule(p))
+            (a = _tmp_105_rule(p))
             &&
             (literal_1 = _PyPegen_expect_token(p, 8))
         )
@@ -7578,8 +8131,8 @@ genexp_rule(Parser *p)
     { // '(' expression for_if_clauses ')'
         expr_ty a;
         asdl_seq* b;
-        void *literal;
-        void *literal_1;
+        Token * literal;
+        Token * literal_1;
         if (
             (literal = _PyPegen_expect_token(p, 7))
             &&
@@ -7642,8 +8195,8 @@ set_rule(Parser *p)
     UNUSED(start_col_offset); // Only used by EXTRA macro
     { // '{' expressions_list '}'
         asdl_seq* a;
-        void *literal;
-        void *literal_1;
+        Token * literal;
+        Token * literal_1;
         if (
             (literal = _PyPegen_expect_token(p, 25))
             &&
@@ -7694,8 +8247,8 @@ setcomp_rule(Parser *p)
     { // '{' expression for_if_clauses '}'
         expr_ty a;
         asdl_seq* b;
-        void *literal;
-        void *literal_1;
+        Token * literal;
+        Token * literal_1;
         if (
             (literal = _PyPegen_expect_token(p, 25))
             &&
@@ -7758,8 +8311,8 @@ dict_rule(Parser *p)
     UNUSED(start_col_offset); // Only used by EXTRA macro
     { // '{' kvpairs? '}'
         void *a;
-        void *literal;
-        void *literal_1;
+        Token * literal;
+        Token * literal_1;
         if (
             (literal = _PyPegen_expect_token(p, 25))
             &&
@@ -7810,8 +8363,8 @@ dictcomp_rule(Parser *p)
     { // '{' kvpair for_if_clauses '}'
         KeyValuePair* a;
         asdl_seq* b;
-        void *literal;
-        void *literal_1;
+        Token * literal;
+        Token * literal_1;
         if (
             (literal = _PyPegen_expect_token(p, 25))
             &&
@@ -7858,7 +8411,7 @@ kvpairs_rule(Parser *p)
         void *opt_var;
         UNUSED(opt_var); // Silence compiler warnings
         if (
-            (a = _gather_96_rule(p))
+            (a = _gather_106_rule(p))
             &&
             (opt_var = _PyPegen_expect_token(p, 12), 1)
         )
@@ -7888,7 +8441,7 @@ kvpair_rule(Parser *p)
     int mark = p->mark;
     { // '**' bitwise_or
         expr_ty a;
-        void *literal;
+        Token * literal;
         if (
             (literal = _PyPegen_expect_token(p, 35))
             &&
@@ -7907,7 +8460,7 @@ kvpair_rule(Parser *p)
     { // expression ':' expression
         expr_ty a;
         expr_ty b;
-        void *literal;
+        Token * literal;
         if (
             (a = expression_rule(p))
             &&
@@ -7930,7 +8483,7 @@ kvpair_rule(Parser *p)
     return res;
 }
 
-// for_if_clauses: ((ASYNC? 'for' star_targets 'in' disjunction (('if' disjunction))*))+
+// for_if_clauses: for_if_clause+
 static asdl_seq*
 for_if_clauses_rule(Parser *p)
 {
@@ -7939,13 +8492,82 @@ for_if_clauses_rule(Parser *p)
     }
     asdl_seq* res = NULL;
     int mark = p->mark;
-    { // ((ASYNC? 'for' star_targets 'in' disjunction (('if' disjunction))*))+
-        asdl_seq * a;
+    { // for_if_clause+
+        asdl_seq * _loop1_108_var;
         if (
-            (a = _loop1_98_rule(p))
+            (_loop1_108_var = _loop1_108_rule(p))
         )
         {
-            res = a;
+            res = _loop1_108_var;
+            goto done;
+        }
+        p->mark = mark;
+    }
+    res = NULL;
+  done:
+    return res;
+}
+
+// for_if_clause:
+//     | ASYNC 'for' star_targets 'in' disjunction (('if' disjunction))*
+//     | 'for' star_targets 'in' disjunction (('if' disjunction))*
+static comprehension_ty
+for_if_clause_rule(Parser *p)
+{
+    if (p->error_indicator) {
+        return NULL;
+    }
+    comprehension_ty res = NULL;
+    int mark = p->mark;
+    { // ASYNC 'for' star_targets 'in' disjunction (('if' disjunction))*
+        expr_ty a;
+        Token * async_var;
+        expr_ty b;
+        asdl_seq * c;
+        Token * keyword;
+        Token * keyword_1;
+        if (
+            (async_var = _PyPegen_expect_token(p, ASYNC))
+            &&
+            (keyword = _PyPegen_expect_token(p, 517))
+            &&
+            (a = star_targets_rule(p))
+            &&
+            (keyword_1 = _PyPegen_expect_token(p, 518))
+            &&
+            (b = disjunction_rule(p))
+            &&
+            (c = _loop0_109_rule(p))
+        )
+        {
+            res = CHECK_VERSION ( 6 , "Async comprehensions are" , _Py_comprehension ( a , b , c , 1 , p -> arena ) );
+            if (res == NULL && PyErr_Occurred()) {
+                p->error_indicator = 1;
+                return NULL;
+            }
+            goto done;
+        }
+        p->mark = mark;
+    }
+    { // 'for' star_targets 'in' disjunction (('if' disjunction))*
+        expr_ty a;
+        expr_ty b;
+        asdl_seq * c;
+        Token * keyword;
+        Token * keyword_1;
+        if (
+            (keyword = _PyPegen_expect_token(p, 517))
+            &&
+            (a = star_targets_rule(p))
+            &&
+            (keyword_1 = _PyPegen_expect_token(p, 518))
+            &&
+            (b = disjunction_rule(p))
+            &&
+            (c = _loop0_110_rule(p))
+        )
+        {
+            res = _Py_comprehension ( a , b , c , 0 , p -> arena );
             if (res == NULL && PyErr_Occurred()) {
                 p->error_indicator = 1;
                 return NULL;
@@ -7978,8 +8600,8 @@ yield_expr_rule(Parser *p)
     UNUSED(start_col_offset); // Only used by EXTRA macro
     { // 'yield' 'from' expression
         expr_ty a;
-        void *keyword;
-        void *keyword_1;
+        Token * keyword;
+        Token * keyword_1;
         if (
             (keyword = _PyPegen_expect_token(p, 504))
             &&
@@ -8007,7 +8629,7 @@ yield_expr_rule(Parser *p)
     }
     { // 'yield' star_expressions?
         void *a;
-        void *keyword;
+        Token * keyword;
         if (
             (keyword = _PyPegen_expect_token(p, 504))
             &&
@@ -8108,7 +8730,7 @@ args_rule(Parser *p)
         if (
             (a = starred_expression_rule(p))
             &&
-            (b = _tmp_99_rule(p), 1)
+            (b = _tmp_111_rule(p), 1)
         )
         {
             Token *token = _PyPegen_get_last_nonnwhitespace_token(p);
@@ -8157,7 +8779,7 @@ args_rule(Parser *p)
         if (
             (a = named_expression_rule(p))
             &&
-            (b = _tmp_100_rule(p), 1)
+            (b = _tmp_112_rule(p), 1)
         )
         {
             Token *token = _PyPegen_get_last_nonnwhitespace_token(p);
@@ -8197,13 +8819,13 @@ kwargs_rule(Parser *p)
     { // ','.kwarg_or_starred+ ',' ','.kwarg_or_double_starred+
         asdl_seq * a;
         asdl_seq * b;
-        void *literal;
+        Token * literal;
         if (
-            (a = _gather_101_rule(p))
+            (a = _gather_113_rule(p))
             &&
             (literal = _PyPegen_expect_token(p, 12))
             &&
-            (b = _gather_103_rule(p))
+            (b = _gather_115_rule(p))
         )
         {
             res = _PyPegen_join_sequences ( p , a , b );
@@ -8216,23 +8838,23 @@ kwargs_rule(Parser *p)
         p->mark = mark;
     }
     { // ','.kwarg_or_starred+
-        asdl_seq * _gather_105_var;
+        asdl_seq * _gather_117_var;
         if (
-            (_gather_105_var = _gather_105_rule(p))
+            (_gather_117_var = _gather_117_rule(p))
         )
         {
-            res = _gather_105_var;
+            res = _gather_117_var;
             goto done;
         }
         p->mark = mark;
     }
     { // ','.kwarg_or_double_starred+
-        asdl_seq * _gather_107_var;
+        asdl_seq * _gather_119_var;
         if (
-            (_gather_107_var = _gather_107_rule(p))
+            (_gather_119_var = _gather_119_rule(p))
         )
         {
-            res = _gather_107_var;
+            res = _gather_119_var;
             goto done;
         }
         p->mark = mark;
@@ -8261,7 +8883,7 @@ starred_expression_rule(Parser *p)
     UNUSED(start_col_offset); // Only used by EXTRA macro
     { // '*' expression
         expr_ty a;
-        void *literal;
+        Token * literal;
         if (
             (literal = _PyPegen_expect_token(p, 16))
             &&
@@ -8310,7 +8932,7 @@ kwarg_or_starred_rule(Parser *p)
     { // NAME '=' expression
         expr_ty a;
         expr_ty b;
-        void *literal;
+        Token * literal;
         if (
             (a = _PyPegen_name_token(p))
             &&
@@ -8376,7 +8998,7 @@ kwarg_or_double_starred_rule(Parser *p)
     { // NAME '=' expression
         expr_ty a;
         expr_ty b;
-        void *literal;
+        Token * literal;
         if (
             (a = _PyPegen_name_token(p))
             &&
@@ -8404,7 +9026,7 @@ kwarg_or_double_starred_rule(Parser *p)
     }
     { // '**' expression
         expr_ty a;
-        void *literal;
+        Token * literal;
         if (
             (literal = _PyPegen_expect_token(p, 35))
             &&
@@ -8475,7 +9097,7 @@ star_targets_rule(Parser *p)
         if (
             (a = star_target_rule(p))
             &&
-            (b = _loop0_109_rule(p))
+            (b = _loop0_121_rule(p))
             &&
             (opt_var = _PyPegen_expect_token(p, 12), 1)
         )
@@ -8516,7 +9138,7 @@ star_targets_seq_rule(Parser *p)
         void *opt_var;
         UNUSED(opt_var); // Silence compiler warnings
         if (
-            (a = _gather_110_rule(p))
+            (a = _gather_122_rule(p))
             &&
             (opt_var = _PyPegen_expect_token(p, 12), 1)
         )
@@ -8560,11 +9182,11 @@ star_target_rule(Parser *p)
     UNUSED(start_col_offset); // Only used by EXTRA macro
     { // '*' (!'*' star_target)
         void *a;
-        void *literal;
+        Token * literal;
         if (
             (literal = _PyPegen_expect_token(p, 16))
             &&
-            (a = _tmp_112_rule(p))
+            (a = _tmp_124_rule(p))
         )
         {
             Token *token = _PyPegen_get_last_nonnwhitespace_token(p);
@@ -8587,7 +9209,7 @@ star_target_rule(Parser *p)
     { // t_primary '.' NAME !t_lookahead
         expr_ty a;
         expr_ty b;
-        void *literal;
+        Token * literal;
         if (
             (a = t_primary_rule(p))
             &&
@@ -8618,8 +9240,8 @@ star_target_rule(Parser *p)
     { // t_primary '[' slices ']' !t_lookahead
         expr_ty a;
         expr_ty b;
-        void *literal;
-        void *literal_1;
+        Token * literal;
+        Token * literal_1;
         if (
             (a = t_primary_rule(p))
             &&
@@ -8704,8 +9326,8 @@ star_atom_rule(Parser *p)
     }
     { // '(' star_target ')'
         expr_ty a;
-        void *literal;
-        void *literal_1;
+        Token * literal;
+        Token * literal_1;
         if (
             (literal = _PyPegen_expect_token(p, 7))
             &&
@@ -8725,8 +9347,8 @@ star_atom_rule(Parser *p)
     }
     { // '(' star_targets_seq? ')'
         void *a;
-        void *literal;
-        void *literal_1;
+        Token * literal;
+        Token * literal_1;
         if (
             (literal = _PyPegen_expect_token(p, 7))
             &&
@@ -8754,8 +9376,8 @@ star_atom_rule(Parser *p)
     }
     { // '[' star_targets_seq? ']'
         void *a;
-        void *literal;
-        void *literal_1;
+        Token * literal;
+        Token * literal_1;
         if (
             (literal = _PyPegen_expect_token(p, 9))
             &&
@@ -8826,8 +9448,8 @@ inside_paren_ann_assign_target_rule(Parser *p)
     }
     { // '(' inside_paren_ann_assign_target ')'
         expr_ty a;
-        void *literal;
-        void *literal_1;
+        Token * literal;
+        Token * literal_1;
         if (
             (literal = _PyPegen_expect_token(p, 7))
             &&
@@ -8872,7 +9494,7 @@ ann_assign_subscript_attribute_target_rule(Parser *p)
     { // t_primary '.' NAME !t_lookahead
         expr_ty a;
         expr_ty b;
-        void *literal;
+        Token * literal;
         if (
             (a = t_primary_rule(p))
             &&
@@ -8903,8 +9525,8 @@ ann_assign_subscript_attribute_target_rule(Parser *p)
     { // t_primary '[' slices ']' !t_lookahead
         expr_ty a;
         expr_ty b;
-        void *literal;
-        void *literal_1;
+        Token * literal;
+        Token * literal_1;
         if (
             (a = t_primary_rule(p))
             &&
@@ -8953,7 +9575,7 @@ del_targets_rule(Parser *p)
         void *opt_var;
         UNUSED(opt_var); // Silence compiler warnings
         if (
-            (a = _gather_113_rule(p))
+            (a = _gather_125_rule(p))
             &&
             (opt_var = _PyPegen_expect_token(p, 12), 1)
         )
@@ -8997,7 +9619,7 @@ del_target_rule(Parser *p)
     { // t_primary '.' NAME !t_lookahead
         expr_ty a;
         expr_ty b;
-        void *literal;
+        Token * literal;
         if (
             (a = t_primary_rule(p))
             &&
@@ -9028,8 +9650,8 @@ del_target_rule(Parser *p)
     { // t_primary '[' slices ']' !t_lookahead
         expr_ty a;
         expr_ty b;
-        void *literal;
-        void *literal_1;
+        Token * literal;
+        Token * literal_1;
         if (
             (a = t_primary_rule(p))
             &&
@@ -9110,8 +9732,8 @@ del_t_atom_rule(Parser *p)
     }
     { // '(' del_target ')'
         expr_ty a;
-        void *literal;
-        void *literal_1;
+        Token * literal;
+        Token * literal_1;
         if (
             (literal = _PyPegen_expect_token(p, 7))
             &&
@@ -9131,8 +9753,8 @@ del_t_atom_rule(Parser *p)
     }
     { // '(' del_targets? ')'
         void *a;
-        void *literal;
-        void *literal_1;
+        Token * literal;
+        Token * literal_1;
         if (
             (literal = _PyPegen_expect_token(p, 7))
             &&
@@ -9160,8 +9782,8 @@ del_t_atom_rule(Parser *p)
     }
     { // '[' del_targets? ']'
         void *a;
-        void *literal;
-        void *literal_1;
+        Token * literal;
+        Token * literal_1;
         if (
             (literal = _PyPegen_expect_token(p, 9))
             &&
@@ -9206,7 +9828,7 @@ targets_rule(Parser *p)
         void *opt_var;
         UNUSED(opt_var); // Silence compiler warnings
         if (
-            (a = _gather_115_rule(p))
+            (a = _gather_127_rule(p))
             &&
             (opt_var = _PyPegen_expect_token(p, 12), 1)
         )
@@ -9250,7 +9872,7 @@ target_rule(Parser *p)
     { // t_primary '.' NAME !t_lookahead
         expr_ty a;
         expr_ty b;
-        void *literal;
+        Token * literal;
         if (
             (a = t_primary_rule(p))
             &&
@@ -9281,8 +9903,8 @@ target_rule(Parser *p)
     { // t_primary '[' slices ']' !t_lookahead
         expr_ty a;
         expr_ty b;
-        void *literal;
-        void *literal_1;
+        Token * literal;
+        Token * literal_1;
         if (
             (a = t_primary_rule(p))
             &&
@@ -9379,7 +10001,7 @@ t_primary_raw(Parser *p)
     { // t_primary '.' NAME &t_lookahead
         expr_ty a;
         expr_ty b;
-        void *literal;
+        Token * literal;
         if (
             (a = t_primary_rule(p))
             &&
@@ -9410,8 +10032,8 @@ t_primary_raw(Parser *p)
     { // t_primary '[' slices ']' &t_lookahead
         expr_ty a;
         expr_ty b;
-        void *literal;
-        void *literal_1;
+        Token * literal;
+        Token * literal_1;
         if (
             (a = t_primary_rule(p))
             &&
@@ -9472,8 +10094,8 @@ t_primary_raw(Parser *p)
     { // t_primary '(' arguments? ')' &t_lookahead
         expr_ty a;
         void *b;
-        void *literal;
-        void *literal_1;
+        Token * literal;
+        Token * literal_1;
         if (
             (a = t_primary_rule(p))
             &&
@@ -9535,7 +10157,7 @@ t_lookahead_rule(Parser *p)
     void * res = NULL;
     int mark = p->mark;
     { // '('
-        void *literal;
+        Token * literal;
         if (
             (literal = _PyPegen_expect_token(p, 7))
         )
@@ -9546,7 +10168,7 @@ t_lookahead_rule(Parser *p)
         p->mark = mark;
     }
     { // '['
-        void *literal;
+        Token * literal;
         if (
             (literal = _PyPegen_expect_token(p, 9))
         )
@@ -9557,7 +10179,7 @@ t_lookahead_rule(Parser *p)
         p->mark = mark;
     }
     { // '.'
-        void *literal;
+        Token * literal;
         if (
             (literal = _PyPegen_expect_token(p, 23))
         )
@@ -9606,8 +10228,8 @@ t_atom_rule(Parser *p)
     }
     { // '(' target ')'
         expr_ty a;
-        void *literal;
-        void *literal_1;
+        Token * literal;
+        Token * literal_1;
         if (
             (literal = _PyPegen_expect_token(p, 7))
             &&
@@ -9627,8 +10249,8 @@ t_atom_rule(Parser *p)
     }
     { // '(' targets? ')'
         void *b;
-        void *literal;
-        void *literal_1;
+        Token * literal;
+        Token * literal_1;
         if (
             (literal = _PyPegen_expect_token(p, 7))
             &&
@@ -9656,8 +10278,8 @@ t_atom_rule(Parser *p)
     }
     { // '[' targets? ']'
         void *b;
-        void *literal;
-        void *literal_1;
+        Token * literal;
+        Token * literal_1;
         if (
             (literal = _PyPegen_expect_token(p, 9))
             &&
@@ -9702,8 +10324,8 @@ incorrect_arguments_rule(Parser *p)
     int mark = p->mark;
     { // args ',' '*'
         expr_ty args_var;
-        void *literal;
-        void *literal_1;
+        Token * literal;
+        Token * literal_1;
         if (
             (args_var = args_rule(p))
             &&
@@ -9724,7 +10346,7 @@ incorrect_arguments_rule(Parser *p)
     { // expression for_if_clauses ',' [args | expression for_if_clauses]
         expr_ty expression_var;
         asdl_seq* for_if_clauses_var;
-        void *literal;
+        Token * literal;
         void *opt_var;
         UNUSED(opt_var); // Silence compiler warnings
         if (
@@ -9734,7 +10356,7 @@ incorrect_arguments_rule(Parser *p)
             &&
             (literal = _PyPegen_expect_token(p, 12))
             &&
-            (opt_var = _tmp_117_rule(p), 1)
+            (opt_var = _tmp_129_rule(p), 1)
         )
         {
             res = RAISE_SYNTAX_ERROR ( "Generator expression must be parenthesized" );
@@ -9749,7 +10371,7 @@ incorrect_arguments_rule(Parser *p)
     { // args ',' args
         expr_ty a;
         expr_ty args_var;
-        void *literal;
+        Token * literal;
         if (
             (a = args_rule(p))
             &&
@@ -9784,7 +10406,7 @@ invalid_named_expression_rule(Parser *p)
     { // expression ':=' expression
         expr_ty a;
         expr_ty expression_var;
-        void *literal;
+        Token * literal;
         if (
             (a = expression_rule(p))
             &&
@@ -9822,7 +10444,7 @@ invalid_assignment_rule(Parser *p)
     int mark = p->mark;
     { // list ':'
         expr_ty list_var;
-        void *literal;
+        Token * literal;
         if (
             (list_var = list_rule(p))
             &&
@@ -9839,7 +10461,7 @@ invalid_assignment_rule(Parser *p)
         p->mark = mark;
     }
     { // tuple ':'
-        void *literal;
+        Token * literal;
         expr_ty tuple_var;
         if (
             (tuple_var = tuple_rule(p))
@@ -9859,7 +10481,7 @@ invalid_assignment_rule(Parser *p)
     { // expression ':' expression ['=' annotated_rhs]
         expr_ty expression_var;
         expr_ty expression_var_1;
-        void *literal;
+        Token * literal;
         void *opt_var;
         UNUSED(opt_var); // Silence compiler warnings
         if (
@@ -9869,7 +10491,7 @@ invalid_assignment_rule(Parser *p)
             &&
             (expression_var_1 = expression_rule(p))
             &&
-            (opt_var = _tmp_118_rule(p), 1)
+            (opt_var = _tmp_130_rule(p), 1)
         )
         {
             res = RAISE_SYNTAX_ERROR ( "illegal target for annotation" );
@@ -9882,18 +10504,18 @@ invalid_assignment_rule(Parser *p)
         p->mark = mark;
     }
     { // expression ('=' | augassign) (yield_expr | star_expressions)
-        void *_tmp_119_var;
-        void *_tmp_120_var;
+        void *_tmp_131_var;
+        void *_tmp_132_var;
         expr_ty a;
         if (
             (a = expression_rule(p))
             &&
-            (_tmp_119_var = _tmp_119_rule(p))
+            (_tmp_131_var = _tmp_131_rule(p))
             &&
-            (_tmp_120_var = _tmp_120_rule(p))
+            (_tmp_132_var = _tmp_132_rule(p))
         )
         {
-            res = RAISE_SYNTAX_ERROR ( "cannot assign to %s" , _PyPegen_get_expr_name ( a ) );
+            res = RAISE_SYNTAX_ERROR_NO_COL_OFFSET ( "cannot assign to %s" , _PyPegen_get_expr_name ( a ) );
             if (res == NULL && PyErr_Occurred()) {
                 p->error_indicator = 1;
                 return NULL;
@@ -9917,7 +10539,7 @@ invalid_block_rule(Parser *p)
     void * res = NULL;
     int mark = p->mark;
     { // NEWLINE !INDENT
-        void *newline_var;
+        Token * newline_var;
         if (
             (newline_var = _PyPegen_expect_token(p, NEWLINE))
             &&
@@ -9948,12 +10570,12 @@ invalid_comprehension_rule(Parser *p)
     void * res = NULL;
     int mark = p->mark;
     { // ('[' | '(' | '{') '*' expression for_if_clauses
-        void *_tmp_121_var;
+        void *_tmp_133_var;
         expr_ty expression_var;
         asdl_seq* for_if_clauses_var;
-        void *literal;
+        Token * literal;
         if (
-            (_tmp_121_var = _tmp_121_rule(p))
+            (_tmp_133_var = _tmp_133_rule(p))
             &&
             (literal = _PyPegen_expect_token(p, 16))
             &&
@@ -9977,7 +10599,7 @@ invalid_comprehension_rule(Parser *p)
 }
 
 // invalid_parameters:
-//     | [plain_names ','] (slash_with_default | names_with_default) ',' plain_names
+//     | param_no_default* (slash_with_default | param_with_default+) param_no_default
 static void *
 invalid_parameters_rule(Parser *p)
 {
@@ -9986,23 +10608,60 @@ invalid_parameters_rule(Parser *p)
     }
     void * res = NULL;
     int mark = p->mark;
-    { // [plain_names ','] (slash_with_default | names_with_default) ',' plain_names
-        void *_tmp_123_var;
-        void *literal;
-        void *opt_var;
-        UNUSED(opt_var); // Silence compiler warnings
-        asdl_seq* plain_names_var;
+    { // param_no_default* (slash_with_default | param_with_default+) param_no_default
+        asdl_seq * _loop0_134_var;
+        void *_tmp_135_var;
+        arg_ty param_no_default_var;
         if (
-            (opt_var = _tmp_122_rule(p), 1)
+            (_loop0_134_var = _loop0_134_rule(p))
             &&
-            (_tmp_123_var = _tmp_123_rule(p))
+            (_tmp_135_var = _tmp_135_rule(p))
             &&
-            (literal = _PyPegen_expect_token(p, 12))
-            &&
-            (plain_names_var = plain_names_rule(p))
+            (param_no_default_var = param_no_default_rule(p))
         )
         {
             res = RAISE_SYNTAX_ERROR ( "non-default argument follows default argument" );
+            if (res == NULL && PyErr_Occurred()) {
+                p->error_indicator = 1;
+                return NULL;
+            }
+            goto done;
+        }
+        p->mark = mark;
+    }
+    res = NULL;
+  done:
+    return res;
+}
+
+// invalid_double_type_comments: TYPE_COMMENT NEWLINE TYPE_COMMENT NEWLINE INDENT
+static void *
+invalid_double_type_comments_rule(Parser *p)
+{
+    if (p->error_indicator) {
+        return NULL;
+    }
+    void * res = NULL;
+    int mark = p->mark;
+    { // TYPE_COMMENT NEWLINE TYPE_COMMENT NEWLINE INDENT
+        Token * indent_var;
+        Token * newline_var;
+        Token * newline_var_1;
+        Token * type_comment_var;
+        Token * type_comment_var_1;
+        if (
+            (type_comment_var = _PyPegen_expect_token(p, TYPE_COMMENT))
+            &&
+            (newline_var = _PyPegen_expect_token(p, NEWLINE))
+            &&
+            (type_comment_var_1 = _PyPegen_expect_token(p, TYPE_COMMENT))
+            &&
+            (newline_var_1 = _PyPegen_expect_token(p, NEWLINE))
+            &&
+            (indent_var = _PyPegen_expect_token(p, INDENT))
+        )
+        {
+            res = RAISE_SYNTAX_ERROR ( "Cannot have two type comments on def" );
             if (res == NULL && PyErr_Occurred()) {
                 p->error_indicator = 1;
                 return NULL;
@@ -10034,7 +10693,7 @@ _loop0_1_rule(Parser *p)
     ssize_t children_capacity = 1;
     ssize_t n = 0;
     { // NEWLINE
-        void *newline_var;
+        Token * newline_var;
         while (
             (newline_var = _PyPegen_expect_token(p, NEWLINE))
         )
@@ -10065,9 +10724,398 @@ _loop0_1_rule(Parser *p)
     return seq;
 }
 
-// _loop1_2: statement
+// _loop0_2: NEWLINE
 static asdl_seq *
-_loop1_2_rule(Parser *p)
+_loop0_2_rule(Parser *p)
+{
+    if (p->error_indicator) {
+        return NULL;
+    }
+    void *res = NULL;
+    int mark = p->mark;
+    int start_mark = p->mark;
+    void **children = PyMem_Malloc(sizeof(void *));
+    if (!children) {
+        PyErr_Format(PyExc_MemoryError, "Parser out of memory");
+        return NULL;
+    }
+    ssize_t children_capacity = 1;
+    ssize_t n = 0;
+    { // NEWLINE
+        Token * newline_var;
+        while (
+            (newline_var = _PyPegen_expect_token(p, NEWLINE))
+        )
+        {
+            res = newline_var;
+            if (n == children_capacity) {
+                children_capacity *= 2;
+                children = PyMem_Realloc(children, children_capacity*sizeof(void *));
+                if (!children) {
+                    PyErr_Format(PyExc_MemoryError, "realloc None");
+                    return NULL;
+                }
+            }
+            children[n++] = res;
+            mark = p->mark;
+        }
+        p->mark = mark;
+    }
+    asdl_seq *seq = _Py_asdl_seq_new(n, p->arena);
+    if (!seq) {
+        PyErr_Format(PyExc_MemoryError, "asdl_seq_new _loop0_2");
+        PyMem_Free(children);
+        return NULL;
+    }
+    for (int i = 0; i < n; i++) asdl_seq_SET(seq, i, children[i]);
+    PyMem_Free(children);
+    _PyPegen_insert_memo(p, start_mark, _loop0_2_type, seq);
+    return seq;
+}
+
+// _loop0_4: ',' expression
+static asdl_seq *
+_loop0_4_rule(Parser *p)
+{
+    if (p->error_indicator) {
+        return NULL;
+    }
+    void *res = NULL;
+    int mark = p->mark;
+    int start_mark = p->mark;
+    void **children = PyMem_Malloc(sizeof(void *));
+    if (!children) {
+        PyErr_Format(PyExc_MemoryError, "Parser out of memory");
+        return NULL;
+    }
+    ssize_t children_capacity = 1;
+    ssize_t n = 0;
+    { // ',' expression
+        expr_ty elem;
+        Token * literal;
+        while (
+            (literal = _PyPegen_expect_token(p, 12))
+            &&
+            (elem = expression_rule(p))
+        )
+        {
+            res = elem;
+            if (res == NULL && PyErr_Occurred()) {
+                p->error_indicator = 1;
+                PyMem_Free(children);
+                return NULL;
+            }
+            if (n == children_capacity) {
+                children_capacity *= 2;
+                children = PyMem_Realloc(children, children_capacity*sizeof(void *));
+                if (!children) {
+                    PyErr_Format(PyExc_MemoryError, "realloc None");
+                    return NULL;
+                }
+            }
+            children[n++] = res;
+            mark = p->mark;
+        }
+        p->mark = mark;
+    }
+    asdl_seq *seq = _Py_asdl_seq_new(n, p->arena);
+    if (!seq) {
+        PyErr_Format(PyExc_MemoryError, "asdl_seq_new _loop0_4");
+        PyMem_Free(children);
+        return NULL;
+    }
+    for (int i = 0; i < n; i++) asdl_seq_SET(seq, i, children[i]);
+    PyMem_Free(children);
+    _PyPegen_insert_memo(p, start_mark, _loop0_4_type, seq);
+    return seq;
+}
+
+// _gather_3: expression _loop0_4
+static asdl_seq *
+_gather_3_rule(Parser *p)
+{
+    if (p->error_indicator) {
+        return NULL;
+    }
+    asdl_seq * res = NULL;
+    int mark = p->mark;
+    { // expression _loop0_4
+        expr_ty elem;
+        asdl_seq * seq;
+        if (
+            (elem = expression_rule(p))
+            &&
+            (seq = _loop0_4_rule(p))
+        )
+        {
+            res = _PyPegen_seq_insert_in_front(p, elem, seq);
+            goto done;
+        }
+        p->mark = mark;
+    }
+    res = NULL;
+  done:
+    return res;
+}
+
+// _loop0_6: ',' expression
+static asdl_seq *
+_loop0_6_rule(Parser *p)
+{
+    if (p->error_indicator) {
+        return NULL;
+    }
+    void *res = NULL;
+    int mark = p->mark;
+    int start_mark = p->mark;
+    void **children = PyMem_Malloc(sizeof(void *));
+    if (!children) {
+        PyErr_Format(PyExc_MemoryError, "Parser out of memory");
+        return NULL;
+    }
+    ssize_t children_capacity = 1;
+    ssize_t n = 0;
+    { // ',' expression
+        expr_ty elem;
+        Token * literal;
+        while (
+            (literal = _PyPegen_expect_token(p, 12))
+            &&
+            (elem = expression_rule(p))
+        )
+        {
+            res = elem;
+            if (res == NULL && PyErr_Occurred()) {
+                p->error_indicator = 1;
+                PyMem_Free(children);
+                return NULL;
+            }
+            if (n == children_capacity) {
+                children_capacity *= 2;
+                children = PyMem_Realloc(children, children_capacity*sizeof(void *));
+                if (!children) {
+                    PyErr_Format(PyExc_MemoryError, "realloc None");
+                    return NULL;
+                }
+            }
+            children[n++] = res;
+            mark = p->mark;
+        }
+        p->mark = mark;
+    }
+    asdl_seq *seq = _Py_asdl_seq_new(n, p->arena);
+    if (!seq) {
+        PyErr_Format(PyExc_MemoryError, "asdl_seq_new _loop0_6");
+        PyMem_Free(children);
+        return NULL;
+    }
+    for (int i = 0; i < n; i++) asdl_seq_SET(seq, i, children[i]);
+    PyMem_Free(children);
+    _PyPegen_insert_memo(p, start_mark, _loop0_6_type, seq);
+    return seq;
+}
+
+// _gather_5: expression _loop0_6
+static asdl_seq *
+_gather_5_rule(Parser *p)
+{
+    if (p->error_indicator) {
+        return NULL;
+    }
+    asdl_seq * res = NULL;
+    int mark = p->mark;
+    { // expression _loop0_6
+        expr_ty elem;
+        asdl_seq * seq;
+        if (
+            (elem = expression_rule(p))
+            &&
+            (seq = _loop0_6_rule(p))
+        )
+        {
+            res = _PyPegen_seq_insert_in_front(p, elem, seq);
+            goto done;
+        }
+        p->mark = mark;
+    }
+    res = NULL;
+  done:
+    return res;
+}
+
+// _loop0_8: ',' expression
+static asdl_seq *
+_loop0_8_rule(Parser *p)
+{
+    if (p->error_indicator) {
+        return NULL;
+    }
+    void *res = NULL;
+    int mark = p->mark;
+    int start_mark = p->mark;
+    void **children = PyMem_Malloc(sizeof(void *));
+    if (!children) {
+        PyErr_Format(PyExc_MemoryError, "Parser out of memory");
+        return NULL;
+    }
+    ssize_t children_capacity = 1;
+    ssize_t n = 0;
+    { // ',' expression
+        expr_ty elem;
+        Token * literal;
+        while (
+            (literal = _PyPegen_expect_token(p, 12))
+            &&
+            (elem = expression_rule(p))
+        )
+        {
+            res = elem;
+            if (res == NULL && PyErr_Occurred()) {
+                p->error_indicator = 1;
+                PyMem_Free(children);
+                return NULL;
+            }
+            if (n == children_capacity) {
+                children_capacity *= 2;
+                children = PyMem_Realloc(children, children_capacity*sizeof(void *));
+                if (!children) {
+                    PyErr_Format(PyExc_MemoryError, "realloc None");
+                    return NULL;
+                }
+            }
+            children[n++] = res;
+            mark = p->mark;
+        }
+        p->mark = mark;
+    }
+    asdl_seq *seq = _Py_asdl_seq_new(n, p->arena);
+    if (!seq) {
+        PyErr_Format(PyExc_MemoryError, "asdl_seq_new _loop0_8");
+        PyMem_Free(children);
+        return NULL;
+    }
+    for (int i = 0; i < n; i++) asdl_seq_SET(seq, i, children[i]);
+    PyMem_Free(children);
+    _PyPegen_insert_memo(p, start_mark, _loop0_8_type, seq);
+    return seq;
+}
+
+// _gather_7: expression _loop0_8
+static asdl_seq *
+_gather_7_rule(Parser *p)
+{
+    if (p->error_indicator) {
+        return NULL;
+    }
+    asdl_seq * res = NULL;
+    int mark = p->mark;
+    { // expression _loop0_8
+        expr_ty elem;
+        asdl_seq * seq;
+        if (
+            (elem = expression_rule(p))
+            &&
+            (seq = _loop0_8_rule(p))
+        )
+        {
+            res = _PyPegen_seq_insert_in_front(p, elem, seq);
+            goto done;
+        }
+        p->mark = mark;
+    }
+    res = NULL;
+  done:
+    return res;
+}
+
+// _loop0_10: ',' expression
+static asdl_seq *
+_loop0_10_rule(Parser *p)
+{
+    if (p->error_indicator) {
+        return NULL;
+    }
+    void *res = NULL;
+    int mark = p->mark;
+    int start_mark = p->mark;
+    void **children = PyMem_Malloc(sizeof(void *));
+    if (!children) {
+        PyErr_Format(PyExc_MemoryError, "Parser out of memory");
+        return NULL;
+    }
+    ssize_t children_capacity = 1;
+    ssize_t n = 0;
+    { // ',' expression
+        expr_ty elem;
+        Token * literal;
+        while (
+            (literal = _PyPegen_expect_token(p, 12))
+            &&
+            (elem = expression_rule(p))
+        )
+        {
+            res = elem;
+            if (res == NULL && PyErr_Occurred()) {
+                p->error_indicator = 1;
+                PyMem_Free(children);
+                return NULL;
+            }
+            if (n == children_capacity) {
+                children_capacity *= 2;
+                children = PyMem_Realloc(children, children_capacity*sizeof(void *));
+                if (!children) {
+                    PyErr_Format(PyExc_MemoryError, "realloc None");
+                    return NULL;
+                }
+            }
+            children[n++] = res;
+            mark = p->mark;
+        }
+        p->mark = mark;
+    }
+    asdl_seq *seq = _Py_asdl_seq_new(n, p->arena);
+    if (!seq) {
+        PyErr_Format(PyExc_MemoryError, "asdl_seq_new _loop0_10");
+        PyMem_Free(children);
+        return NULL;
+    }
+    for (int i = 0; i < n; i++) asdl_seq_SET(seq, i, children[i]);
+    PyMem_Free(children);
+    _PyPegen_insert_memo(p, start_mark, _loop0_10_type, seq);
+    return seq;
+}
+
+// _gather_9: expression _loop0_10
+static asdl_seq *
+_gather_9_rule(Parser *p)
+{
+    if (p->error_indicator) {
+        return NULL;
+    }
+    asdl_seq * res = NULL;
+    int mark = p->mark;
+    { // expression _loop0_10
+        expr_ty elem;
+        asdl_seq * seq;
+        if (
+            (elem = expression_rule(p))
+            &&
+            (seq = _loop0_10_rule(p))
+        )
+        {
+            res = _PyPegen_seq_insert_in_front(p, elem, seq);
+            goto done;
+        }
+        p->mark = mark;
+    }
+    res = NULL;
+  done:
+    return res;
+}
+
+// _loop1_11: statement
+static asdl_seq *
+_loop1_11_rule(Parser *p)
 {
     if (p->error_indicator) {
         return NULL;
@@ -10108,19 +11156,19 @@ _loop1_2_rule(Parser *p)
     }
     asdl_seq *seq = _Py_asdl_seq_new(n, p->arena);
     if (!seq) {
-        PyErr_Format(PyExc_MemoryError, "asdl_seq_new _loop1_2");
+        PyErr_Format(PyExc_MemoryError, "asdl_seq_new _loop1_11");
         PyMem_Free(children);
         return NULL;
     }
     for (int i = 0; i < n; i++) asdl_seq_SET(seq, i, children[i]);
     PyMem_Free(children);
-    _PyPegen_insert_memo(p, start_mark, _loop1_2_type, seq);
+    _PyPegen_insert_memo(p, start_mark, _loop1_11_type, seq);
     return seq;
 }
 
-// _loop0_4: ';' small_stmt
+// _loop0_13: ';' small_stmt
 static asdl_seq *
-_loop0_4_rule(Parser *p)
+_loop0_13_rule(Parser *p)
 {
     if (p->error_indicator) {
         return NULL;
@@ -10137,7 +11185,7 @@ _loop0_4_rule(Parser *p)
     ssize_t n = 0;
     { // ';' small_stmt
         stmt_ty elem;
-        void *literal;
+        Token * literal;
         while (
             (literal = _PyPegen_expect_token(p, 13))
             &&
@@ -10165,32 +11213,32 @@ _loop0_4_rule(Parser *p)
     }
     asdl_seq *seq = _Py_asdl_seq_new(n, p->arena);
     if (!seq) {
-        PyErr_Format(PyExc_MemoryError, "asdl_seq_new _loop0_4");
+        PyErr_Format(PyExc_MemoryError, "asdl_seq_new _loop0_13");
         PyMem_Free(children);
         return NULL;
     }
     for (int i = 0; i < n; i++) asdl_seq_SET(seq, i, children[i]);
     PyMem_Free(children);
-    _PyPegen_insert_memo(p, start_mark, _loop0_4_type, seq);
+    _PyPegen_insert_memo(p, start_mark, _loop0_13_type, seq);
     return seq;
 }
 
-// _gather_3: small_stmt _loop0_4
+// _gather_12: small_stmt _loop0_13
 static asdl_seq *
-_gather_3_rule(Parser *p)
+_gather_12_rule(Parser *p)
 {
     if (p->error_indicator) {
         return NULL;
     }
     asdl_seq * res = NULL;
     int mark = p->mark;
-    { // small_stmt _loop0_4
+    { // small_stmt _loop0_13
         stmt_ty elem;
         asdl_seq * seq;
         if (
             (elem = small_stmt_rule(p))
             &&
-            (seq = _loop0_4_rule(p))
+            (seq = _loop0_13_rule(p))
         )
         {
             res = _PyPegen_seq_insert_in_front(p, elem, seq);
@@ -10203,9 +11251,9 @@ _gather_3_rule(Parser *p)
     return res;
 }
 
-// _tmp_5: 'import' | 'from'
+// _tmp_14: 'import' | 'from'
 static void *
-_tmp_5_rule(Parser *p)
+_tmp_14_rule(Parser *p)
 {
     if (p->error_indicator) {
         return NULL;
@@ -10213,7 +11261,7 @@ _tmp_5_rule(Parser *p)
     void * res = NULL;
     int mark = p->mark;
     { // 'import'
-        void *keyword;
+        Token * keyword;
         if (
             (keyword = _PyPegen_expect_token(p, 513))
         )
@@ -10224,7 +11272,7 @@ _tmp_5_rule(Parser *p)
         p->mark = mark;
     }
     { // 'from'
-        void *keyword;
+        Token * keyword;
         if (
             (keyword = _PyPegen_expect_token(p, 514))
         )
@@ -10239,9 +11287,9 @@ _tmp_5_rule(Parser *p)
     return res;
 }
 
-// _tmp_6: 'def' | '@' | ASYNC
+// _tmp_15: 'def' | '@' | ASYNC
 static void *
-_tmp_6_rule(Parser *p)
+_tmp_15_rule(Parser *p)
 {
     if (p->error_indicator) {
         return NULL;
@@ -10249,7 +11297,7 @@ _tmp_6_rule(Parser *p)
     void * res = NULL;
     int mark = p->mark;
     { // 'def'
-        void *keyword;
+        Token * keyword;
         if (
             (keyword = _PyPegen_expect_token(p, 522))
         )
@@ -10260,7 +11308,7 @@ _tmp_6_rule(Parser *p)
         p->mark = mark;
     }
     { // '@'
-        void *literal;
+        Token * literal;
         if (
             (literal = _PyPegen_expect_token(p, 49))
         )
@@ -10271,7 +11319,7 @@ _tmp_6_rule(Parser *p)
         p->mark = mark;
     }
     { // ASYNC
-        void *async_var;
+        Token * async_var;
         if (
             (async_var = _PyPegen_expect_token(p, ASYNC))
         )
@@ -10286,9 +11334,9 @@ _tmp_6_rule(Parser *p)
     return res;
 }
 
-// _tmp_7: 'class' | '@'
+// _tmp_16: 'class' | '@'
 static void *
-_tmp_7_rule(Parser *p)
+_tmp_16_rule(Parser *p)
 {
     if (p->error_indicator) {
         return NULL;
@@ -10296,7 +11344,7 @@ _tmp_7_rule(Parser *p)
     void * res = NULL;
     int mark = p->mark;
     { // 'class'
-        void *keyword;
+        Token * keyword;
         if (
             (keyword = _PyPegen_expect_token(p, 523))
         )
@@ -10307,7 +11355,7 @@ _tmp_7_rule(Parser *p)
         p->mark = mark;
     }
     { // '@'
-        void *literal;
+        Token * literal;
         if (
             (literal = _PyPegen_expect_token(p, 49))
         )
@@ -10322,9 +11370,9 @@ _tmp_7_rule(Parser *p)
     return res;
 }
 
-// _tmp_8: 'with' | ASYNC
+// _tmp_17: 'with' | ASYNC
 static void *
-_tmp_8_rule(Parser *p)
+_tmp_17_rule(Parser *p)
 {
     if (p->error_indicator) {
         return NULL;
@@ -10332,7 +11380,7 @@ _tmp_8_rule(Parser *p)
     void * res = NULL;
     int mark = p->mark;
     { // 'with'
-        void *keyword;
+        Token * keyword;
         if (
             (keyword = _PyPegen_expect_token(p, 519))
         )
@@ -10343,7 +11391,7 @@ _tmp_8_rule(Parser *p)
         p->mark = mark;
     }
     { // ASYNC
-        void *async_var;
+        Token * async_var;
         if (
             (async_var = _PyPegen_expect_token(p, ASYNC))
         )
@@ -10358,9 +11406,9 @@ _tmp_8_rule(Parser *p)
     return res;
 }
 
-// _tmp_9: 'for' | ASYNC
+// _tmp_18: 'for' | ASYNC
 static void *
-_tmp_9_rule(Parser *p)
+_tmp_18_rule(Parser *p)
 {
     if (p->error_indicator) {
         return NULL;
@@ -10368,7 +11416,7 @@ _tmp_9_rule(Parser *p)
     void * res = NULL;
     int mark = p->mark;
     { // 'for'
-        void *keyword;
+        Token * keyword;
         if (
             (keyword = _PyPegen_expect_token(p, 517))
         )
@@ -10379,7 +11427,7 @@ _tmp_9_rule(Parser *p)
         p->mark = mark;
     }
     { // ASYNC
-        void *async_var;
+        Token * async_var;
         if (
             (async_var = _PyPegen_expect_token(p, ASYNC))
         )
@@ -10394,9 +11442,9 @@ _tmp_9_rule(Parser *p)
     return res;
 }
 
-// _tmp_10: '=' annotated_rhs
+// _tmp_19: '=' annotated_rhs
 static void *
-_tmp_10_rule(Parser *p)
+_tmp_19_rule(Parser *p)
 {
     if (p->error_indicator) {
         return NULL;
@@ -10405,7 +11453,7 @@ _tmp_10_rule(Parser *p)
     int mark = p->mark;
     { // '=' annotated_rhs
         expr_ty d;
-        void *literal;
+        Token * literal;
         if (
             (literal = _PyPegen_expect_token(p, 22))
             &&
@@ -10426,9 +11474,9 @@ _tmp_10_rule(Parser *p)
     return res;
 }
 
-// _tmp_11: '(' inside_paren_ann_assign_target ')' | ann_assign_subscript_attribute_target
+// _tmp_20: '(' inside_paren_ann_assign_target ')' | ann_assign_subscript_attribute_target
 static void *
-_tmp_11_rule(Parser *p)
+_tmp_20_rule(Parser *p)
 {
     if (p->error_indicator) {
         return NULL;
@@ -10437,8 +11485,8 @@ _tmp_11_rule(Parser *p)
     int mark = p->mark;
     { // '(' inside_paren_ann_assign_target ')'
         expr_ty b;
-        void *literal;
-        void *literal_1;
+        Token * literal;
+        Token * literal_1;
         if (
             (literal = _PyPegen_expect_token(p, 7))
             &&
@@ -10472,9 +11520,9 @@ _tmp_11_rule(Parser *p)
     return res;
 }
 
-// _tmp_12: '=' annotated_rhs
+// _tmp_21: '=' annotated_rhs
 static void *
-_tmp_12_rule(Parser *p)
+_tmp_21_rule(Parser *p)
 {
     if (p->error_indicator) {
         return NULL;
@@ -10483,7 +11531,7 @@ _tmp_12_rule(Parser *p)
     int mark = p->mark;
     { // '=' annotated_rhs
         expr_ty d;
-        void *literal;
+        Token * literal;
         if (
             (literal = _PyPegen_expect_token(p, 22))
             &&
@@ -10504,383 +11552,7 @@ _tmp_12_rule(Parser *p)
     return res;
 }
 
-// _loop1_13: (star_targets '=')
-static asdl_seq *
-_loop1_13_rule(Parser *p)
-{
-    if (p->error_indicator) {
-        return NULL;
-    }
-    void *res = NULL;
-    int mark = p->mark;
-    int start_mark = p->mark;
-    void **children = PyMem_Malloc(sizeof(void *));
-    if (!children) {
-        PyErr_Format(PyExc_MemoryError, "Parser out of memory");
-        return NULL;
-    }
-    ssize_t children_capacity = 1;
-    ssize_t n = 0;
-    { // (star_targets '=')
-        void *_tmp_124_var;
-        while (
-            (_tmp_124_var = _tmp_124_rule(p))
-        )
-        {
-            res = _tmp_124_var;
-            if (n == children_capacity) {
-                children_capacity *= 2;
-                children = PyMem_Realloc(children, children_capacity*sizeof(void *));
-                if (!children) {
-                    PyErr_Format(PyExc_MemoryError, "realloc None");
-                    return NULL;
-                }
-            }
-            children[n++] = res;
-            mark = p->mark;
-        }
-        p->mark = mark;
-    }
-    if (n == 0) {
-        PyMem_Free(children);
-        return NULL;
-    }
-    asdl_seq *seq = _Py_asdl_seq_new(n, p->arena);
-    if (!seq) {
-        PyErr_Format(PyExc_MemoryError, "asdl_seq_new _loop1_13");
-        PyMem_Free(children);
-        return NULL;
-    }
-    for (int i = 0; i < n; i++) asdl_seq_SET(seq, i, children[i]);
-    PyMem_Free(children);
-    _PyPegen_insert_memo(p, start_mark, _loop1_13_type, seq);
-    return seq;
-}
-
-// _tmp_14: yield_expr | star_expressions
-static void *
-_tmp_14_rule(Parser *p)
-{
-    if (p->error_indicator) {
-        return NULL;
-    }
-    void * res = NULL;
-    int mark = p->mark;
-    { // yield_expr
-        expr_ty yield_expr_var;
-        if (
-            (yield_expr_var = yield_expr_rule(p))
-        )
-        {
-            res = yield_expr_var;
-            goto done;
-        }
-        p->mark = mark;
-    }
-    { // star_expressions
-        expr_ty star_expressions_var;
-        if (
-            (star_expressions_var = star_expressions_rule(p))
-        )
-        {
-            res = star_expressions_var;
-            goto done;
-        }
-        p->mark = mark;
-    }
-    res = NULL;
-  done:
-    return res;
-}
-
-// _tmp_15: yield_expr | star_expressions
-static void *
-_tmp_15_rule(Parser *p)
-{
-    if (p->error_indicator) {
-        return NULL;
-    }
-    void * res = NULL;
-    int mark = p->mark;
-    { // yield_expr
-        expr_ty yield_expr_var;
-        if (
-            (yield_expr_var = yield_expr_rule(p))
-        )
-        {
-            res = yield_expr_var;
-            goto done;
-        }
-        p->mark = mark;
-    }
-    { // star_expressions
-        expr_ty star_expressions_var;
-        if (
-            (star_expressions_var = star_expressions_rule(p))
-        )
-        {
-            res = star_expressions_var;
-            goto done;
-        }
-        p->mark = mark;
-    }
-    res = NULL;
-  done:
-    return res;
-}
-
-// _loop0_17: ',' NAME
-static asdl_seq *
-_loop0_17_rule(Parser *p)
-{
-    if (p->error_indicator) {
-        return NULL;
-    }
-    void *res = NULL;
-    int mark = p->mark;
-    int start_mark = p->mark;
-    void **children = PyMem_Malloc(sizeof(void *));
-    if (!children) {
-        PyErr_Format(PyExc_MemoryError, "Parser out of memory");
-        return NULL;
-    }
-    ssize_t children_capacity = 1;
-    ssize_t n = 0;
-    { // ',' NAME
-        expr_ty elem;
-        void *literal;
-        while (
-            (literal = _PyPegen_expect_token(p, 12))
-            &&
-            (elem = _PyPegen_name_token(p))
-        )
-        {
-            res = elem;
-            if (res == NULL && PyErr_Occurred()) {
-                p->error_indicator = 1;
-                PyMem_Free(children);
-                return NULL;
-            }
-            if (n == children_capacity) {
-                children_capacity *= 2;
-                children = PyMem_Realloc(children, children_capacity*sizeof(void *));
-                if (!children) {
-                    PyErr_Format(PyExc_MemoryError, "realloc None");
-                    return NULL;
-                }
-            }
-            children[n++] = res;
-            mark = p->mark;
-        }
-        p->mark = mark;
-    }
-    asdl_seq *seq = _Py_asdl_seq_new(n, p->arena);
-    if (!seq) {
-        PyErr_Format(PyExc_MemoryError, "asdl_seq_new _loop0_17");
-        PyMem_Free(children);
-        return NULL;
-    }
-    for (int i = 0; i < n; i++) asdl_seq_SET(seq, i, children[i]);
-    PyMem_Free(children);
-    _PyPegen_insert_memo(p, start_mark, _loop0_17_type, seq);
-    return seq;
-}
-
-// _gather_16: NAME _loop0_17
-static asdl_seq *
-_gather_16_rule(Parser *p)
-{
-    if (p->error_indicator) {
-        return NULL;
-    }
-    asdl_seq * res = NULL;
-    int mark = p->mark;
-    { // NAME _loop0_17
-        expr_ty elem;
-        asdl_seq * seq;
-        if (
-            (elem = _PyPegen_name_token(p))
-            &&
-            (seq = _loop0_17_rule(p))
-        )
-        {
-            res = _PyPegen_seq_insert_in_front(p, elem, seq);
-            goto done;
-        }
-        p->mark = mark;
-    }
-    res = NULL;
-  done:
-    return res;
-}
-
-// _loop0_19: ',' NAME
-static asdl_seq *
-_loop0_19_rule(Parser *p)
-{
-    if (p->error_indicator) {
-        return NULL;
-    }
-    void *res = NULL;
-    int mark = p->mark;
-    int start_mark = p->mark;
-    void **children = PyMem_Malloc(sizeof(void *));
-    if (!children) {
-        PyErr_Format(PyExc_MemoryError, "Parser out of memory");
-        return NULL;
-    }
-    ssize_t children_capacity = 1;
-    ssize_t n = 0;
-    { // ',' NAME
-        expr_ty elem;
-        void *literal;
-        while (
-            (literal = _PyPegen_expect_token(p, 12))
-            &&
-            (elem = _PyPegen_name_token(p))
-        )
-        {
-            res = elem;
-            if (res == NULL && PyErr_Occurred()) {
-                p->error_indicator = 1;
-                PyMem_Free(children);
-                return NULL;
-            }
-            if (n == children_capacity) {
-                children_capacity *= 2;
-                children = PyMem_Realloc(children, children_capacity*sizeof(void *));
-                if (!children) {
-                    PyErr_Format(PyExc_MemoryError, "realloc None");
-                    return NULL;
-                }
-            }
-            children[n++] = res;
-            mark = p->mark;
-        }
-        p->mark = mark;
-    }
-    asdl_seq *seq = _Py_asdl_seq_new(n, p->arena);
-    if (!seq) {
-        PyErr_Format(PyExc_MemoryError, "asdl_seq_new _loop0_19");
-        PyMem_Free(children);
-        return NULL;
-    }
-    for (int i = 0; i < n; i++) asdl_seq_SET(seq, i, children[i]);
-    PyMem_Free(children);
-    _PyPegen_insert_memo(p, start_mark, _loop0_19_type, seq);
-    return seq;
-}
-
-// _gather_18: NAME _loop0_19
-static asdl_seq *
-_gather_18_rule(Parser *p)
-{
-    if (p->error_indicator) {
-        return NULL;
-    }
-    asdl_seq * res = NULL;
-    int mark = p->mark;
-    { // NAME _loop0_19
-        expr_ty elem;
-        asdl_seq * seq;
-        if (
-            (elem = _PyPegen_name_token(p))
-            &&
-            (seq = _loop0_19_rule(p))
-        )
-        {
-            res = _PyPegen_seq_insert_in_front(p, elem, seq);
-            goto done;
-        }
-        p->mark = mark;
-    }
-    res = NULL;
-  done:
-    return res;
-}
-
-// _tmp_20: ',' expression
-static void *
-_tmp_20_rule(Parser *p)
-{
-    if (p->error_indicator) {
-        return NULL;
-    }
-    void * res = NULL;
-    int mark = p->mark;
-    { // ',' expression
-        void *literal;
-        expr_ty z;
-        if (
-            (literal = _PyPegen_expect_token(p, 12))
-            &&
-            (z = expression_rule(p))
-        )
-        {
-            res = z;
-            if (res == NULL && PyErr_Occurred()) {
-                p->error_indicator = 1;
-                return NULL;
-            }
-            goto done;
-        }
-        p->mark = mark;
-    }
-    res = NULL;
-  done:
-    return res;
-}
-
-// _loop0_21: ('.' | '...')
-static asdl_seq *
-_loop0_21_rule(Parser *p)
-{
-    if (p->error_indicator) {
-        return NULL;
-    }
-    void *res = NULL;
-    int mark = p->mark;
-    int start_mark = p->mark;
-    void **children = PyMem_Malloc(sizeof(void *));
-    if (!children) {
-        PyErr_Format(PyExc_MemoryError, "Parser out of memory");
-        return NULL;
-    }
-    ssize_t children_capacity = 1;
-    ssize_t n = 0;
-    { // ('.' | '...')
-        void *_tmp_125_var;
-        while (
-            (_tmp_125_var = _tmp_125_rule(p))
-        )
-        {
-            res = _tmp_125_var;
-            if (n == children_capacity) {
-                children_capacity *= 2;
-                children = PyMem_Realloc(children, children_capacity*sizeof(void *));
-                if (!children) {
-                    PyErr_Format(PyExc_MemoryError, "realloc None");
-                    return NULL;
-                }
-            }
-            children[n++] = res;
-            mark = p->mark;
-        }
-        p->mark = mark;
-    }
-    asdl_seq *seq = _Py_asdl_seq_new(n, p->arena);
-    if (!seq) {
-        PyErr_Format(PyExc_MemoryError, "asdl_seq_new _loop0_21");
-        PyMem_Free(children);
-        return NULL;
-    }
-    for (int i = 0; i < n; i++) asdl_seq_SET(seq, i, children[i]);
-    PyMem_Free(children);
-    _PyPegen_insert_memo(p, start_mark, _loop0_21_type, seq);
-    return seq;
-}
-
-// _loop1_22: ('.' | '...')
+// _loop1_22: (star_targets '=')
 static asdl_seq *
 _loop1_22_rule(Parser *p)
 {
@@ -10897,13 +11569,13 @@ _loop1_22_rule(Parser *p)
     }
     ssize_t children_capacity = 1;
     ssize_t n = 0;
-    { // ('.' | '...')
-        void *_tmp_126_var;
+    { // (star_targets '=')
+        void *_tmp_136_var;
         while (
-            (_tmp_126_var = _tmp_126_rule(p))
+            (_tmp_136_var = _tmp_136_rule(p))
         )
         {
-            res = _tmp_126_var;
+            res = _tmp_136_var;
             if (n == children_capacity) {
                 children_capacity *= 2;
                 children = PyMem_Realloc(children, children_capacity*sizeof(void *));
@@ -10933,9 +11605,81 @@ _loop1_22_rule(Parser *p)
     return seq;
 }
 
-// _loop0_24: ',' import_from_as_name
+// _tmp_23: yield_expr | star_expressions
+static void *
+_tmp_23_rule(Parser *p)
+{
+    if (p->error_indicator) {
+        return NULL;
+    }
+    void * res = NULL;
+    int mark = p->mark;
+    { // yield_expr
+        expr_ty yield_expr_var;
+        if (
+            (yield_expr_var = yield_expr_rule(p))
+        )
+        {
+            res = yield_expr_var;
+            goto done;
+        }
+        p->mark = mark;
+    }
+    { // star_expressions
+        expr_ty star_expressions_var;
+        if (
+            (star_expressions_var = star_expressions_rule(p))
+        )
+        {
+            res = star_expressions_var;
+            goto done;
+        }
+        p->mark = mark;
+    }
+    res = NULL;
+  done:
+    return res;
+}
+
+// _tmp_24: yield_expr | star_expressions
+static void *
+_tmp_24_rule(Parser *p)
+{
+    if (p->error_indicator) {
+        return NULL;
+    }
+    void * res = NULL;
+    int mark = p->mark;
+    { // yield_expr
+        expr_ty yield_expr_var;
+        if (
+            (yield_expr_var = yield_expr_rule(p))
+        )
+        {
+            res = yield_expr_var;
+            goto done;
+        }
+        p->mark = mark;
+    }
+    { // star_expressions
+        expr_ty star_expressions_var;
+        if (
+            (star_expressions_var = star_expressions_rule(p))
+        )
+        {
+            res = star_expressions_var;
+            goto done;
+        }
+        p->mark = mark;
+    }
+    res = NULL;
+  done:
+    return res;
+}
+
+// _loop0_26: ',' NAME
 static asdl_seq *
-_loop0_24_rule(Parser *p)
+_loop0_26_rule(Parser *p)
 {
     if (p->error_indicator) {
         return NULL;
@@ -10950,13 +11694,13 @@ _loop0_24_rule(Parser *p)
     }
     ssize_t children_capacity = 1;
     ssize_t n = 0;
-    { // ',' import_from_as_name
-        alias_ty elem;
-        void *literal;
+    { // ',' NAME
+        expr_ty elem;
+        Token * literal;
         while (
             (literal = _PyPegen_expect_token(p, 12))
             &&
-            (elem = import_from_as_name_rule(p))
+            (elem = _PyPegen_name_token(p))
         )
         {
             res = elem;
@@ -10980,32 +11724,32 @@ _loop0_24_rule(Parser *p)
     }
     asdl_seq *seq = _Py_asdl_seq_new(n, p->arena);
     if (!seq) {
-        PyErr_Format(PyExc_MemoryError, "asdl_seq_new _loop0_24");
+        PyErr_Format(PyExc_MemoryError, "asdl_seq_new _loop0_26");
         PyMem_Free(children);
         return NULL;
     }
     for (int i = 0; i < n; i++) asdl_seq_SET(seq, i, children[i]);
     PyMem_Free(children);
-    _PyPegen_insert_memo(p, start_mark, _loop0_24_type, seq);
+    _PyPegen_insert_memo(p, start_mark, _loop0_26_type, seq);
     return seq;
 }
 
-// _gather_23: import_from_as_name _loop0_24
+// _gather_25: NAME _loop0_26
 static asdl_seq *
-_gather_23_rule(Parser *p)
+_gather_25_rule(Parser *p)
 {
     if (p->error_indicator) {
         return NULL;
     }
     asdl_seq * res = NULL;
     int mark = p->mark;
-    { // import_from_as_name _loop0_24
-        alias_ty elem;
+    { // NAME _loop0_26
+        expr_ty elem;
         asdl_seq * seq;
         if (
-            (elem = import_from_as_name_rule(p))
+            (elem = _PyPegen_name_token(p))
             &&
-            (seq = _loop0_24_rule(p))
+            (seq = _loop0_26_rule(p))
         )
         {
             res = _PyPegen_seq_insert_in_front(p, elem, seq);
@@ -11018,41 +11762,9 @@ _gather_23_rule(Parser *p)
     return res;
 }
 
-// _tmp_25: 'as' NAME
-static void *
-_tmp_25_rule(Parser *p)
-{
-    if (p->error_indicator) {
-        return NULL;
-    }
-    void * res = NULL;
-    int mark = p->mark;
-    { // 'as' NAME
-        void *keyword;
-        expr_ty z;
-        if (
-            (keyword = _PyPegen_expect_token(p, 531))
-            &&
-            (z = _PyPegen_name_token(p))
-        )
-        {
-            res = z;
-            if (res == NULL && PyErr_Occurred()) {
-                p->error_indicator = 1;
-                return NULL;
-            }
-            goto done;
-        }
-        p->mark = mark;
-    }
-    res = NULL;
-  done:
-    return res;
-}
-
-// _loop0_27: ',' dotted_as_name
+// _loop0_28: ',' NAME
 static asdl_seq *
-_loop0_27_rule(Parser *p)
+_loop0_28_rule(Parser *p)
 {
     if (p->error_indicator) {
         return NULL;
@@ -11067,13 +11779,13 @@ _loop0_27_rule(Parser *p)
     }
     ssize_t children_capacity = 1;
     ssize_t n = 0;
-    { // ',' dotted_as_name
-        alias_ty elem;
-        void *literal;
+    { // ',' NAME
+        expr_ty elem;
+        Token * literal;
         while (
             (literal = _PyPegen_expect_token(p, 12))
             &&
-            (elem = dotted_as_name_rule(p))
+            (elem = _PyPegen_name_token(p))
         )
         {
             res = elem;
@@ -11097,32 +11809,32 @@ _loop0_27_rule(Parser *p)
     }
     asdl_seq *seq = _Py_asdl_seq_new(n, p->arena);
     if (!seq) {
-        PyErr_Format(PyExc_MemoryError, "asdl_seq_new _loop0_27");
+        PyErr_Format(PyExc_MemoryError, "asdl_seq_new _loop0_28");
         PyMem_Free(children);
         return NULL;
     }
     for (int i = 0; i < n; i++) asdl_seq_SET(seq, i, children[i]);
     PyMem_Free(children);
-    _PyPegen_insert_memo(p, start_mark, _loop0_27_type, seq);
+    _PyPegen_insert_memo(p, start_mark, _loop0_28_type, seq);
     return seq;
 }
 
-// _gather_26: dotted_as_name _loop0_27
+// _gather_27: NAME _loop0_28
 static asdl_seq *
-_gather_26_rule(Parser *p)
+_gather_27_rule(Parser *p)
 {
     if (p->error_indicator) {
         return NULL;
     }
     asdl_seq * res = NULL;
     int mark = p->mark;
-    { // dotted_as_name _loop0_27
-        alias_ty elem;
+    { // NAME _loop0_28
+        expr_ty elem;
         asdl_seq * seq;
         if (
-            (elem = dotted_as_name_rule(p))
+            (elem = _PyPegen_name_token(p))
             &&
-            (seq = _loop0_27_rule(p))
+            (seq = _loop0_28_rule(p))
         )
         {
             res = _PyPegen_seq_insert_in_front(p, elem, seq);
@@ -11135,22 +11847,22 @@ _gather_26_rule(Parser *p)
     return res;
 }
 
-// _tmp_28: 'as' NAME
+// _tmp_29: ',' expression
 static void *
-_tmp_28_rule(Parser *p)
+_tmp_29_rule(Parser *p)
 {
     if (p->error_indicator) {
         return NULL;
     }
     void * res = NULL;
     int mark = p->mark;
-    { // 'as' NAME
-        void *keyword;
+    { // ',' expression
+        Token * literal;
         expr_ty z;
         if (
-            (keyword = _PyPegen_expect_token(p, 531))
+            (literal = _PyPegen_expect_token(p, 12))
             &&
-            (z = _PyPegen_name_token(p))
+            (z = expression_rule(p))
         )
         {
             res = z;
@@ -11167,7 +11879,7 @@ _tmp_28_rule(Parser *p)
     return res;
 }
 
-// _loop0_30: ',' with_item
+// _loop0_30: ('.' | '...')
 static asdl_seq *
 _loop0_30_rule(Parser *p)
 {
@@ -11184,21 +11896,13 @@ _loop0_30_rule(Parser *p)
     }
     ssize_t children_capacity = 1;
     ssize_t n = 0;
-    { // ',' with_item
-        withitem_ty elem;
-        void *literal;
+    { // ('.' | '...')
+        void *_tmp_137_var;
         while (
-            (literal = _PyPegen_expect_token(p, 12))
-            &&
-            (elem = with_item_rule(p))
+            (_tmp_137_var = _tmp_137_rule(p))
         )
         {
-            res = elem;
-            if (res == NULL && PyErr_Occurred()) {
-                p->error_indicator = 1;
-                PyMem_Free(children);
-                return NULL;
-            }
+            res = _tmp_137_var;
             if (n == children_capacity) {
                 children_capacity *= 2;
                 children = PyMem_Realloc(children, children_capacity*sizeof(void *));
@@ -11224,22 +11928,132 @@ _loop0_30_rule(Parser *p)
     return seq;
 }
 
-// _gather_29: with_item _loop0_30
+// _loop1_31: ('.' | '...')
 static asdl_seq *
-_gather_29_rule(Parser *p)
+_loop1_31_rule(Parser *p)
+{
+    if (p->error_indicator) {
+        return NULL;
+    }
+    void *res = NULL;
+    int mark = p->mark;
+    int start_mark = p->mark;
+    void **children = PyMem_Malloc(sizeof(void *));
+    if (!children) {
+        PyErr_Format(PyExc_MemoryError, "Parser out of memory");
+        return NULL;
+    }
+    ssize_t children_capacity = 1;
+    ssize_t n = 0;
+    { // ('.' | '...')
+        void *_tmp_138_var;
+        while (
+            (_tmp_138_var = _tmp_138_rule(p))
+        )
+        {
+            res = _tmp_138_var;
+            if (n == children_capacity) {
+                children_capacity *= 2;
+                children = PyMem_Realloc(children, children_capacity*sizeof(void *));
+                if (!children) {
+                    PyErr_Format(PyExc_MemoryError, "realloc None");
+                    return NULL;
+                }
+            }
+            children[n++] = res;
+            mark = p->mark;
+        }
+        p->mark = mark;
+    }
+    if (n == 0) {
+        PyMem_Free(children);
+        return NULL;
+    }
+    asdl_seq *seq = _Py_asdl_seq_new(n, p->arena);
+    if (!seq) {
+        PyErr_Format(PyExc_MemoryError, "asdl_seq_new _loop1_31");
+        PyMem_Free(children);
+        return NULL;
+    }
+    for (int i = 0; i < n; i++) asdl_seq_SET(seq, i, children[i]);
+    PyMem_Free(children);
+    _PyPegen_insert_memo(p, start_mark, _loop1_31_type, seq);
+    return seq;
+}
+
+// _loop0_33: ',' import_from_as_name
+static asdl_seq *
+_loop0_33_rule(Parser *p)
+{
+    if (p->error_indicator) {
+        return NULL;
+    }
+    void *res = NULL;
+    int mark = p->mark;
+    int start_mark = p->mark;
+    void **children = PyMem_Malloc(sizeof(void *));
+    if (!children) {
+        PyErr_Format(PyExc_MemoryError, "Parser out of memory");
+        return NULL;
+    }
+    ssize_t children_capacity = 1;
+    ssize_t n = 0;
+    { // ',' import_from_as_name
+        alias_ty elem;
+        Token * literal;
+        while (
+            (literal = _PyPegen_expect_token(p, 12))
+            &&
+            (elem = import_from_as_name_rule(p))
+        )
+        {
+            res = elem;
+            if (res == NULL && PyErr_Occurred()) {
+                p->error_indicator = 1;
+                PyMem_Free(children);
+                return NULL;
+            }
+            if (n == children_capacity) {
+                children_capacity *= 2;
+                children = PyMem_Realloc(children, children_capacity*sizeof(void *));
+                if (!children) {
+                    PyErr_Format(PyExc_MemoryError, "realloc None");
+                    return NULL;
+                }
+            }
+            children[n++] = res;
+            mark = p->mark;
+        }
+        p->mark = mark;
+    }
+    asdl_seq *seq = _Py_asdl_seq_new(n, p->arena);
+    if (!seq) {
+        PyErr_Format(PyExc_MemoryError, "asdl_seq_new _loop0_33");
+        PyMem_Free(children);
+        return NULL;
+    }
+    for (int i = 0; i < n; i++) asdl_seq_SET(seq, i, children[i]);
+    PyMem_Free(children);
+    _PyPegen_insert_memo(p, start_mark, _loop0_33_type, seq);
+    return seq;
+}
+
+// _gather_32: import_from_as_name _loop0_33
+static asdl_seq *
+_gather_32_rule(Parser *p)
 {
     if (p->error_indicator) {
         return NULL;
     }
     asdl_seq * res = NULL;
     int mark = p->mark;
-    { // with_item _loop0_30
-        withitem_ty elem;
+    { // import_from_as_name _loop0_33
+        alias_ty elem;
         asdl_seq * seq;
         if (
-            (elem = with_item_rule(p))
+            (elem = import_from_as_name_rule(p))
             &&
-            (seq = _loop0_30_rule(p))
+            (seq = _loop0_33_rule(p))
         )
         {
             res = _PyPegen_seq_insert_in_front(p, elem, seq);
@@ -11252,9 +12066,158 @@ _gather_29_rule(Parser *p)
     return res;
 }
 
-// _loop0_32: ',' with_item
+// _tmp_34: 'as' NAME
+static void *
+_tmp_34_rule(Parser *p)
+{
+    if (p->error_indicator) {
+        return NULL;
+    }
+    void * res = NULL;
+    int mark = p->mark;
+    { // 'as' NAME
+        Token * keyword;
+        expr_ty z;
+        if (
+            (keyword = _PyPegen_expect_token(p, 531))
+            &&
+            (z = _PyPegen_name_token(p))
+        )
+        {
+            res = z;
+            if (res == NULL && PyErr_Occurred()) {
+                p->error_indicator = 1;
+                return NULL;
+            }
+            goto done;
+        }
+        p->mark = mark;
+    }
+    res = NULL;
+  done:
+    return res;
+}
+
+// _loop0_36: ',' dotted_as_name
 static asdl_seq *
-_loop0_32_rule(Parser *p)
+_loop0_36_rule(Parser *p)
+{
+    if (p->error_indicator) {
+        return NULL;
+    }
+    void *res = NULL;
+    int mark = p->mark;
+    int start_mark = p->mark;
+    void **children = PyMem_Malloc(sizeof(void *));
+    if (!children) {
+        PyErr_Format(PyExc_MemoryError, "Parser out of memory");
+        return NULL;
+    }
+    ssize_t children_capacity = 1;
+    ssize_t n = 0;
+    { // ',' dotted_as_name
+        alias_ty elem;
+        Token * literal;
+        while (
+            (literal = _PyPegen_expect_token(p, 12))
+            &&
+            (elem = dotted_as_name_rule(p))
+        )
+        {
+            res = elem;
+            if (res == NULL && PyErr_Occurred()) {
+                p->error_indicator = 1;
+                PyMem_Free(children);
+                return NULL;
+            }
+            if (n == children_capacity) {
+                children_capacity *= 2;
+                children = PyMem_Realloc(children, children_capacity*sizeof(void *));
+                if (!children) {
+                    PyErr_Format(PyExc_MemoryError, "realloc None");
+                    return NULL;
+                }
+            }
+            children[n++] = res;
+            mark = p->mark;
+        }
+        p->mark = mark;
+    }
+    asdl_seq *seq = _Py_asdl_seq_new(n, p->arena);
+    if (!seq) {
+        PyErr_Format(PyExc_MemoryError, "asdl_seq_new _loop0_36");
+        PyMem_Free(children);
+        return NULL;
+    }
+    for (int i = 0; i < n; i++) asdl_seq_SET(seq, i, children[i]);
+    PyMem_Free(children);
+    _PyPegen_insert_memo(p, start_mark, _loop0_36_type, seq);
+    return seq;
+}
+
+// _gather_35: dotted_as_name _loop0_36
+static asdl_seq *
+_gather_35_rule(Parser *p)
+{
+    if (p->error_indicator) {
+        return NULL;
+    }
+    asdl_seq * res = NULL;
+    int mark = p->mark;
+    { // dotted_as_name _loop0_36
+        alias_ty elem;
+        asdl_seq * seq;
+        if (
+            (elem = dotted_as_name_rule(p))
+            &&
+            (seq = _loop0_36_rule(p))
+        )
+        {
+            res = _PyPegen_seq_insert_in_front(p, elem, seq);
+            goto done;
+        }
+        p->mark = mark;
+    }
+    res = NULL;
+  done:
+    return res;
+}
+
+// _tmp_37: 'as' NAME
+static void *
+_tmp_37_rule(Parser *p)
+{
+    if (p->error_indicator) {
+        return NULL;
+    }
+    void * res = NULL;
+    int mark = p->mark;
+    { // 'as' NAME
+        Token * keyword;
+        expr_ty z;
+        if (
+            (keyword = _PyPegen_expect_token(p, 531))
+            &&
+            (z = _PyPegen_name_token(p))
+        )
+        {
+            res = z;
+            if (res == NULL && PyErr_Occurred()) {
+                p->error_indicator = 1;
+                return NULL;
+            }
+            goto done;
+        }
+        p->mark = mark;
+    }
+    res = NULL;
+  done:
+    return res;
+}
+
+// _loop0_39: ',' with_item
+static asdl_seq *
+_loop0_39_rule(Parser *p)
 {
     if (p->error_indicator) {
         return NULL;
@@ -11271,7 +12234,7 @@ _loop0_32_rule(Parser *p)
     ssize_t n = 0;
     { // ',' with_item
         withitem_ty elem;
-        void *literal;
+        Token * literal;
         while (
             (literal = _PyPegen_expect_token(p, 12))
             &&
@@ -11299,32 +12262,32 @@ _loop0_32_rule(Parser *p)
     }
     asdl_seq *seq = _Py_asdl_seq_new(n, p->arena);
     if (!seq) {
-        PyErr_Format(PyExc_MemoryError, "asdl_seq_new _loop0_32");
+        PyErr_Format(PyExc_MemoryError, "asdl_seq_new _loop0_39");
         PyMem_Free(children);
         return NULL;
     }
     for (int i = 0; i < n; i++) asdl_seq_SET(seq, i, children[i]);
     PyMem_Free(children);
-    _PyPegen_insert_memo(p, start_mark, _loop0_32_type, seq);
+    _PyPegen_insert_memo(p, start_mark, _loop0_39_type, seq);
     return seq;
 }
 
-// _gather_31: with_item _loop0_32
+// _gather_38: with_item _loop0_39
 static asdl_seq *
-_gather_31_rule(Parser *p)
+_gather_38_rule(Parser *p)
 {
     if (p->error_indicator) {
         return NULL;
     }
     asdl_seq * res = NULL;
     int mark = p->mark;
-    { // with_item _loop0_32
+    { // with_item _loop0_39
         withitem_ty elem;
         asdl_seq * seq;
         if (
             (elem = with_item_rule(p))
             &&
-            (seq = _loop0_32_rule(p))
+            (seq = _loop0_39_rule(p))
         )
         {
             res = _PyPegen_seq_insert_in_front(p, elem, seq);
@@ -11337,9 +12300,264 @@ _gather_31_rule(Parser *p)
     return res;
 }
 
-// _tmp_33: 'as' target
+// _loop0_41: ',' with_item
+static asdl_seq *
+_loop0_41_rule(Parser *p)
+{
+    if (p->error_indicator) {
+        return NULL;
+    }
+    void *res = NULL;
+    int mark = p->mark;
+    int start_mark = p->mark;
+    void **children = PyMem_Malloc(sizeof(void *));
+    if (!children) {
+        PyErr_Format(PyExc_MemoryError, "Parser out of memory");
+        return NULL;
+    }
+    ssize_t children_capacity = 1;
+    ssize_t n = 0;
+    { // ',' with_item
+        withitem_ty elem;
+        Token * literal;
+        while (
+            (literal = _PyPegen_expect_token(p, 12))
+            &&
+            (elem = with_item_rule(p))
+        )
+        {
+            res = elem;
+            if (res == NULL && PyErr_Occurred()) {
+                p->error_indicator = 1;
+                PyMem_Free(children);
+                return NULL;
+            }
+            if (n == children_capacity) {
+                children_capacity *= 2;
+                children = PyMem_Realloc(children, children_capacity*sizeof(void *));
+                if (!children) {
+                    PyErr_Format(PyExc_MemoryError, "realloc None");
+                    return NULL;
+                }
+            }
+            children[n++] = res;
+            mark = p->mark;
+        }
+        p->mark = mark;
+    }
+    asdl_seq *seq = _Py_asdl_seq_new(n, p->arena);
+    if (!seq) {
+        PyErr_Format(PyExc_MemoryError, "asdl_seq_new _loop0_41");
+        PyMem_Free(children);
+        return NULL;
+    }
+    for (int i = 0; i < n; i++) asdl_seq_SET(seq, i, children[i]);
+    PyMem_Free(children);
+    _PyPegen_insert_memo(p, start_mark, _loop0_41_type, seq);
+    return seq;
+}
+
+// _gather_40: with_item _loop0_41
+static asdl_seq *
+_gather_40_rule(Parser *p)
+{
+    if (p->error_indicator) {
+        return NULL;
+    }
+    asdl_seq * res = NULL;
+    int mark = p->mark;
+    { // with_item _loop0_41
+        withitem_ty elem;
+        asdl_seq * seq;
+        if (
+            (elem = with_item_rule(p))
+            &&
+            (seq = _loop0_41_rule(p))
+        )
+        {
+            res = _PyPegen_seq_insert_in_front(p, elem, seq);
+            goto done;
+        }
+        p->mark = mark;
+    }
+    res = NULL;
+  done:
+    return res;
+}
+
+// _loop0_43: ',' with_item
+static asdl_seq *
+_loop0_43_rule(Parser *p)
+{
+    if (p->error_indicator) {
+        return NULL;
+    }
+    void *res = NULL;
+    int mark = p->mark;
+    int start_mark = p->mark;
+    void **children = PyMem_Malloc(sizeof(void *));
+    if (!children) {
+        PyErr_Format(PyExc_MemoryError, "Parser out of memory");
+        return NULL;
+    }
+    ssize_t children_capacity = 1;
+    ssize_t n = 0;
+    { // ',' with_item
+        withitem_ty elem;
+        Token * literal;
+        while (
+            (literal = _PyPegen_expect_token(p, 12))
+            &&
+            (elem = with_item_rule(p))
+        )
+        {
+            res = elem;
+            if (res == NULL && PyErr_Occurred()) {
+                p->error_indicator = 1;
+                PyMem_Free(children);
+                return NULL;
+            }
+            if (n == children_capacity) {
+                children_capacity *= 2;
+                children = PyMem_Realloc(children, children_capacity*sizeof(void *));
+                if (!children) {
+                    PyErr_Format(PyExc_MemoryError, "realloc None");
+                    return NULL;
+                }
+            }
+            children[n++] = res;
+            mark = p->mark;
+        }
+        p->mark = mark;
+    }
+    asdl_seq *seq = _Py_asdl_seq_new(n, p->arena);
+    if (!seq) {
+        PyErr_Format(PyExc_MemoryError, "asdl_seq_new _loop0_43");
+        PyMem_Free(children);
+        return NULL;
+    }
+    for (int i = 0; i < n; i++) asdl_seq_SET(seq, i, children[i]);
+    PyMem_Free(children);
+    _PyPegen_insert_memo(p, start_mark, _loop0_43_type, seq);
+    return seq;
+}
+
+// _gather_42: with_item _loop0_43
+static asdl_seq *
+_gather_42_rule(Parser *p)
+{
+    if (p->error_indicator) {
+        return NULL;
+    }
+    asdl_seq * res = NULL;
+    int mark = p->mark;
+    { // with_item _loop0_43
+        withitem_ty elem;
+        asdl_seq * seq;
+        if (
+            (elem = with_item_rule(p))
+            &&
+            (seq = _loop0_43_rule(p))
+        )
+        {
+            res = _PyPegen_seq_insert_in_front(p, elem, seq);
+            goto done;
+        }
+        p->mark = mark;
+    }
+    res = NULL;
+  done:
+    return res;
+}
+
+// _loop0_45: ',' with_item
+static asdl_seq *
+_loop0_45_rule(Parser *p)
+{
+    if (p->error_indicator) {
+        return NULL;
+    }
+    void *res = NULL;
+    int mark = p->mark;
+    int start_mark = p->mark;
+    void **children = PyMem_Malloc(sizeof(void *));
+    if (!children) {
+        PyErr_Format(PyExc_MemoryError, "Parser out of memory");
+        return NULL;
+    }
+    ssize_t children_capacity = 1;
+    ssize_t n = 0;
+    { // ',' with_item
+        withitem_ty elem;
+        Token * literal;
+        while (
+            (literal = _PyPegen_expect_token(p, 12))
+            &&
+            (elem = with_item_rule(p))
+        )
+        {
+            res = elem;
+            if (res == NULL && PyErr_Occurred()) {
+                p->error_indicator = 1;
+                PyMem_Free(children);
+                return NULL;
+            }
+            if (n == children_capacity) {
+                children_capacity *= 2;
+                children = PyMem_Realloc(children, children_capacity*sizeof(void *));
+                if (!children) {
+                    PyErr_Format(PyExc_MemoryError, "realloc None");
+                    return NULL;
+                }
+            }
+            children[n++] = res;
+            mark = p->mark;
+        }
+        p->mark = mark;
+    }
+    asdl_seq *seq = _Py_asdl_seq_new(n, p->arena);
+    if (!seq) {
+        PyErr_Format(PyExc_MemoryError, "asdl_seq_new _loop0_45");
+        PyMem_Free(children);
+        return NULL;
+    }
+    for (int i = 0; i < n; i++) asdl_seq_SET(seq, i, children[i]);
+    PyMem_Free(children);
+    _PyPegen_insert_memo(p, start_mark, _loop0_45_type, seq);
+    return seq;
+}
+
+// _gather_44: with_item _loop0_45
+static asdl_seq *
+_gather_44_rule(Parser *p)
+{
+    if (p->error_indicator) {
+        return NULL;
+    }
+    asdl_seq * res = NULL;
+    int mark = p->mark;
+    { // with_item _loop0_45
+        withitem_ty elem;
+        asdl_seq * seq;
+        if (
+            (elem = with_item_rule(p))
+            &&
+            (seq = _loop0_45_rule(p))
+        )
+        {
+            res = _PyPegen_seq_insert_in_front(p, elem, seq);
+            goto done;
+        }
+        p->mark = mark;
+    }
+    res = NULL;
+  done:
+    return res;
+}
+
+// _tmp_46: 'as' target
 static void *
-_tmp_33_rule(Parser *p)
+_tmp_46_rule(Parser *p)
 {
     if (p->error_indicator) {
         return NULL;
@@ -11347,7 +12565,7 @@ _tmp_33_rule(Parser *p)
     void * res = NULL;
     int mark = p->mark;
     { // 'as' target
-        void *keyword;
+        Token * keyword;
         expr_ty t;
         if (
             (keyword = _PyPegen_expect_token(p, 531))
@@ -11369,9 +12587,9 @@ _tmp_33_rule(Parser *p)
     return res;
 }
 
-// _loop1_34: except_block
+// _loop1_47: except_block
 static asdl_seq *
-_loop1_34_rule(Parser *p)
+_loop1_47_rule(Parser *p)
 {
     if (p->error_indicator) {
         return NULL;
@@ -11412,19 +12630,19 @@ _loop1_34_rule(Parser *p)
     }
     asdl_seq *seq = _Py_asdl_seq_new(n, p->arena);
     if (!seq) {
-        PyErr_Format(PyExc_MemoryError, "asdl_seq_new _loop1_34");
+        PyErr_Format(PyExc_MemoryError, "asdl_seq_new _loop1_47");
         PyMem_Free(children);
         return NULL;
     }
     for (int i = 0; i < n; i++) asdl_seq_SET(seq, i, children[i]);
     PyMem_Free(children);
-    _PyPegen_insert_memo(p, start_mark, _loop1_34_type, seq);
+    _PyPegen_insert_memo(p, start_mark, _loop1_47_type, seq);
     return seq;
 }
 
-// _tmp_35: 'as' target
+// _tmp_48: 'as' target
 static void *
-_tmp_35_rule(Parser *p)
+_tmp_48_rule(Parser *p)
 {
     if (p->error_indicator) {
         return NULL;
@@ -11432,7 +12650,7 @@ _tmp_35_rule(Parser *p)
     void * res = NULL;
     int mark = p->mark;
     { // 'as' target
-        void *keyword;
+        Token * keyword;
         expr_ty z;
         if (
             (keyword = _PyPegen_expect_token(p, 531))
@@ -11454,9 +12672,9 @@ _tmp_35_rule(Parser *p)
     return res;
 }
 
-// _tmp_36: 'from' expression
+// _tmp_49: 'from' expression
 static void *
-_tmp_36_rule(Parser *p)
+_tmp_49_rule(Parser *p)
 {
     if (p->error_indicator) {
         return NULL;
@@ -11464,7 +12682,7 @@ _tmp_36_rule(Parser *p)
     void * res = NULL;
     int mark = p->mark;
     { // 'from' expression
-        void *keyword;
+        Token * keyword;
         expr_ty z;
         if (
             (keyword = _PyPegen_expect_token(p, 514))
@@ -11486,461 +12704,7 @@ _tmp_36_rule(Parser *p)
     return res;
 }
 
-// _tmp_37: '->' annotation
-static void *
-_tmp_37_rule(Parser *p)
-{
-    if (p->error_indicator) {
-        return NULL;
-    }
-    void * res = NULL;
-    int mark = p->mark;
-    { // '->' annotation
-        void *literal;
-        expr_ty z;
-        if (
-            (literal = _PyPegen_expect_token(p, 51))
-            &&
-            (z = annotation_rule(p))
-        )
-        {
-            res = z;
-            if (res == NULL && PyErr_Occurred()) {
-                p->error_indicator = 1;
-                return NULL;
-            }
-            goto done;
-        }
-        p->mark = mark;
-    }
-    res = NULL;
-  done:
-    return res;
-}
-
-// _tmp_38: ',' plain_names
-static void *
-_tmp_38_rule(Parser *p)
-{
-    if (p->error_indicator) {
-        return NULL;
-    }
-    void * res = NULL;
-    int mark = p->mark;
-    { // ',' plain_names
-        void *literal;
-        asdl_seq* x;
-        if (
-            (literal = _PyPegen_expect_token(p, 12))
-            &&
-            (x = plain_names_rule(p))
-        )
-        {
-            res = x;
-            if (res == NULL && PyErr_Occurred()) {
-                p->error_indicator = 1;
-                return NULL;
-            }
-            goto done;
-        }
-        p->mark = mark;
-    }
-    res = NULL;
-  done:
-    return res;
-}
-
-// _tmp_39: ',' names_with_default
-static void *
-_tmp_39_rule(Parser *p)
-{
-    if (p->error_indicator) {
-        return NULL;
-    }
-    void * res = NULL;
-    int mark = p->mark;
-    { // ',' names_with_default
-        void *literal;
-        asdl_seq* y;
-        if (
-            (literal = _PyPegen_expect_token(p, 12))
-            &&
-            (y = names_with_default_rule(p))
-        )
-        {
-            res = y;
-            if (res == NULL && PyErr_Occurred()) {
-                p->error_indicator = 1;
-                return NULL;
-            }
-            goto done;
-        }
-        p->mark = mark;
-    }
-    res = NULL;
-  done:
-    return res;
-}
-
-// _tmp_40: ',' star_etc?
-static void *
-_tmp_40_rule(Parser *p)
-{
-    if (p->error_indicator) {
-        return NULL;
-    }
-    void * res = NULL;
-    int mark = p->mark;
-    { // ',' star_etc?
-        void *literal;
-        void *z;
-        if (
-            (literal = _PyPegen_expect_token(p, 12))
-            &&
-            (z = star_etc_rule(p), 1)
-        )
-        {
-            res = z;
-            if (res == NULL && PyErr_Occurred()) {
-                p->error_indicator = 1;
-                return NULL;
-            }
-            goto done;
-        }
-        p->mark = mark;
-    }
-    res = NULL;
-  done:
-    return res;
-}
-
-// _tmp_41: ',' names_with_default
-static void *
-_tmp_41_rule(Parser *p)
-{
-    if (p->error_indicator) {
-        return NULL;
-    }
-    void * res = NULL;
-    int mark = p->mark;
-    { // ',' names_with_default
-        void *literal;
-        asdl_seq* y;
-        if (
-            (literal = _PyPegen_expect_token(p, 12))
-            &&
-            (y = names_with_default_rule(p))
-        )
-        {
-            res = y;
-            if (res == NULL && PyErr_Occurred()) {
-                p->error_indicator = 1;
-                return NULL;
-            }
-            goto done;
-        }
-        p->mark = mark;
-    }
-    res = NULL;
-  done:
-    return res;
-}
-
-// _tmp_42: ',' star_etc?
-static void *
-_tmp_42_rule(Parser *p)
-{
-    if (p->error_indicator) {
-        return NULL;
-    }
-    void * res = NULL;
-    int mark = p->mark;
-    { // ',' star_etc?
-        void *literal;
-        void *z;
-        if (
-            (literal = _PyPegen_expect_token(p, 12))
-            &&
-            (z = star_etc_rule(p), 1)
-        )
-        {
-            res = z;
-            if (res == NULL && PyErr_Occurred()) {
-                p->error_indicator = 1;
-                return NULL;
-            }
-            goto done;
-        }
-        p->mark = mark;
-    }
-    res = NULL;
-  done:
-    return res;
-}
-
-// _tmp_43: ',' names_with_default
-static void *
-_tmp_43_rule(Parser *p)
-{
-    if (p->error_indicator) {
-        return NULL;
-    }
-    void * res = NULL;
-    int mark = p->mark;
-    { // ',' names_with_default
-        void *literal;
-        asdl_seq* y;
-        if (
-            (literal = _PyPegen_expect_token(p, 12))
-            &&
-            (y = names_with_default_rule(p))
-        )
-        {
-            res = y;
-            if (res == NULL && PyErr_Occurred()) {
-                p->error_indicator = 1;
-                return NULL;
-            }
-            goto done;
-        }
-        p->mark = mark;
-    }
-    res = NULL;
-  done:
-    return res;
-}
-
-// _tmp_44: ',' star_etc?
-static void *
-_tmp_44_rule(Parser *p)
-{
-    if (p->error_indicator) {
-        return NULL;
-    }
-    void * res = NULL;
-    int mark = p->mark;
-    { // ',' star_etc?
-        void *literal;
-        void *z;
-        if (
-            (literal = _PyPegen_expect_token(p, 12))
-            &&
-            (z = star_etc_rule(p), 1)
-        )
-        {
-            res = z;
-            if (res == NULL && PyErr_Occurred()) {
-                p->error_indicator = 1;
-                return NULL;
-            }
-            goto done;
-        }
-        p->mark = mark;
-    }
-    res = NULL;
-  done:
-    return res;
-}
-
-// _tmp_45: ',' star_etc?
-static void *
-_tmp_45_rule(Parser *p)
-{
-    if (p->error_indicator) {
-        return NULL;
-    }
-    void * res = NULL;
-    int mark = p->mark;
-    { // ',' star_etc?
-        void *literal;
-        void *z;
-        if (
-            (literal = _PyPegen_expect_token(p, 12))
-            &&
-            (z = star_etc_rule(p), 1)
-        )
-        {
-            res = z;
-            if (res == NULL && PyErr_Occurred()) {
-                p->error_indicator = 1;
-                return NULL;
-            }
-            goto done;
-        }
-        p->mark = mark;
-    }
-    res = NULL;
-  done:
-    return res;
-}
-
-// _tmp_46: plain_names ','
-static void *
-_tmp_46_rule(Parser *p)
-{
-    if (p->error_indicator) {
-        return NULL;
-    }
-    void * res = NULL;
-    int mark = p->mark;
-    { // plain_names ','
-        void *literal;
-        asdl_seq* n;
-        if (
-            (n = plain_names_rule(p))
-            &&
-            (literal = _PyPegen_expect_token(p, 12))
-        )
-        {
-            res = n;
-            if (res == NULL && PyErr_Occurred()) {
-                p->error_indicator = 1;
-                return NULL;
-            }
-            goto done;
-        }
-        p->mark = mark;
-    }
-    res = NULL;
-  done:
-    return res;
-}
-
-// _loop0_47: name_with_optional_default
-static asdl_seq *
-_loop0_47_rule(Parser *p)
-{
-    if (p->error_indicator) {
-        return NULL;
-    }
-    void *res = NULL;
-    int mark = p->mark;
-    int start_mark = p->mark;
-    void **children = PyMem_Malloc(sizeof(void *));
-    if (!children) {
-        PyErr_Format(PyExc_MemoryError, "Parser out of memory");
-        return NULL;
-    }
-    ssize_t children_capacity = 1;
-    ssize_t n = 0;
-    { // name_with_optional_default
-        NameDefaultPair* name_with_optional_default_var;
-        while (
-            (name_with_optional_default_var = name_with_optional_default_rule(p))
-        )
-        {
-            res = name_with_optional_default_var;
-            if (n == children_capacity) {
-                children_capacity *= 2;
-                children = PyMem_Realloc(children, children_capacity*sizeof(void *));
-                if (!children) {
-                    PyErr_Format(PyExc_MemoryError, "realloc None");
-                    return NULL;
-                }
-            }
-            children[n++] = res;
-            mark = p->mark;
-        }
-        p->mark = mark;
-    }
-    asdl_seq *seq = _Py_asdl_seq_new(n, p->arena);
-    if (!seq) {
-        PyErr_Format(PyExc_MemoryError, "asdl_seq_new _loop0_47");
-        PyMem_Free(children);
-        return NULL;
-    }
-    for (int i = 0; i < n; i++) asdl_seq_SET(seq, i, children[i]);
-    PyMem_Free(children);
-    _PyPegen_insert_memo(p, start_mark, _loop0_47_type, seq);
-    return seq;
-}
-
-// _tmp_48: ',' kwds
-static void *
-_tmp_48_rule(Parser *p)
-{
-    if (p->error_indicator) {
-        return NULL;
-    }
-    void * res = NULL;
-    int mark = p->mark;
-    { // ',' kwds
-        arg_ty d;
-        void *literal;
-        if (
-            (literal = _PyPegen_expect_token(p, 12))
-            &&
-            (d = kwds_rule(p))
-        )
-        {
-            res = d;
-            if (res == NULL && PyErr_Occurred()) {
-                p->error_indicator = 1;
-                return NULL;
-            }
-            goto done;
-        }
-        p->mark = mark;
-    }
-    res = NULL;
-  done:
-    return res;
-}
-
-// _loop1_49: name_with_optional_default
-static asdl_seq *
-_loop1_49_rule(Parser *p)
-{
-    if (p->error_indicator) {
-        return NULL;
-    }
-    void *res = NULL;
-    int mark = p->mark;
-    int start_mark = p->mark;
-    void **children = PyMem_Malloc(sizeof(void *));
-    if (!children) {
-        PyErr_Format(PyExc_MemoryError, "Parser out of memory");
-        return NULL;
-    }
-    ssize_t children_capacity = 1;
-    ssize_t n = 0;
-    { // name_with_optional_default
-        NameDefaultPair* name_with_optional_default_var;
-        while (
-            (name_with_optional_default_var = name_with_optional_default_rule(p))
-        )
-        {
-            res = name_with_optional_default_var;
-            if (n == children_capacity) {
-                children_capacity *= 2;
-                children = PyMem_Realloc(children, children_capacity*sizeof(void *));
-                if (!children) {
-                    PyErr_Format(PyExc_MemoryError, "realloc None");
-                    return NULL;
-                }
-            }
-            children[n++] = res;
-            mark = p->mark;
-        }
-        p->mark = mark;
-    }
-    if (n == 0) {
-        PyMem_Free(children);
-        return NULL;
-    }
-    asdl_seq *seq = _Py_asdl_seq_new(n, p->arena);
-    if (!seq) {
-        PyErr_Format(PyExc_MemoryError, "asdl_seq_new _loop1_49");
-        PyMem_Free(children);
-        return NULL;
-    }
-    for (int i = 0; i < n; i++) asdl_seq_SET(seq, i, children[i]);
-    PyMem_Free(children);
-    _PyPegen_insert_memo(p, start_mark, _loop1_49_type, seq);
-    return seq;
-}
-
-// _tmp_50: ',' kwds
+// _tmp_50: '->' expression
 static void *
 _tmp_50_rule(Parser *p)
 {
@@ -11949,16 +12713,16 @@ _tmp_50_rule(Parser *p)
     }
     void * res = NULL;
     int mark = p->mark;
-    { // ',' kwds
-        arg_ty d;
-        void *literal;
+    { // '->' expression
+        Token * literal;
+        expr_ty z;
         if (
-            (literal = _PyPegen_expect_token(p, 12))
+            (literal = _PyPegen_expect_token(p, 51))
             &&
-            (d = kwds_rule(p))
+            (z = expression_rule(p))
         )
         {
-            res = d;
+            res = z;
             if (res == NULL && PyErr_Occurred()) {
                 p->error_indicator = 1;
                 return NULL;
@@ -11972,7 +12736,7 @@ _tmp_50_rule(Parser *p)
     return res;
 }
 
-// _tmp_51: '=' expression
+// _tmp_51: '->' expression
 static void *
 _tmp_51_rule(Parser *p)
 {
@@ -11981,16 +12745,16 @@ _tmp_51_rule(Parser *p)
     }
     void * res = NULL;
     int mark = p->mark;
-    { // '=' expression
-        expr_ty e;
-        void *literal;
+    { // '->' expression
+        Token * literal;
+        expr_ty z;
         if (
-            (literal = _PyPegen_expect_token(p, 22))
+            (literal = _PyPegen_expect_token(p, 51))
             &&
-            (e = expression_rule(p))
+            (z = expression_rule(p))
         )
         {
-            res = e;
+            res = z;
             if (res == NULL && PyErr_Occurred()) {
                 p->error_indicator = 1;
                 return NULL;
@@ -12004,7 +12768,35 @@ _tmp_51_rule(Parser *p)
     return res;
 }
 
-// _loop0_53: ',' name_with_default
+// _tmp_52: NEWLINE INDENT
+static void *
+_tmp_52_rule(Parser *p)
+{
+    if (p->error_indicator) {
+        return NULL;
+    }
+    void * res = NULL;
+    int mark = p->mark;
+    { // NEWLINE INDENT
+        Token * indent_var;
+        Token * newline_var;
+        if (
+            (newline_var = _PyPegen_expect_token(p, NEWLINE))
+            &&
+            (indent_var = _PyPegen_expect_token(p, INDENT))
+        )
+        {
+            res = _PyPegen_dummy_name(p, newline_var, indent_var);
+            goto done;
+        }
+        p->mark = mark;
+    }
+    res = NULL;
+  done:
+    return res;
+}
+
+// _loop0_53: param_no_default
 static asdl_seq *
 _loop0_53_rule(Parser *p)
 {
@@ -12021,21 +12813,13 @@ _loop0_53_rule(Parser *p)
     }
     ssize_t children_capacity = 1;
     ssize_t n = 0;
-    { // ',' name_with_default
-        NameDefaultPair* elem;
-        void *literal;
+    { // param_no_default
+        arg_ty param_no_default_var;
         while (
-            (literal = _PyPegen_expect_token(p, 12))
-            &&
-            (elem = name_with_default_rule(p))
+            (param_no_default_var = param_no_default_rule(p))
         )
         {
-            res = elem;
-            if (res == NULL && PyErr_Occurred()) {
-                p->error_indicator = 1;
-                PyMem_Free(children);
-                return NULL;
-            }
+            res = param_no_default_var;
             if (n == children_capacity) {
                 children_capacity *= 2;
                 children = PyMem_Realloc(children, children_capacity*sizeof(void *));
@@ -12061,35 +12845,56 @@ _loop0_53_rule(Parser *p)
     return seq;
 }
 
-// _gather_52: name_with_default _loop0_53
+// _loop0_54: param_with_default
 static asdl_seq *
-_gather_52_rule(Parser *p)
+_loop0_54_rule(Parser *p)
 {
     if (p->error_indicator) {
         return NULL;
     }
-    asdl_seq * res = NULL;
+    void *res = NULL;
     int mark = p->mark;
-    { // name_with_default _loop0_53
-        NameDefaultPair* elem;
-        asdl_seq * seq;
-        if (
-            (elem = name_with_default_rule(p))
-            &&
-            (seq = _loop0_53_rule(p))
+    int start_mark = p->mark;
+    void **children = PyMem_Malloc(sizeof(void *));
+    if (!children) {
+        PyErr_Format(PyExc_MemoryError, "Parser out of memory");
+        return NULL;
+    }
+    ssize_t children_capacity = 1;
+    ssize_t n = 0;
+    { // param_with_default
+        NameDefaultPair* param_with_default_var;
+        while (
+            (param_with_default_var = param_with_default_rule(p))
         )
         {
-            res = _PyPegen_seq_insert_in_front(p, elem, seq);
-            goto done;
+            res = param_with_default_var;
+            if (n == children_capacity) {
+                children_capacity *= 2;
+                children = PyMem_Realloc(children, children_capacity*sizeof(void *));
+                if (!children) {
+                    PyErr_Format(PyExc_MemoryError, "realloc None");
+                    return NULL;
+                }
+            }
+            children[n++] = res;
+            mark = p->mark;
         }
         p->mark = mark;
     }
-    res = NULL;
-  done:
-    return res;
+    asdl_seq *seq = _Py_asdl_seq_new(n, p->arena);
+    if (!seq) {
+        PyErr_Format(PyExc_MemoryError, "asdl_seq_new _loop0_54");
+        PyMem_Free(children);
+        return NULL;
+    }
+    for (int i = 0; i < n; i++) asdl_seq_SET(seq, i, children[i]);
+    PyMem_Free(children);
+    _PyPegen_insert_memo(p, start_mark, _loop0_54_type, seq);
+    return seq;
 }
 
-// _loop0_55: ',' (plain_name !'=')
+// _loop0_55: param_with_default
 static asdl_seq *
 _loop0_55_rule(Parser *p)
 {
@@ -12106,21 +12911,13 @@ _loop0_55_rule(Parser *p)
     }
     ssize_t children_capacity = 1;
     ssize_t n = 0;
-    { // ',' (plain_name !'=')
-        void *elem;
-        void *literal;
+    { // param_with_default
+        NameDefaultPair* param_with_default_var;
         while (
-            (literal = _PyPegen_expect_token(p, 12))
-            &&
-            (elem = _tmp_127_rule(p))
+            (param_with_default_var = param_with_default_rule(p))
         )
         {
-            res = elem;
-            if (res == NULL && PyErr_Occurred()) {
-                p->error_indicator = 1;
-                PyMem_Free(children);
-                return NULL;
-            }
+            res = param_with_default_var;
             if (n == children_capacity) {
                 children_capacity *= 2;
                 children = PyMem_Realloc(children, children_capacity*sizeof(void *));
@@ -12146,69 +12943,9 @@ _loop0_55_rule(Parser *p)
     return seq;
 }
 
-// _gather_54: (plain_name !'=') _loop0_55
+// _loop1_56: param_no_default
 static asdl_seq *
-_gather_54_rule(Parser *p)
-{
-    if (p->error_indicator) {
-        return NULL;
-    }
-    asdl_seq * res = NULL;
-    int mark = p->mark;
-    { // (plain_name !'=') _loop0_55
-        void *elem;
-        asdl_seq * seq;
-        if (
-            (elem = _tmp_127_rule(p))
-            &&
-            (seq = _loop0_55_rule(p))
-        )
-        {
-            res = _PyPegen_seq_insert_in_front(p, elem, seq);
-            goto done;
-        }
-        p->mark = mark;
-    }
-    res = NULL;
-  done:
-    return res;
-}
-
-// _tmp_56: ':' annotation
-static void *
-_tmp_56_rule(Parser *p)
-{
-    if (p->error_indicator) {
-        return NULL;
-    }
-    void * res = NULL;
-    int mark = p->mark;
-    { // ':' annotation
-        void *literal;
-        expr_ty z;
-        if (
-            (literal = _PyPegen_expect_token(p, 11))
-            &&
-            (z = annotation_rule(p))
-        )
-        {
-            res = z;
-            if (res == NULL && PyErr_Occurred()) {
-                p->error_indicator = 1;
-                return NULL;
-            }
-            goto done;
-        }
-        p->mark = mark;
-    }
-    res = NULL;
-  done:
-    return res;
-}
-
-// _loop1_57: ('@' named_expression NEWLINE)
-static asdl_seq *
-_loop1_57_rule(Parser *p)
+_loop1_56_rule(Parser *p)
 {
     if (p->error_indicator) {
         return NULL;
@@ -12223,13 +12960,13 @@ _loop1_57_rule(Parser *p)
     }
     ssize_t children_capacity = 1;
     ssize_t n = 0;
-    { // ('@' named_expression NEWLINE)
-        void *_tmp_128_var;
+    { // param_no_default
+        arg_ty param_no_default_var;
         while (
-            (_tmp_128_var = _tmp_128_rule(p))
+            (param_no_default_var = param_no_default_rule(p))
         )
         {
-            res = _tmp_128_var;
+            res = param_no_default_var;
             if (n == children_capacity) {
                 children_capacity *= 2;
                 children = PyMem_Realloc(children, children_capacity*sizeof(void *));
@@ -12249,54 +12986,19 @@ _loop1_57_rule(Parser *p)
     }
     asdl_seq *seq = _Py_asdl_seq_new(n, p->arena);
     if (!seq) {
-        PyErr_Format(PyExc_MemoryError, "asdl_seq_new _loop1_57");
+        PyErr_Format(PyExc_MemoryError, "asdl_seq_new _loop1_56");
         PyMem_Free(children);
         return NULL;
     }
     for (int i = 0; i < n; i++) asdl_seq_SET(seq, i, children[i]);
     PyMem_Free(children);
-    _PyPegen_insert_memo(p, start_mark, _loop1_57_type, seq);
+    _PyPegen_insert_memo(p, start_mark, _loop1_56_type, seq);
     return seq;
 }
 
-// _tmp_58: '(' arguments? ')'
-static void *
-_tmp_58_rule(Parser *p)
-{
-    if (p->error_indicator) {
-        return NULL;
-    }
-    void * res = NULL;
-    int mark = p->mark;
-    { // '(' arguments? ')'
-        void *literal;
-        void *literal_1;
-        void *z;
-        if (
-            (literal = _PyPegen_expect_token(p, 7))
-            &&
-            (z = arguments_rule(p), 1)
-            &&
-            (literal_1 = _PyPegen_expect_token(p, 8))
-        )
-        {
-            res = z;
-            if (res == NULL && PyErr_Occurred()) {
-                p->error_indicator = 1;
-                return NULL;
-            }
-            goto done;
-        }
-        p->mark = mark;
-    }
-    res = NULL;
-  done:
-    return res;
-}
-
-// _loop0_60: ',' star_expression
+// _loop0_57: param_with_default
 static asdl_seq *
-_loop0_60_rule(Parser *p)
+_loop0_57_rule(Parser *p)
 {
     if (p->error_indicator) {
         return NULL;
@@ -12311,21 +13013,13 @@ _loop0_60_rule(Parser *p)
     }
     ssize_t children_capacity = 1;
     ssize_t n = 0;
-    { // ',' star_expression
-        expr_ty elem;
-        void *literal;
+    { // param_with_default
+        NameDefaultPair* param_with_default_var;
         while (
-            (literal = _PyPegen_expect_token(p, 12))
-            &&
-            (elem = star_expression_rule(p))
+            (param_with_default_var = param_with_default_rule(p))
         )
         {
-            res = elem;
-            if (res == NULL && PyErr_Occurred()) {
-                p->error_indicator = 1;
-                PyMem_Free(children);
-                return NULL;
-            }
+            res = param_with_default_var;
             if (n == children_capacity) {
                 children_capacity *= 2;
                 children = PyMem_Realloc(children, children_capacity*sizeof(void *));
@@ -12341,47 +13035,19 @@ _loop0_60_rule(Parser *p)
     }
     asdl_seq *seq = _Py_asdl_seq_new(n, p->arena);
     if (!seq) {
-        PyErr_Format(PyExc_MemoryError, "asdl_seq_new _loop0_60");
+        PyErr_Format(PyExc_MemoryError, "asdl_seq_new _loop0_57");
         PyMem_Free(children);
         return NULL;
     }
     for (int i = 0; i < n; i++) asdl_seq_SET(seq, i, children[i]);
     PyMem_Free(children);
-    _PyPegen_insert_memo(p, start_mark, _loop0_60_type, seq);
+    _PyPegen_insert_memo(p, start_mark, _loop0_57_type, seq);
     return seq;
 }
 
-// _gather_59: star_expression _loop0_60
+// _loop1_58: param_with_default
 static asdl_seq *
-_gather_59_rule(Parser *p)
-{
-    if (p->error_indicator) {
-        return NULL;
-    }
-    asdl_seq * res = NULL;
-    int mark = p->mark;
-    { // star_expression _loop0_60
-        expr_ty elem;
-        asdl_seq * seq;
-        if (
-            (elem = star_expression_rule(p))
-            &&
-            (seq = _loop0_60_rule(p))
-        )
-        {
-            res = _PyPegen_seq_insert_in_front(p, elem, seq);
-            goto done;
-        }
-        p->mark = mark;
-    }
-    res = NULL;
-  done:
-    return res;
-}
-
-// _loop1_61: (',' star_expression)
-static asdl_seq *
-_loop1_61_rule(Parser *p)
+_loop1_58_rule(Parser *p)
 {
     if (p->error_indicator) {
         return NULL;
@@ -12396,13 +13062,13 @@ _loop1_61_rule(Parser *p)
     }
     ssize_t children_capacity = 1;
     ssize_t n = 0;
-    { // (',' star_expression)
-        void *_tmp_129_var;
+    { // param_with_default
+        NameDefaultPair* param_with_default_var;
         while (
-            (_tmp_129_var = _tmp_129_rule(p))
+            (param_with_default_var = param_with_default_rule(p))
         )
         {
-            res = _tmp_129_var;
+            res = param_with_default_var;
             if (n == children_capacity) {
                 children_capacity *= 2;
                 children = PyMem_Realloc(children, children_capacity*sizeof(void *));
@@ -12422,17 +13088,225 @@ _loop1_61_rule(Parser *p)
     }
     asdl_seq *seq = _Py_asdl_seq_new(n, p->arena);
     if (!seq) {
-        PyErr_Format(PyExc_MemoryError, "asdl_seq_new _loop1_61");
+        PyErr_Format(PyExc_MemoryError, "asdl_seq_new _loop1_58");
         PyMem_Free(children);
         return NULL;
     }
     for (int i = 0; i < n; i++) asdl_seq_SET(seq, i, children[i]);
     PyMem_Free(children);
-    _PyPegen_insert_memo(p, start_mark, _loop1_61_type, seq);
+    _PyPegen_insert_memo(p, start_mark, _loop1_58_type, seq);
     return seq;
 }
 
-// _loop0_63: ',' star_named_expression
+// _loop1_59: param_no_default
+static asdl_seq *
+_loop1_59_rule(Parser *p)
+{
+    if (p->error_indicator) {
+        return NULL;
+    }
+    void *res = NULL;
+    int mark = p->mark;
+    int start_mark = p->mark;
+    void **children = PyMem_Malloc(sizeof(void *));
+    if (!children) {
+        PyErr_Format(PyExc_MemoryError, "Parser out of memory");
+        return NULL;
+    }
+    ssize_t children_capacity = 1;
+    ssize_t n = 0;
+    { // param_no_default
+        arg_ty param_no_default_var;
+        while (
+            (param_no_default_var = param_no_default_rule(p))
+        )
+        {
+            res = param_no_default_var;
+            if (n == children_capacity) {
+                children_capacity *= 2;
+                children = PyMem_Realloc(children, children_capacity*sizeof(void *));
+                if (!children) {
+                    PyErr_Format(PyExc_MemoryError, "realloc None");
+                    return NULL;
+                }
+            }
+            children[n++] = res;
+            mark = p->mark;
+        }
+        p->mark = mark;
+    }
+    if (n == 0) {
+        PyMem_Free(children);
+        return NULL;
+    }
+    asdl_seq *seq = _Py_asdl_seq_new(n, p->arena);
+    if (!seq) {
+        PyErr_Format(PyExc_MemoryError, "asdl_seq_new _loop1_59");
+        PyMem_Free(children);
+        return NULL;
+    }
+    for (int i = 0; i < n; i++) asdl_seq_SET(seq, i, children[i]);
+    PyMem_Free(children);
+    _PyPegen_insert_memo(p, start_mark, _loop1_59_type, seq);
+    return seq;
+}
+
+// _loop1_60: param_no_default
+static asdl_seq *
+_loop1_60_rule(Parser *p)
+{
+    if (p->error_indicator) {
+        return NULL;
+    }
+    void *res = NULL;
+    int mark = p->mark;
+    int start_mark = p->mark;
+    void **children = PyMem_Malloc(sizeof(void *));
+    if (!children) {
+        PyErr_Format(PyExc_MemoryError, "Parser out of memory");
+        return NULL;
+    }
+    ssize_t children_capacity = 1;
+    ssize_t n = 0;
+    { // param_no_default
+        arg_ty param_no_default_var;
+        while (
+            (param_no_default_var = param_no_default_rule(p))
+        )
+        {
+            res = param_no_default_var;
+            if (n == children_capacity) {
+                children_capacity *= 2;
+                children = PyMem_Realloc(children, children_capacity*sizeof(void *));
+                if (!children) {
+                    PyErr_Format(PyExc_MemoryError, "realloc None");
+                    return NULL;
+                }
+            }
+            children[n++] = res;
+            mark = p->mark;
+        }
+        p->mark = mark;
+    }
+    if (n == 0) {
+        PyMem_Free(children);
+        return NULL;
+    }
+    asdl_seq *seq = _Py_asdl_seq_new(n, p->arena);
+    if (!seq) {
+        PyErr_Format(PyExc_MemoryError, "asdl_seq_new _loop1_60");
+        PyMem_Free(children);
+        return NULL;
+    }
+    for (int i = 0; i < n; i++) asdl_seq_SET(seq, i, children[i]);
+    PyMem_Free(children);
+    _PyPegen_insert_memo(p, start_mark, _loop1_60_type, seq);
+    return seq;
+}
+
+// _loop0_61: param_no_default
+static asdl_seq *
+_loop0_61_rule(Parser *p)
+{
+    if (p->error_indicator) {
+        return NULL;
+    }
+    void *res = NULL;
+    int mark = p->mark;
+    int start_mark = p->mark;
+    void **children = PyMem_Malloc(sizeof(void *));
+    if (!children) {
+        PyErr_Format(PyExc_MemoryError, "Parser out of memory");
+        return NULL;
+    }
+    ssize_t children_capacity = 1;
+    ssize_t n = 0;
+    { // param_no_default
+        arg_ty param_no_default_var;
+        while (
+            (param_no_default_var = param_no_default_rule(p))
+        )
+        {
+            res = param_no_default_var;
+            if (n == children_capacity) {
+                children_capacity *= 2;
+                children = PyMem_Realloc(children, children_capacity*sizeof(void *));
+                if (!children) {
+                    PyErr_Format(PyExc_MemoryError, "realloc None");
+                    return NULL;
+                }
+            }
+            children[n++] = res;
+            mark = p->mark;
+        }
+        p->mark = mark;
+    }
+    asdl_seq *seq = _Py_asdl_seq_new(n, p->arena);
+    if (!seq) {
+        PyErr_Format(PyExc_MemoryError, "asdl_seq_new _loop0_61");
+        PyMem_Free(children);
+        return NULL;
+    }
+    for (int i = 0; i < n; i++) asdl_seq_SET(seq, i, children[i]);
+    PyMem_Free(children);
+    _PyPegen_insert_memo(p, start_mark, _loop0_61_type, seq);
+    return seq;
+}
+
+// _loop1_62: param_with_default
+static asdl_seq *
+_loop1_62_rule(Parser *p)
+{
+    if (p->error_indicator) {
+        return NULL;
+    }
+    void *res = NULL;
+    int mark = p->mark;
+    int start_mark = p->mark;
+    void **children = PyMem_Malloc(sizeof(void *));
+    if (!children) {
+        PyErr_Format(PyExc_MemoryError, "Parser out of memory");
+        return NULL;
+    }
+    ssize_t children_capacity = 1;
+    ssize_t n = 0;
+    { // param_with_default
+        NameDefaultPair* param_with_default_var;
+        while (
+            (param_with_default_var = param_with_default_rule(p))
+        )
+        {
+            res = param_with_default_var;
+            if (n == children_capacity) {
+                children_capacity *= 2;
+                children = PyMem_Realloc(children, children_capacity*sizeof(void *));
+                if (!children) {
+                    PyErr_Format(PyExc_MemoryError, "realloc None");
+                    return NULL;
+                }
+            }
+            children[n++] = res;
+            mark = p->mark;
+        }
+        p->mark = mark;
+    }
+    if (n == 0) {
+        PyMem_Free(children);
+        return NULL;
+    }
+    asdl_seq *seq = _Py_asdl_seq_new(n, p->arena);
+    if (!seq) {
+        PyErr_Format(PyExc_MemoryError, "asdl_seq_new _loop1_62");
+        PyMem_Free(children);
+        return NULL;
+    }
+    for (int i = 0; i < n; i++) asdl_seq_SET(seq, i, children[i]);
+    PyMem_Free(children);
+    _PyPegen_insert_memo(p, start_mark, _loop1_62_type, seq);
+    return seq;
+}
+
+// _loop0_63: param_no_default
 static asdl_seq *
 _loop0_63_rule(Parser *p)
 {
@@ -12449,21 +13323,13 @@ _loop0_63_rule(Parser *p)
     }
     ssize_t children_capacity = 1;
     ssize_t n = 0;
-    { // ',' star_named_expression
-        expr_ty elem;
-        void *literal;
+    { // param_no_default
+        arg_ty param_no_default_var;
         while (
-            (literal = _PyPegen_expect_token(p, 12))
-            &&
-            (elem = star_named_expression_rule(p))
+            (param_no_default_var = param_no_default_rule(p))
         )
         {
-            res = elem;
-            if (res == NULL && PyErr_Occurred()) {
-                p->error_indicator = 1;
-                PyMem_Free(children);
-                return NULL;
-            }
+            res = param_no_default_var;
             if (n == children_capacity) {
                 children_capacity *= 2;
                 children = PyMem_Realloc(children, children_capacity*sizeof(void *));
@@ -12489,35 +13355,7 @@ _loop0_63_rule(Parser *p)
     return seq;
 }
 
-// _gather_62: star_named_expression _loop0_63
-static asdl_seq *
-_gather_62_rule(Parser *p)
-{
-    if (p->error_indicator) {
-        return NULL;
-    }
-    asdl_seq * res = NULL;
-    int mark = p->mark;
-    { // star_named_expression _loop0_63
-        expr_ty elem;
-        asdl_seq * seq;
-        if (
-            (elem = star_named_expression_rule(p))
-            &&
-            (seq = _loop0_63_rule(p))
-        )
-        {
-            res = _PyPegen_seq_insert_in_front(p, elem, seq);
-            goto done;
-        }
-        p->mark = mark;
-    }
-    res = NULL;
-  done:
-    return res;
-}
-
-// _loop1_64: (',' expression)
+// _loop1_64: param_with_default
 static asdl_seq *
 _loop1_64_rule(Parser *p)
 {
@@ -12534,13 +13372,13 @@ _loop1_64_rule(Parser *p)
     }
     ssize_t children_capacity = 1;
     ssize_t n = 0;
-    { // (',' expression)
-        void *_tmp_130_var;
+    { // param_with_default
+        NameDefaultPair* param_with_default_var;
         while (
-            (_tmp_130_var = _tmp_130_rule(p))
+            (param_with_default_var = param_with_default_rule(p))
         )
         {
-            res = _tmp_130_var;
+            res = param_with_default_var;
             if (n == children_capacity) {
                 children_capacity *= 2;
                 children = PyMem_Realloc(children, children_capacity*sizeof(void *));
@@ -12570,9 +13408,475 @@ _loop1_64_rule(Parser *p)
     return seq;
 }
 
-// _tmp_65: ',' lambda_plain_names
+// _loop0_65: param_maybe_default
+static asdl_seq *
+_loop0_65_rule(Parser *p)
+{
+    if (p->error_indicator) {
+        return NULL;
+    }
+    void *res = NULL;
+    int mark = p->mark;
+    int start_mark = p->mark;
+    void **children = PyMem_Malloc(sizeof(void *));
+    if (!children) {
+        PyErr_Format(PyExc_MemoryError, "Parser out of memory");
+        return NULL;
+    }
+    ssize_t children_capacity = 1;
+    ssize_t n = 0;
+    { // param_maybe_default
+        NameDefaultPair* param_maybe_default_var;
+        while (
+            (param_maybe_default_var = param_maybe_default_rule(p))
+        )
+        {
+            res = param_maybe_default_var;
+            if (n == children_capacity) {
+                children_capacity *= 2;
+                children = PyMem_Realloc(children, children_capacity*sizeof(void *));
+                if (!children) {
+                    PyErr_Format(PyExc_MemoryError, "realloc None");
+                    return NULL;
+                }
+            }
+            children[n++] = res;
+            mark = p->mark;
+        }
+        p->mark = mark;
+    }
+    asdl_seq *seq = _Py_asdl_seq_new(n, p->arena);
+    if (!seq) {
+        PyErr_Format(PyExc_MemoryError, "asdl_seq_new _loop0_65");
+        PyMem_Free(children);
+        return NULL;
+    }
+    for (int i = 0; i < n; i++) asdl_seq_SET(seq, i, children[i]);
+    PyMem_Free(children);
+    _PyPegen_insert_memo(p, start_mark, _loop0_65_type, seq);
+    return seq;
+}
+
+// _loop1_66: param_maybe_default
+static asdl_seq *
+_loop1_66_rule(Parser *p)
+{
+    if (p->error_indicator) {
+        return NULL;
+    }
+    void *res = NULL;
+    int mark = p->mark;
+    int start_mark = p->mark;
+    void **children = PyMem_Malloc(sizeof(void *));
+    if (!children) {
+        PyErr_Format(PyExc_MemoryError, "Parser out of memory");
+        return NULL;
+    }
+    ssize_t children_capacity = 1;
+    ssize_t n = 0;
+    { // param_maybe_default
+        NameDefaultPair* param_maybe_default_var;
+        while (
+            (param_maybe_default_var = param_maybe_default_rule(p))
+        )
+        {
+            res = param_maybe_default_var;
+            if (n == children_capacity) {
+                children_capacity *= 2;
+                children = PyMem_Realloc(children, children_capacity*sizeof(void *));
+                if (!children) {
+                    PyErr_Format(PyExc_MemoryError, "realloc None");
+                    return NULL;
+                }
+            }
+            children[n++] = res;
+            mark = p->mark;
+        }
+        p->mark = mark;
+    }
+    if (n == 0) {
+        PyMem_Free(children);
+        return NULL;
+    }
+    asdl_seq *seq = _Py_asdl_seq_new(n, p->arena);
+    if (!seq) {
+        PyErr_Format(PyExc_MemoryError, "asdl_seq_new _loop1_66");
+        PyMem_Free(children);
+        return NULL;
+    }
+    for (int i = 0; i < n; i++) asdl_seq_SET(seq, i, children[i]);
+    PyMem_Free(children);
+    _PyPegen_insert_memo(p, start_mark, _loop1_66_type, seq);
+    return seq;
+}
+
+// _loop1_67: ('@' named_expression NEWLINE)
+static asdl_seq *
+_loop1_67_rule(Parser *p)
+{
+    if (p->error_indicator) {
+        return NULL;
+    }
+    void *res = NULL;
+    int mark = p->mark;
+    int start_mark = p->mark;
+    void **children = PyMem_Malloc(sizeof(void *));
+    if (!children) {
+        PyErr_Format(PyExc_MemoryError, "Parser out of memory");
+        return NULL;
+    }
+    ssize_t children_capacity = 1;
+    ssize_t n = 0;
+    { // ('@' named_expression NEWLINE)
+        void *_tmp_139_var;
+        while (
+            (_tmp_139_var = _tmp_139_rule(p))
+        )
+        {
+            res = _tmp_139_var;
+            if (n == children_capacity) {
+                children_capacity *= 2;
+                children = PyMem_Realloc(children, children_capacity*sizeof(void *));
+                if (!children) {
+                    PyErr_Format(PyExc_MemoryError, "realloc None");
+                    return NULL;
+                }
+            }
+            children[n++] = res;
+            mark = p->mark;
+        }
+        p->mark = mark;
+    }
+    if (n == 0) {
+        PyMem_Free(children);
+        return NULL;
+    }
+    asdl_seq *seq = _Py_asdl_seq_new(n, p->arena);
+    if (!seq) {
+        PyErr_Format(PyExc_MemoryError, "asdl_seq_new _loop1_67");
+        PyMem_Free(children);
+        return NULL;
+    }
+    for (int i = 0; i < n; i++) asdl_seq_SET(seq, i, children[i]);
+    PyMem_Free(children);
+    _PyPegen_insert_memo(p, start_mark, _loop1_67_type, seq);
+    return seq;
+}
+
+// _tmp_68: '(' arguments? ')'
 static void *
-_tmp_65_rule(Parser *p)
+_tmp_68_rule(Parser *p)
+{
+    if (p->error_indicator) {
+        return NULL;
+    }
+    void * res = NULL;
+    int mark = p->mark;
+    { // '(' arguments? ')'
+        Token * literal;
+        Token * literal_1;
+        void *z;
+        if (
+            (literal = _PyPegen_expect_token(p, 7))
+            &&
+            (z = arguments_rule(p), 1)
+            &&
+            (literal_1 = _PyPegen_expect_token(p, 8))
+        )
+        {
+            res = z;
+            if (res == NULL && PyErr_Occurred()) {
+                p->error_indicator = 1;
+                return NULL;
+            }
+            goto done;
+        }
+        p->mark = mark;
+    }
+    res = NULL;
+  done:
+    return res;
+}
+
+// _loop0_70: ',' star_expression
+static asdl_seq *
+_loop0_70_rule(Parser *p)
+{
+    if (p->error_indicator) {
+        return NULL;
+    }
+    void *res = NULL;
+    int mark = p->mark;
+    int start_mark = p->mark;
+    void **children = PyMem_Malloc(sizeof(void *));
+    if (!children) {
+        PyErr_Format(PyExc_MemoryError, "Parser out of memory");
+        return NULL;
+    }
+    ssize_t children_capacity = 1;
+    ssize_t n = 0;
+    { // ',' star_expression
+        expr_ty elem;
+        Token * literal;
+        while (
+            (literal = _PyPegen_expect_token(p, 12))
+            &&
+            (elem = star_expression_rule(p))
+        )
+        {
+            res = elem;
+            if (res == NULL && PyErr_Occurred()) {
+                p->error_indicator = 1;
+                PyMem_Free(children);
+                return NULL;
+            }
+            if (n == children_capacity) {
+                children_capacity *= 2;
+                children = PyMem_Realloc(children, children_capacity*sizeof(void *));
+                if (!children) {
+                    PyErr_Format(PyExc_MemoryError, "realloc None");
+                    return NULL;
+                }
+            }
+            children[n++] = res;
+            mark = p->mark;
+        }
+        p->mark = mark;
+    }
+    asdl_seq *seq = _Py_asdl_seq_new(n, p->arena);
+    if (!seq) {
+        PyErr_Format(PyExc_MemoryError, "asdl_seq_new _loop0_70");
+        PyMem_Free(children);
+        return NULL;
+    }
+    for (int i = 0; i < n; i++) asdl_seq_SET(seq, i, children[i]);
+    PyMem_Free(children);
+    _PyPegen_insert_memo(p, start_mark, _loop0_70_type, seq);
+    return seq;
+}
+
+// _gather_69: star_expression _loop0_70
+static asdl_seq *
+_gather_69_rule(Parser *p)
+{
+    if (p->error_indicator) {
+        return NULL;
+    }
+    asdl_seq * res = NULL;
+    int mark = p->mark;
+    { // star_expression _loop0_70
+        expr_ty elem;
+        asdl_seq * seq;
+        if (
+            (elem = star_expression_rule(p))
+            &&
+            (seq = _loop0_70_rule(p))
+        )
+        {
+            res = _PyPegen_seq_insert_in_front(p, elem, seq);
+            goto done;
+        }
+        p->mark = mark;
+    }
+    res = NULL;
+  done:
+    return res;
+}
+
+// _loop1_71: (',' star_expression)
+static asdl_seq *
+_loop1_71_rule(Parser *p)
+{
+    if (p->error_indicator) {
+        return NULL;
+    }
+    void *res = NULL;
+    int mark = p->mark;
+    int start_mark = p->mark;
+    void **children = PyMem_Malloc(sizeof(void *));
+    if (!children) {
+        PyErr_Format(PyExc_MemoryError, "Parser out of memory");
+        return NULL;
+    }
+    ssize_t children_capacity = 1;
+    ssize_t n = 0;
+    { // (',' star_expression)
+        void *_tmp_140_var;
+        while (
+            (_tmp_140_var = _tmp_140_rule(p))
+        )
+        {
+            res = _tmp_140_var;
+            if (n == children_capacity) {
+                children_capacity *= 2;
+                children = PyMem_Realloc(children, children_capacity*sizeof(void *));
+                if (!children) {
+                    PyErr_Format(PyExc_MemoryError, "realloc None");
+                    return NULL;
+                }
+            }
+            children[n++] = res;
+            mark = p->mark;
+        }
+        p->mark = mark;
+    }
+    if (n == 0) {
+        PyMem_Free(children);
+        return NULL;
+    }
+    asdl_seq *seq = _Py_asdl_seq_new(n, p->arena);
+    if (!seq) {
+        PyErr_Format(PyExc_MemoryError, "asdl_seq_new _loop1_71");
+        PyMem_Free(children);
+        return NULL;
+    }
+    for (int i = 0; i < n; i++) asdl_seq_SET(seq, i, children[i]);
+    PyMem_Free(children);
+    _PyPegen_insert_memo(p, start_mark, _loop1_71_type, seq);
+    return seq;
+}
+
+// _loop0_73: ',' star_named_expression
+static asdl_seq *
+_loop0_73_rule(Parser *p)
+{
+    if (p->error_indicator) {
+        return NULL;
+    }
+    void *res = NULL;
+    int mark = p->mark;
+    int start_mark = p->mark;
+    void **children = PyMem_Malloc(sizeof(void *));
+    if (!children) {
+        PyErr_Format(PyExc_MemoryError, "Parser out of memory");
+        return NULL;
+    }
+    ssize_t children_capacity = 1;
+    ssize_t n = 0;
+    { // ',' star_named_expression
+        expr_ty elem;
+        Token * literal;
+        while (
+            (literal = _PyPegen_expect_token(p, 12))
+            &&
+            (elem = star_named_expression_rule(p))
+        )
+        {
+            res = elem;
+            if (res == NULL && PyErr_Occurred()) {
+                p->error_indicator = 1;
+                PyMem_Free(children);
+                return NULL;
+            }
+            if (n == children_capacity) {
+                children_capacity *= 2;
+                children = PyMem_Realloc(children, children_capacity*sizeof(void *));
+                if (!children) {
+                    PyErr_Format(PyExc_MemoryError, "realloc None");
+                    return NULL;
+                }
+            }
+            children[n++] = res;
+            mark = p->mark;
+        }
+        p->mark = mark;
+    }
+    asdl_seq *seq = _Py_asdl_seq_new(n, p->arena);
+    if (!seq) {
+        PyErr_Format(PyExc_MemoryError, "asdl_seq_new _loop0_73");
+        PyMem_Free(children);
+        return NULL;
+    }
+    for (int i = 0; i < n; i++) asdl_seq_SET(seq, i, children[i]);
+    PyMem_Free(children);
+    _PyPegen_insert_memo(p, start_mark, _loop0_73_type, seq);
+    return seq;
+}
+
+// _gather_72: star_named_expression _loop0_73
+static asdl_seq *
+_gather_72_rule(Parser *p)
+{
+    if (p->error_indicator) {
+        return NULL;
+    }
+    asdl_seq * res = NULL;
+    int mark = p->mark;
+    { // star_named_expression _loop0_73
+        expr_ty elem;
+        asdl_seq * seq;
+        if (
+            (elem = star_named_expression_rule(p))
+            &&
+            (seq = _loop0_73_rule(p))
+        )
+        {
+            res = _PyPegen_seq_insert_in_front(p, elem, seq);
+            goto done;
+        }
+        p->mark = mark;
+    }
+    res = NULL;
+  done:
+    return res;
+}
+
+// _loop1_74: (',' expression)
+static asdl_seq *
+_loop1_74_rule(Parser *p)
+{
+    if (p->error_indicator) {
+        return NULL;
+    }
+    void *res = NULL;
+    int mark = p->mark;
+    int start_mark = p->mark;
+    void **children = PyMem_Malloc(sizeof(void *));
+    if (!children) {
+        PyErr_Format(PyExc_MemoryError, "Parser out of memory");
+        return NULL;
+    }
+    ssize_t children_capacity = 1;
+    ssize_t n = 0;
+    { // (',' expression)
+        void *_tmp_141_var;
+        while (
+            (_tmp_141_var = _tmp_141_rule(p))
+        )
+        {
+            res = _tmp_141_var;
+            if (n == children_capacity) {
+                children_capacity *= 2;
+                children = PyMem_Realloc(children, children_capacity*sizeof(void *));
+                if (!children) {
+                    PyErr_Format(PyExc_MemoryError, "realloc None");
+                    return NULL;
+                }
+            }
+            children[n++] = res;
+            mark = p->mark;
+        }
+        p->mark = mark;
+    }
+    if (n == 0) {
+        PyMem_Free(children);
+        return NULL;
+    }
+    asdl_seq *seq = _Py_asdl_seq_new(n, p->arena);
+    if (!seq) {
+        PyErr_Format(PyExc_MemoryError, "asdl_seq_new _loop1_74");
+        PyMem_Free(children);
+        return NULL;
+    }
+    for (int i = 0; i < n; i++) asdl_seq_SET(seq, i, children[i]);
+    PyMem_Free(children);
+    _PyPegen_insert_memo(p, start_mark, _loop1_74_type, seq);
+    return seq;
+}
+
+// _tmp_75: ',' lambda_plain_names
+static void *
+_tmp_75_rule(Parser *p)
 {
     if (p->error_indicator) {
         return NULL;
@@ -12580,7 +13884,7 @@ _tmp_65_rule(Parser *p)
     void * res = NULL;
     int mark = p->mark;
     { // ',' lambda_plain_names
-        void *literal;
+        Token * literal;
         asdl_seq* x;
         if (
             (literal = _PyPegen_expect_token(p, 12))
@@ -12602,9 +13906,9 @@ _tmp_65_rule(Parser *p)
     return res;
 }
 
-// _tmp_66: ',' lambda_names_with_default
+// _tmp_76: ',' lambda_names_with_default
 static void *
-_tmp_66_rule(Parser *p)
+_tmp_76_rule(Parser *p)
 {
     if (p->error_indicator) {
         return NULL;
@@ -12612,7 +13916,7 @@ _tmp_66_rule(Parser *p)
     void * res = NULL;
     int mark = p->mark;
     { // ',' lambda_names_with_default
-        void *literal;
+        Token * literal;
         asdl_seq* y;
         if (
             (literal = _PyPegen_expect_token(p, 12))
@@ -12634,9 +13938,9 @@ _tmp_66_rule(Parser *p)
     return res;
 }
 
-// _tmp_67: ',' lambda_star_etc?
+// _tmp_77: ',' lambda_star_etc?
 static void *
-_tmp_67_rule(Parser *p)
+_tmp_77_rule(Parser *p)
 {
     if (p->error_indicator) {
         return NULL;
@@ -12644,7 +13948,7 @@ _tmp_67_rule(Parser *p)
     void * res = NULL;
     int mark = p->mark;
     { // ',' lambda_star_etc?
-        void *literal;
+        Token * literal;
         void *z;
         if (
             (literal = _PyPegen_expect_token(p, 12))
@@ -12666,9 +13970,9 @@ _tmp_67_rule(Parser *p)
     return res;
 }
 
-// _tmp_68: ',' lambda_names_with_default
+// _tmp_78: ',' lambda_names_with_default
 static void *
-_tmp_68_rule(Parser *p)
+_tmp_78_rule(Parser *p)
 {
     if (p->error_indicator) {
         return NULL;
@@ -12676,7 +13980,7 @@ _tmp_68_rule(Parser *p)
     void * res = NULL;
     int mark = p->mark;
     { // ',' lambda_names_with_default
-        void *literal;
+        Token * literal;
         asdl_seq* y;
         if (
             (literal = _PyPegen_expect_token(p, 12))
@@ -12698,9 +14002,9 @@ _tmp_68_rule(Parser *p)
     return res;
 }
 
-// _tmp_69: ',' lambda_star_etc?
+// _tmp_79: ',' lambda_star_etc?
 static void *
-_tmp_69_rule(Parser *p)
+_tmp_79_rule(Parser *p)
 {
     if (p->error_indicator) {
         return NULL;
@@ -12708,7 +14012,7 @@ _tmp_69_rule(Parser *p)
     void * res = NULL;
     int mark = p->mark;
     { // ',' lambda_star_etc?
-        void *literal;
+        Token * literal;
         void *z;
         if (
             (literal = _PyPegen_expect_token(p, 12))
@@ -12730,9 +14034,9 @@ _tmp_69_rule(Parser *p)
     return res;
 }
 
-// _tmp_70: ',' lambda_names_with_default
+// _tmp_80: ',' lambda_names_with_default
 static void *
-_tmp_70_rule(Parser *p)
+_tmp_80_rule(Parser *p)
 {
     if (p->error_indicator) {
         return NULL;
@@ -12740,7 +14044,7 @@ _tmp_70_rule(Parser *p)
     void * res = NULL;
     int mark = p->mark;
     { // ',' lambda_names_with_default
-        void *literal;
+        Token * literal;
         asdl_seq* y;
         if (
             (literal = _PyPegen_expect_token(p, 12))
@@ -12762,9 +14066,9 @@ _tmp_70_rule(Parser *p)
     return res;
 }
 
-// _tmp_71: ',' lambda_star_etc?
+// _tmp_81: ',' lambda_star_etc?
 static void *
-_tmp_71_rule(Parser *p)
+_tmp_81_rule(Parser *p)
 {
     if (p->error_indicator) {
         return NULL;
@@ -12772,7 +14076,7 @@ _tmp_71_rule(Parser *p)
     void * res = NULL;
     int mark = p->mark;
     { // ',' lambda_star_etc?
-        void *literal;
+        Token * literal;
         void *z;
         if (
             (literal = _PyPegen_expect_token(p, 12))
@@ -12794,9 +14098,9 @@ _tmp_71_rule(Parser *p)
     return res;
 }
 
-// _tmp_72: ',' lambda_star_etc?
+// _tmp_82: ',' lambda_star_etc?
 static void *
-_tmp_72_rule(Parser *p)
+_tmp_82_rule(Parser *p)
 {
     if (p->error_indicator) {
         return NULL;
@@ -12804,7 +14108,7 @@ _tmp_72_rule(Parser *p)
     void * res = NULL;
     int mark = p->mark;
     { // ',' lambda_star_etc?
-        void *literal;
+        Token * literal;
         void *z;
         if (
             (literal = _PyPegen_expect_token(p, 12))
@@ -12826,9 +14130,9 @@ _tmp_72_rule(Parser *p)
     return res;
 }
 
-// _tmp_73: lambda_plain_names ','
+// _tmp_83: lambda_plain_names ','
 static void *
-_tmp_73_rule(Parser *p)
+_tmp_83_rule(Parser *p)
 {
     if (p->error_indicator) {
         return NULL;
@@ -12836,7 +14140,7 @@ _tmp_73_rule(Parser *p)
     void * res = NULL;
     int mark = p->mark;
     { // lambda_plain_names ','
-        void *literal;
+        Token * literal;
         asdl_seq* n;
         if (
             (n = lambda_plain_names_rule(p))
@@ -12858,9 +14162,9 @@ _tmp_73_rule(Parser *p)
     return res;
 }
 
-// _loop0_74: lambda_name_with_optional_default
+// _loop0_84: lambda_name_with_optional_default
 static asdl_seq *
-_loop0_74_rule(Parser *p)
+_loop0_84_rule(Parser *p)
 {
     if (p->error_indicator) {
         return NULL;
@@ -12897,19 +14201,19 @@ _loop0_74_rule(Parser *p)
     }
     asdl_seq *seq = _Py_asdl_seq_new(n, p->arena);
     if (!seq) {
-        PyErr_Format(PyExc_MemoryError, "asdl_seq_new _loop0_74");
+        PyErr_Format(PyExc_MemoryError, "asdl_seq_new _loop0_84");
         PyMem_Free(children);
         return NULL;
     }
     for (int i = 0; i < n; i++) asdl_seq_SET(seq, i, children[i]);
     PyMem_Free(children);
-    _PyPegen_insert_memo(p, start_mark, _loop0_74_type, seq);
+    _PyPegen_insert_memo(p, start_mark, _loop0_84_type, seq);
     return seq;
 }
 
-// _tmp_75: ',' lambda_kwds
+// _tmp_85: ',' lambda_kwds
 static void *
-_tmp_75_rule(Parser *p)
+_tmp_85_rule(Parser *p)
 {
     if (p->error_indicator) {
         return NULL;
@@ -12918,7 +14222,7 @@ _tmp_75_rule(Parser *p)
     int mark = p->mark;
     { // ',' lambda_kwds
         arg_ty d;
-        void *literal;
+        Token * literal;
         if (
             (literal = _PyPegen_expect_token(p, 12))
             &&
@@ -12939,9 +14243,9 @@ _tmp_75_rule(Parser *p)
     return res;
 }
 
-// _loop1_76: lambda_name_with_optional_default
+// _loop1_86: lambda_name_with_optional_default
 static asdl_seq *
-_loop1_76_rule(Parser *p)
+_loop1_86_rule(Parser *p)
 {
     if (p->error_indicator) {
         return NULL;
@@ -12982,19 +14286,19 @@ _loop1_76_rule(Parser *p)
     }
     asdl_seq *seq = _Py_asdl_seq_new(n, p->arena);
     if (!seq) {
-        PyErr_Format(PyExc_MemoryError, "asdl_seq_new _loop1_76");
+        PyErr_Format(PyExc_MemoryError, "asdl_seq_new _loop1_86");
         PyMem_Free(children);
         return NULL;
     }
     for (int i = 0; i < n; i++) asdl_seq_SET(seq, i, children[i]);
     PyMem_Free(children);
-    _PyPegen_insert_memo(p, start_mark, _loop1_76_type, seq);
+    _PyPegen_insert_memo(p, start_mark, _loop1_86_type, seq);
     return seq;
 }
 
-// _tmp_77: ',' lambda_kwds
+// _tmp_87: ',' lambda_kwds
 static void *
-_tmp_77_rule(Parser *p)
+_tmp_87_rule(Parser *p)
 {
     if (p->error_indicator) {
         return NULL;
@@ -13003,7 +14307,7 @@ _tmp_77_rule(Parser *p)
     int mark = p->mark;
     { // ',' lambda_kwds
         arg_ty d;
-        void *literal;
+        Token * literal;
         if (
             (literal = _PyPegen_expect_token(p, 12))
             &&
@@ -13024,9 +14328,9 @@ _tmp_77_rule(Parser *p)
     return res;
 }
 
-// _tmp_78: '=' expression
+// _tmp_88: '=' expression
 static void *
-_tmp_78_rule(Parser *p)
+_tmp_88_rule(Parser *p)
 {
     if (p->error_indicator) {
         return NULL;
@@ -13035,7 +14339,7 @@ _tmp_78_rule(Parser *p)
     int mark = p->mark;
     { // '=' expression
         expr_ty e;
-        void *literal;
+        Token * literal;
         if (
             (literal = _PyPegen_expect_token(p, 22))
             &&
@@ -13056,9 +14360,9 @@ _tmp_78_rule(Parser *p)
     return res;
 }
 
-// _loop0_80: ',' lambda_name_with_default
+// _loop0_90: ',' lambda_name_with_default
 static asdl_seq *
-_loop0_80_rule(Parser *p)
+_loop0_90_rule(Parser *p)
 {
     if (p->error_indicator) {
         return NULL;
@@ -13075,7 +14379,7 @@ _loop0_80_rule(Parser *p)
     ssize_t n = 0;
     { // ',' lambda_name_with_default
         NameDefaultPair* elem;
-        void *literal;
+        Token * literal;
         while (
             (literal = _PyPegen_expect_token(p, 12))
             &&
@@ -13103,32 +14407,32 @@ _loop0_80_rule(Parser *p)
     }
     asdl_seq *seq = _Py_asdl_seq_new(n, p->arena);
     if (!seq) {
-        PyErr_Format(PyExc_MemoryError, "asdl_seq_new _loop0_80");
+        PyErr_Format(PyExc_MemoryError, "asdl_seq_new _loop0_90");
         PyMem_Free(children);
         return NULL;
     }
     for (int i = 0; i < n; i++) asdl_seq_SET(seq, i, children[i]);
     PyMem_Free(children);
-    _PyPegen_insert_memo(p, start_mark, _loop0_80_type, seq);
+    _PyPegen_insert_memo(p, start_mark, _loop0_90_type, seq);
     return seq;
 }
 
-// _gather_79: lambda_name_with_default _loop0_80
+// _gather_89: lambda_name_with_default _loop0_90
 static asdl_seq *
-_gather_79_rule(Parser *p)
+_gather_89_rule(Parser *p)
 {
     if (p->error_indicator) {
         return NULL;
     }
     asdl_seq * res = NULL;
     int mark = p->mark;
-    { // lambda_name_with_default _loop0_80
+    { // lambda_name_with_default _loop0_90
         NameDefaultPair* elem;
         asdl_seq * seq;
         if (
             (elem = lambda_name_with_default_rule(p))
             &&
-            (seq = _loop0_80_rule(p))
+            (seq = _loop0_90_rule(p))
         )
         {
             res = _PyPegen_seq_insert_in_front(p, elem, seq);
@@ -13141,9 +14445,9 @@ _gather_79_rule(Parser *p)
     return res;
 }
 
-// _loop0_82: ',' (lambda_plain_name !'=')
+// _loop0_92: ',' (lambda_plain_name !'=')
 static asdl_seq *
-_loop0_82_rule(Parser *p)
+_loop0_92_rule(Parser *p)
 {
     if (p->error_indicator) {
         return NULL;
@@ -13160,11 +14464,11 @@ _loop0_82_rule(Parser *p)
     ssize_t n = 0;
     { // ',' (lambda_plain_name !'=')
         void *elem;
-        void *literal;
+        Token * literal;
         while (
             (literal = _PyPegen_expect_token(p, 12))
             &&
-            (elem = _tmp_131_rule(p))
+            (elem = _tmp_142_rule(p))
         )
         {
             res = elem;
@@ -13188,32 +14492,32 @@ _loop0_82_rule(Parser *p)
     }
     asdl_seq *seq = _Py_asdl_seq_new(n, p->arena);
     if (!seq) {
-        PyErr_Format(PyExc_MemoryError, "asdl_seq_new _loop0_82");
+        PyErr_Format(PyExc_MemoryError, "asdl_seq_new _loop0_92");
         PyMem_Free(children);
         return NULL;
     }
     for (int i = 0; i < n; i++) asdl_seq_SET(seq, i, children[i]);
     PyMem_Free(children);
-    _PyPegen_insert_memo(p, start_mark, _loop0_82_type, seq);
+    _PyPegen_insert_memo(p, start_mark, _loop0_92_type, seq);
     return seq;
 }
 
-// _gather_81: (lambda_plain_name !'=') _loop0_82
+// _gather_91: (lambda_plain_name !'=') _loop0_92
 static asdl_seq *
-_gather_81_rule(Parser *p)
+_gather_91_rule(Parser *p)
 {
     if (p->error_indicator) {
         return NULL;
     }
     asdl_seq * res = NULL;
     int mark = p->mark;
-    { // (lambda_plain_name !'=') _loop0_82
+    { // (lambda_plain_name !'=') _loop0_92
         void *elem;
         asdl_seq * seq;
         if (
-            (elem = _tmp_131_rule(p))
+            (elem = _tmp_142_rule(p))
             &&
-            (seq = _loop0_82_rule(p))
+            (seq = _loop0_92_rule(p))
         )
         {
             res = _PyPegen_seq_insert_in_front(p, elem, seq);
@@ -13226,9 +14530,9 @@ _gather_81_rule(Parser *p)
     return res;
 }
 
-// _loop1_83: ('or' conjunction)
+// _loop1_93: ('or' conjunction)
 static asdl_seq *
-_loop1_83_rule(Parser *p)
+_loop1_93_rule(Parser *p)
 {
     if (p->error_indicator) {
         return NULL;
@@ -13244,12 +14548,12 @@ _loop1_83_rule(Parser *p)
     ssize_t children_capacity = 1;
     ssize_t n = 0;
     { // ('or' conjunction)
-        void *_tmp_132_var;
+        void *_tmp_143_var;
         while (
-            (_tmp_132_var = _tmp_132_rule(p))
+            (_tmp_143_var = _tmp_143_rule(p))
         )
         {
-            res = _tmp_132_var;
+            res = _tmp_143_var;
             if (n == children_capacity) {
                 children_capacity *= 2;
                 children = PyMem_Realloc(children, children_capacity*sizeof(void *));
@@ -13269,19 +14573,19 @@ _loop1_83_rule(Parser *p)
     }
     asdl_seq *seq = _Py_asdl_seq_new(n, p->arena);
     if (!seq) {
-        PyErr_Format(PyExc_MemoryError, "asdl_seq_new _loop1_83");
+        PyErr_Format(PyExc_MemoryError, "asdl_seq_new _loop1_93");
         PyMem_Free(children);
         return NULL;
     }
     for (int i = 0; i < n; i++) asdl_seq_SET(seq, i, children[i]);
     PyMem_Free(children);
-    _PyPegen_insert_memo(p, start_mark, _loop1_83_type, seq);
+    _PyPegen_insert_memo(p, start_mark, _loop1_93_type, seq);
     return seq;
 }
 
-// _loop1_84: ('and' inversion)
+// _loop1_94: ('and' inversion)
 static asdl_seq *
-_loop1_84_rule(Parser *p)
+_loop1_94_rule(Parser *p)
 {
     if (p->error_indicator) {
         return NULL;
@@ -13297,12 +14601,12 @@ _loop1_84_rule(Parser *p)
     ssize_t children_capacity = 1;
     ssize_t n = 0;
     { // ('and' inversion)
-        void *_tmp_133_var;
+        void *_tmp_144_var;
         while (
-            (_tmp_133_var = _tmp_133_rule(p))
+            (_tmp_144_var = _tmp_144_rule(p))
         )
         {
-            res = _tmp_133_var;
+            res = _tmp_144_var;
             if (n == children_capacity) {
                 children_capacity *= 2;
                 children = PyMem_Realloc(children, children_capacity*sizeof(void *));
@@ -13322,19 +14626,19 @@ _loop1_84_rule(Parser *p)
     }
     asdl_seq *seq = _Py_asdl_seq_new(n, p->arena);
     if (!seq) {
-        PyErr_Format(PyExc_MemoryError, "asdl_seq_new _loop1_84");
+        PyErr_Format(PyExc_MemoryError, "asdl_seq_new _loop1_94");
         PyMem_Free(children);
         return NULL;
     }
     for (int i = 0; i < n; i++) asdl_seq_SET(seq, i, children[i]);
     PyMem_Free(children);
-    _PyPegen_insert_memo(p, start_mark, _loop1_84_type, seq);
+    _PyPegen_insert_memo(p, start_mark, _loop1_94_type, seq);
     return seq;
 }
 
-// _loop1_85: compare_op_bitwise_or_pair
+// _loop1_95: compare_op_bitwise_or_pair
 static asdl_seq *
-_loop1_85_rule(Parser *p)
+_loop1_95_rule(Parser *p)
 {
     if (p->error_indicator) {
         return NULL;
@@ -13375,19 +14679,19 @@ _loop1_85_rule(Parser *p)
     }
     asdl_seq *seq = _Py_asdl_seq_new(n, p->arena);
     if (!seq) {
-        PyErr_Format(PyExc_MemoryError, "asdl_seq_new _loop1_85");
+        PyErr_Format(PyExc_MemoryError, "asdl_seq_new _loop1_95");
         PyMem_Free(children);
         return NULL;
     }
     for (int i = 0; i < n; i++) asdl_seq_SET(seq, i, children[i]);
     PyMem_Free(children);
-    _PyPegen_insert_memo(p, start_mark, _loop1_85_type, seq);
+    _PyPegen_insert_memo(p, start_mark, _loop1_95_type, seq);
     return seq;
 }
 
-// _tmp_86: '!='
+// _tmp_96: '!='
 static void *
-_tmp_86_rule(Parser *p)
+_tmp_96_rule(Parser *p)
 {
     if (p->error_indicator) {
         return NULL;
@@ -13395,7 +14699,7 @@ _tmp_86_rule(Parser *p)
     void * res = NULL;
     int mark = p->mark;
     { // '!='
-        void *tok;
+        Token * tok;
         if (
             (tok = _PyPegen_expect_token(p, 28))
         )
@@ -13414,9 +14718,9 @@ _tmp_86_rule(Parser *p)
     return res;
 }
 
-// _loop0_88: ',' slice
+// _loop0_98: ',' slice
 static asdl_seq *
-_loop0_88_rule(Parser *p)
+_loop0_98_rule(Parser *p)
 {
     if (p->error_indicator) {
         return NULL;
@@ -13433,7 +14737,7 @@ _loop0_88_rule(Parser *p)
     ssize_t n = 0;
     { // ',' slice
         expr_ty elem;
-        void *literal;
+        Token * literal;
         while (
             (literal = _PyPegen_expect_token(p, 12))
             &&
@@ -13461,32 +14765,32 @@ _loop0_88_rule(Parser *p)
     }
     asdl_seq *seq = _Py_asdl_seq_new(n, p->arena);
     if (!seq) {
-        PyErr_Format(PyExc_MemoryError, "asdl_seq_new _loop0_88");
+        PyErr_Format(PyExc_MemoryError, "asdl_seq_new _loop0_98");
         PyMem_Free(children);
         return NULL;
     }
     for (int i = 0; i < n; i++) asdl_seq_SET(seq, i, children[i]);
     PyMem_Free(children);
-    _PyPegen_insert_memo(p, start_mark, _loop0_88_type, seq);
+    _PyPegen_insert_memo(p, start_mark, _loop0_98_type, seq);
     return seq;
 }
 
-// _gather_87: slice _loop0_88
+// _gather_97: slice _loop0_98
 static asdl_seq *
-_gather_87_rule(Parser *p)
+_gather_97_rule(Parser *p)
 {
     if (p->error_indicator) {
         return NULL;
     }
     asdl_seq * res = NULL;
     int mark = p->mark;
-    { // slice _loop0_88
+    { // slice _loop0_98
         expr_ty elem;
         asdl_seq * seq;
         if (
             (elem = slice_rule(p))
             &&
-            (seq = _loop0_88_rule(p))
+            (seq = _loop0_98_rule(p))
         )
         {
             res = _PyPegen_seq_insert_in_front(p, elem, seq);
@@ -13499,9 +14803,9 @@ _gather_87_rule(Parser *p)
     return res;
 }
 
-// _tmp_89: ':' expression?
+// _tmp_99: ':' expression?
 static void *
-_tmp_89_rule(Parser *p)
+_tmp_99_rule(Parser *p)
 {
     if (p->error_indicator) {
         return NULL;
@@ -13510,7 +14814,7 @@ _tmp_89_rule(Parser *p)
     int mark = p->mark;
     { // ':' expression?
         void *d;
-        void *literal;
+        Token * literal;
         if (
             (literal = _PyPegen_expect_token(p, 11))
             &&
@@ -13531,9 +14835,9 @@ _tmp_89_rule(Parser *p)
     return res;
 }
 
-// _tmp_90: tuple | group | genexp
+// _tmp_100: tuple | group | genexp
 static void *
-_tmp_90_rule(Parser *p)
+_tmp_100_rule(Parser *p)
 {
     if (p->error_indicator) {
         return NULL;
@@ -13578,9 +14882,9 @@ _tmp_90_rule(Parser *p)
     return res;
 }
 
-// _tmp_91: list | listcomp
+// _tmp_101: list | listcomp
 static void *
-_tmp_91_rule(Parser *p)
+_tmp_101_rule(Parser *p)
 {
     if (p->error_indicator) {
         return NULL;
@@ -13614,9 +14918,9 @@ _tmp_91_rule(Parser *p)
     return res;
 }
 
-// _tmp_92: dict | set | dictcomp | setcomp
+// _tmp_102: dict | set | dictcomp | setcomp
 static void *
-_tmp_92_rule(Parser *p)
+_tmp_102_rule(Parser *p)
 {
     if (p->error_indicator) {
         return NULL;
@@ -13672,9 +14976,9 @@ _tmp_92_rule(Parser *p)
     return res;
 }
 
-// _loop1_93: STRING
+// _loop1_103: STRING
 static asdl_seq *
-_loop1_93_rule(Parser *p)
+_loop1_103_rule(Parser *p)
 {
     if (p->error_indicator) {
         return NULL;
@@ -13715,19 +15019,19 @@ _loop1_93_rule(Parser *p)
     }
     asdl_seq *seq = _Py_asdl_seq_new(n, p->arena);
     if (!seq) {
-        PyErr_Format(PyExc_MemoryError, "asdl_seq_new _loop1_93");
+        PyErr_Format(PyExc_MemoryError, "asdl_seq_new _loop1_103");
         PyMem_Free(children);
         return NULL;
     }
     for (int i = 0; i < n; i++) asdl_seq_SET(seq, i, children[i]);
     PyMem_Free(children);
-    _PyPegen_insert_memo(p, start_mark, _loop1_93_type, seq);
+    _PyPegen_insert_memo(p, start_mark, _loop1_103_type, seq);
     return seq;
 }
 
-// _tmp_94: star_named_expression ',' star_named_expressions?
+// _tmp_104: star_named_expression ',' star_named_expressions?
 static void *
-_tmp_94_rule(Parser *p)
+_tmp_104_rule(Parser *p)
 {
     if (p->error_indicator) {
         return NULL;
@@ -13735,7 +15039,7 @@ _tmp_94_rule(Parser *p)
     void * res = NULL;
     int mark = p->mark;
     { // star_named_expression ',' star_named_expressions?
-        void *literal;
+        Token * literal;
         expr_ty y;
         void *z;
         if (
@@ -13760,9 +15064,9 @@ _tmp_94_rule(Parser *p)
     return res;
 }
 
-// _tmp_95: yield_expr | named_expression
+// _tmp_105: yield_expr | named_expression
 static void *
-_tmp_95_rule(Parser *p)
+_tmp_105_rule(Parser *p)
 {
     if (p->error_indicator) {
         return NULL;
@@ -13796,9 +15100,9 @@ _tmp_95_rule(Parser *p)
     return res;
 }
 
-// _loop0_97: ',' kvpair
+// _loop0_107: ',' kvpair
 static asdl_seq *
-_loop0_97_rule(Parser *p)
+_loop0_107_rule(Parser *p)
 {
     if (p->error_indicator) {
         return NULL;
@@ -13815,7 +15119,7 @@ _loop0_97_rule(Parser *p)
     ssize_t n = 0;
     { // ',' kvpair
         KeyValuePair* elem;
-        void *literal;
+        Token * literal;
         while (
             (literal = _PyPegen_expect_token(p, 12))
             &&
@@ -13843,32 +15147,32 @@ _loop0_97_rule(Parser *p)
     }
     asdl_seq *seq = _Py_asdl_seq_new(n, p->arena);
     if (!seq) {
-        PyErr_Format(PyExc_MemoryError, "asdl_seq_new _loop0_97");
+        PyErr_Format(PyExc_MemoryError, "asdl_seq_new _loop0_107");
         PyMem_Free(children);
         return NULL;
     }
     for (int i = 0; i < n; i++) asdl_seq_SET(seq, i, children[i]);
     PyMem_Free(children);
-    _PyPegen_insert_memo(p, start_mark, _loop0_97_type, seq);
+    _PyPegen_insert_memo(p, start_mark, _loop0_107_type, seq);
     return seq;
 }
 
-// _gather_96: kvpair _loop0_97
+// _gather_106: kvpair _loop0_107
 static asdl_seq *
-_gather_96_rule(Parser *p)
+_gather_106_rule(Parser *p)
 {
     if (p->error_indicator) {
         return NULL;
     }
     asdl_seq * res = NULL;
     int mark = p->mark;
-    { // kvpair _loop0_97
+    { // kvpair _loop0_107
         KeyValuePair* elem;
         asdl_seq * seq;
         if (
             (elem = kvpair_rule(p))
             &&
-            (seq = _loop0_97_rule(p))
+            (seq = _loop0_107_rule(p))
         )
         {
             res = _PyPegen_seq_insert_in_front(p, elem, seq);
@@ -13881,9 +15185,9 @@ _gather_96_rule(Parser *p)
     return res;
 }
 
-// _loop1_98: (ASYNC? 'for' star_targets 'in' disjunction (('if' disjunction))*)
+// _loop1_108: for_if_clause
 static asdl_seq *
-_loop1_98_rule(Parser *p)
+_loop1_108_rule(Parser *p)
 {
     if (p->error_indicator) {
         return NULL;
@@ -13898,13 +15202,13 @@ _loop1_98_rule(Parser *p)
     }
     ssize_t children_capacity = 1;
     ssize_t n = 0;
-    { // (ASYNC? 'for' star_targets 'in' disjunction (('if' disjunction))*)
-        void *_tmp_134_var;
+    { // for_if_clause
+        comprehension_ty for_if_clause_var;
         while (
-            (_tmp_134_var = _tmp_134_rule(p))
+            (for_if_clause_var = for_if_clause_rule(p))
         )
         {
-            res = _tmp_134_var;
+            res = for_if_clause_var;
             if (n == children_capacity) {
                 children_capacity *= 2;
                 children = PyMem_Realloc(children, children_capacity*sizeof(void *));
@@ -13924,421 +15228,17 @@ _loop1_98_rule(Parser *p)
     }
     asdl_seq *seq = _Py_asdl_seq_new(n, p->arena);
     if (!seq) {
-        PyErr_Format(PyExc_MemoryError, "asdl_seq_new _loop1_98");
+        PyErr_Format(PyExc_MemoryError, "asdl_seq_new _loop1_108");
         PyMem_Free(children);
         return NULL;
     }
     for (int i = 0; i < n; i++) asdl_seq_SET(seq, i, children[i]);
     PyMem_Free(children);
-    _PyPegen_insert_memo(p, start_mark, _loop1_98_type, seq);
+    _PyPegen_insert_memo(p, start_mark, _loop1_108_type, seq);
     return seq;
 }
 
-// _tmp_99: ',' args
-static void *
-_tmp_99_rule(Parser *p)
-{
-    if (p->error_indicator) {
-        return NULL;
-    }
-    void * res = NULL;
-    int mark = p->mark;
-    { // ',' args
-        expr_ty c;
-        void *literal;
-        if (
-            (literal = _PyPegen_expect_token(p, 12))
-            &&
-            (c = args_rule(p))
-        )
-        {
-            res = c;
-            if (res == NULL && PyErr_Occurred()) {
-                p->error_indicator = 1;
-                return NULL;
-            }
-            goto done;
-        }
-        p->mark = mark;
-    }
-    res = NULL;
-  done:
-    return res;
-}
-
-// _tmp_100: ',' args
-static void *
-_tmp_100_rule(Parser *p)
-{
-    if (p->error_indicator) {
-        return NULL;
-    }
-    void * res = NULL;
-    int mark = p->mark;
-    { // ',' args
-        expr_ty c;
-        void *literal;
-        if (
-            (literal = _PyPegen_expect_token(p, 12))
-            &&
-            (c = args_rule(p))
-        )
-        {
-            res = c;
-            if (res == NULL && PyErr_Occurred()) {
-                p->error_indicator = 1;
-                return NULL;
-            }
-            goto done;
-        }
-        p->mark = mark;
-    }
-    res = NULL;
-  done:
-    return res;
-}
-
-// _loop0_102: ',' kwarg_or_starred
-static asdl_seq *
-_loop0_102_rule(Parser *p)
-{
-    if (p->error_indicator) {
-        return NULL;
-    }
-    void *res = NULL;
-    int mark = p->mark;
-    int start_mark = p->mark;
-    void **children = PyMem_Malloc(sizeof(void *));
-    if (!children) {
-        PyErr_Format(PyExc_MemoryError, "Parser out of memory");
-        return NULL;
-    }
-    ssize_t children_capacity = 1;
-    ssize_t n = 0;
-    { // ',' kwarg_or_starred
-        KeywordOrStarred* elem;
-        void *literal;
-        while (
-            (literal = _PyPegen_expect_token(p, 12))
-            &&
-            (elem = kwarg_or_starred_rule(p))
-        )
-        {
-            res = elem;
-            if (res == NULL && PyErr_Occurred()) {
-                p->error_indicator = 1;
-                PyMem_Free(children);
-                return NULL;
-            }
-            if (n == children_capacity) {
-                children_capacity *= 2;
-                children = PyMem_Realloc(children, children_capacity*sizeof(void *));
-                if (!children) {
-                    PyErr_Format(PyExc_MemoryError, "realloc None");
-                    return NULL;
-                }
-            }
-            children[n++] = res;
-            mark = p->mark;
-        }
-        p->mark = mark;
-    }
-    asdl_seq *seq = _Py_asdl_seq_new(n, p->arena);
-    if (!seq) {
-        PyErr_Format(PyExc_MemoryError, "asdl_seq_new _loop0_102");
-        PyMem_Free(children);
-        return NULL;
-    }
-    for (int i = 0; i < n; i++) asdl_seq_SET(seq, i, children[i]);
-    PyMem_Free(children);
-    _PyPegen_insert_memo(p, start_mark, _loop0_102_type, seq);
-    return seq;
-}
-
-// _gather_101: kwarg_or_starred _loop0_102
-static asdl_seq *
-_gather_101_rule(Parser *p)
-{
-    if (p->error_indicator) {
-        return NULL;
-    }
-    asdl_seq * res = NULL;
-    int mark = p->mark;
-    { // kwarg_or_starred _loop0_102
-        KeywordOrStarred* elem;
-        asdl_seq * seq;
-        if (
-            (elem = kwarg_or_starred_rule(p))
-            &&
-            (seq = _loop0_102_rule(p))
-        )
-        {
-            res = _PyPegen_seq_insert_in_front(p, elem, seq);
-            goto done;
-        }
-        p->mark = mark;
-    }
-    res = NULL;
-  done:
-    return res;
-}
-
-// _loop0_104: ',' kwarg_or_double_starred
-static asdl_seq *
-_loop0_104_rule(Parser *p)
-{
-    if (p->error_indicator) {
-        return NULL;
-    }
-    void *res = NULL;
-    int mark = p->mark;
-    int start_mark = p->mark;
-    void **children = PyMem_Malloc(sizeof(void *));
-    if (!children) {
-        PyErr_Format(PyExc_MemoryError, "Parser out of memory");
-        return NULL;
-    }
-    ssize_t children_capacity = 1;
-    ssize_t n = 0;
-    { // ',' kwarg_or_double_starred
-        KeywordOrStarred* elem;
-        void *literal;
-        while (
-            (literal = _PyPegen_expect_token(p, 12))
-            &&
-            (elem = kwarg_or_double_starred_rule(p))
-        )
-        {
-            res = elem;
-            if (res == NULL && PyErr_Occurred()) {
-                p->error_indicator = 1;
-                PyMem_Free(children);
-                return NULL;
-            }
-            if (n == children_capacity) {
-                children_capacity *= 2;
-                children = PyMem_Realloc(children, children_capacity*sizeof(void *));
-                if (!children) {
-                    PyErr_Format(PyExc_MemoryError, "realloc None");
-                    return NULL;
-                }
-            }
-            children[n++] = res;
-            mark = p->mark;
-        }
-        p->mark = mark;
-    }
-    asdl_seq *seq = _Py_asdl_seq_new(n, p->arena);
-    if (!seq) {
-        PyErr_Format(PyExc_MemoryError, "asdl_seq_new _loop0_104");
-        PyMem_Free(children);
-        return NULL;
-    }
-    for (int i = 0; i < n; i++) asdl_seq_SET(seq, i, children[i]);
-    PyMem_Free(children);
-    _PyPegen_insert_memo(p, start_mark, _loop0_104_type, seq);
-    return seq;
-}
-
-// _gather_103: kwarg_or_double_starred _loop0_104
-static asdl_seq *
-_gather_103_rule(Parser *p)
-{
-    if (p->error_indicator) {
-        return NULL;
-    }
-    asdl_seq * res = NULL;
-    int mark = p->mark;
-    { // kwarg_or_double_starred _loop0_104
-        KeywordOrStarred* elem;
-        asdl_seq * seq;
-        if (
-            (elem = kwarg_or_double_starred_rule(p))
-            &&
-            (seq = _loop0_104_rule(p))
-        )
-        {
-            res = _PyPegen_seq_insert_in_front(p, elem, seq);
-            goto done;
-        }
-        p->mark = mark;
-    }
-    res = NULL;
-  done:
-    return res;
-}
-
-// _loop0_106: ',' kwarg_or_starred
-static asdl_seq *
-_loop0_106_rule(Parser *p)
-{
-    if (p->error_indicator) {
-        return NULL;
-    }
-    void *res = NULL;
-    int mark = p->mark;
-    int start_mark = p->mark;
-    void **children = PyMem_Malloc(sizeof(void *));
-    if (!children) {
-        PyErr_Format(PyExc_MemoryError, "Parser out of memory");
-        return NULL;
-    }
-    ssize_t children_capacity = 1;
-    ssize_t n = 0;
-    { // ',' kwarg_or_starred
-        KeywordOrStarred* elem;
-        void *literal;
-        while (
-            (literal = _PyPegen_expect_token(p, 12))
-            &&
-            (elem = kwarg_or_starred_rule(p))
-        )
-        {
-            res = elem;
-            if (res == NULL && PyErr_Occurred()) {
-                p->error_indicator = 1;
-                PyMem_Free(children);
-                return NULL;
-            }
-            if (n == children_capacity) {
-                children_capacity *= 2;
-                children = PyMem_Realloc(children, children_capacity*sizeof(void *));
-                if (!children) {
-                    PyErr_Format(PyExc_MemoryError, "realloc None");
-                    return NULL;
-                }
-            }
-            children[n++] = res;
-            mark = p->mark;
-        }
-        p->mark = mark;
-    }
-    asdl_seq *seq = _Py_asdl_seq_new(n, p->arena);
-    if (!seq) {
-        PyErr_Format(PyExc_MemoryError, "asdl_seq_new _loop0_106");
-        PyMem_Free(children);
-        return NULL;
-    }
-    for (int i = 0; i < n; i++) asdl_seq_SET(seq, i, children[i]);
-    PyMem_Free(children);
-    _PyPegen_insert_memo(p, start_mark, _loop0_106_type, seq);
-    return seq;
-}
-
-// _gather_105: kwarg_or_starred _loop0_106
-static asdl_seq *
-_gather_105_rule(Parser *p)
-{
-    if (p->error_indicator) {
-        return NULL;
-    }
-    asdl_seq * res = NULL;
-    int mark = p->mark;
-    { // kwarg_or_starred _loop0_106
-        KeywordOrStarred* elem;
-        asdl_seq * seq;
-        if (
-            (elem = kwarg_or_starred_rule(p))
-            &&
-            (seq = _loop0_106_rule(p))
-        )
-        {
-            res = _PyPegen_seq_insert_in_front(p, elem, seq);
-            goto done;
-        }
-        p->mark = mark;
-    }
-    res = NULL;
-  done:
-    return res;
-}
-
-// _loop0_108: ',' kwarg_or_double_starred
-static asdl_seq *
-_loop0_108_rule(Parser *p)
-{
-    if (p->error_indicator) {
-        return NULL;
-    }
-    void *res = NULL;
-    int mark = p->mark;
-    int start_mark = p->mark;
-    void **children = PyMem_Malloc(sizeof(void *));
-    if (!children) {
-        PyErr_Format(PyExc_MemoryError, "Parser out of memory");
-        return NULL;
-    }
-    ssize_t children_capacity = 1;
-    ssize_t n = 0;
-    { // ',' kwarg_or_double_starred
-        KeywordOrStarred* elem;
-        void *literal;
-        while (
-            (literal = _PyPegen_expect_token(p, 12))
-            &&
-            (elem = kwarg_or_double_starred_rule(p))
-        )
-        {
-            res = elem;
-            if (res == NULL && PyErr_Occurred()) {
-                p->error_indicator = 1;
-                PyMem_Free(children);
-                return NULL;
-            }
-            if (n == children_capacity) {
-                children_capacity *= 2;
-                children = PyMem_Realloc(children, children_capacity*sizeof(void *));
-                if (!children) {
-                    PyErr_Format(PyExc_MemoryError, "realloc None");
-                    return NULL;
-                }
-            }
-            children[n++] = res;
-            mark = p->mark;
-        }
-        p->mark = mark;
-    }
-    asdl_seq *seq = _Py_asdl_seq_new(n, p->arena);
-    if (!seq) {
-        PyErr_Format(PyExc_MemoryError, "asdl_seq_new _loop0_108");
-        PyMem_Free(children);
-        return NULL;
-    }
-    for (int i = 0; i < n; i++) asdl_seq_SET(seq, i, children[i]);
-    PyMem_Free(children);
-    _PyPegen_insert_memo(p, start_mark, _loop0_108_type, seq);
-    return seq;
-}
-
-// _gather_107: kwarg_or_double_starred _loop0_108
-static asdl_seq *
-_gather_107_rule(Parser *p)
-{
-    if (p->error_indicator) {
-        return NULL;
-    }
-    asdl_seq * res = NULL;
-    int mark = p->mark;
-    { // kwarg_or_double_starred _loop0_108
-        KeywordOrStarred* elem;
-        asdl_seq * seq;
-        if (
-            (elem = kwarg_or_double_starred_rule(p))
-            &&
-            (seq = _loop0_108_rule(p))
-        )
-        {
-            res = _PyPegen_seq_insert_in_front(p, elem, seq);
-            goto done;
-        }
-        p->mark = mark;
-    }
-    res = NULL;
-  done:
-    return res;
-}
-
-// _loop0_109: (',' star_target)
+// _loop0_109: ('if' disjunction)
 static asdl_seq *
 _loop0_109_rule(Parser *p)
 {
@@ -14355,13 +15255,13 @@ _loop0_109_rule(Parser *p)
     }
     ssize_t children_capacity = 1;
     ssize_t n = 0;
-    { // (',' star_target)
-        void *_tmp_135_var;
+    { // ('if' disjunction)
+        void *_tmp_145_var;
         while (
-            (_tmp_135_var = _tmp_135_rule(p))
+            (_tmp_145_var = _tmp_145_rule(p))
         )
         {
-            res = _tmp_135_var;
+            res = _tmp_145_var;
             if (n == children_capacity) {
                 children_capacity *= 2;
                 children = PyMem_Realloc(children, children_capacity*sizeof(void *));
@@ -14387,9 +15287,9 @@ _loop0_109_rule(Parser *p)
     return seq;
 }
 
-// _loop0_111: ',' star_target
+// _loop0_110: ('if' disjunction)
 static asdl_seq *
-_loop0_111_rule(Parser *p)
+_loop0_110_rule(Parser *p)
 {
     if (p->error_indicator) {
         return NULL;
@@ -14404,21 +15304,13 @@ _loop0_111_rule(Parser *p)
     }
     ssize_t children_capacity = 1;
     ssize_t n = 0;
-    { // ',' star_target
-        expr_ty elem;
-        void *literal;
+    { // ('if' disjunction)
+        void *_tmp_146_var;
         while (
-            (literal = _PyPegen_expect_token(p, 12))
-            &&
-            (elem = star_target_rule(p))
+            (_tmp_146_var = _tmp_146_rule(p))
         )
         {
-            res = elem;
-            if (res == NULL && PyErr_Occurred()) {
-                p->error_indicator = 1;
-                PyMem_Free(children);
-                return NULL;
-            }
+            res = _tmp_146_var;
             if (n == children_capacity) {
                 children_capacity *= 2;
                 children = PyMem_Realloc(children, children_capacity*sizeof(void *));
@@ -14434,35 +15326,39 @@ _loop0_111_rule(Parser *p)
     }
     asdl_seq *seq = _Py_asdl_seq_new(n, p->arena);
     if (!seq) {
-        PyErr_Format(PyExc_MemoryError, "asdl_seq_new _loop0_111");
+        PyErr_Format(PyExc_MemoryError, "asdl_seq_new _loop0_110");
         PyMem_Free(children);
         return NULL;
     }
     for (int i = 0; i < n; i++) asdl_seq_SET(seq, i, children[i]);
     PyMem_Free(children);
-    _PyPegen_insert_memo(p, start_mark, _loop0_111_type, seq);
+    _PyPegen_insert_memo(p, start_mark, _loop0_110_type, seq);
     return seq;
 }
 
-// _gather_110: star_target _loop0_111
-static asdl_seq *
-_gather_110_rule(Parser *p)
+// _tmp_111: ',' args
+static void *
+_tmp_111_rule(Parser *p)
 {
     if (p->error_indicator) {
         return NULL;
     }
-    asdl_seq * res = NULL;
+    void * res = NULL;
     int mark = p->mark;
-    { // star_target _loop0_111
-        expr_ty elem;
-        asdl_seq * seq;
+    { // ',' args
+        expr_ty c;
+        Token * literal;
         if (
-            (elem = star_target_rule(p))
+            (literal = _PyPegen_expect_token(p, 12))
             &&
-            (seq = _loop0_111_rule(p))
+            (c = args_rule(p))
         )
         {
-            res = _PyPegen_seq_insert_in_front(p, elem, seq);
+            res = c;
+            if (res == NULL && PyErr_Occurred()) {
+                p->error_indicator = 1;
+                return NULL;
+            }
             goto done;
         }
         p->mark = mark;
@@ -14472,7 +15368,7 @@ _gather_110_rule(Parser *p)
     return res;
 }
 
-// _tmp_112: !'*' star_target
+// _tmp_112: ',' args
 static void *
 _tmp_112_rule(Parser *p)
 {
@@ -14481,15 +15377,20 @@ _tmp_112_rule(Parser *p)
     }
     void * res = NULL;
     int mark = p->mark;
-    { // !'*' star_target
-        expr_ty star_target_var;
+    { // ',' args
+        expr_ty c;
+        Token * literal;
         if (
-            _PyPegen_lookahead_with_int(0, _PyPegen_expect_token, p, 16)
+            (literal = _PyPegen_expect_token(p, 12))
             &&
-            (star_target_var = star_target_rule(p))
+            (c = args_rule(p))
         )
         {
-            res = star_target_var;
+            res = c;
+            if (res == NULL && PyErr_Occurred()) {
+                p->error_indicator = 1;
+                return NULL;
+            }
             goto done;
         }
         p->mark = mark;
@@ -14499,7 +15400,7 @@ _tmp_112_rule(Parser *p)
     return res;
 }
 
-// _loop0_114: ',' del_target
+// _loop0_114: ',' kwarg_or_starred
 static asdl_seq *
 _loop0_114_rule(Parser *p)
 {
@@ -14516,13 +15417,13 @@ _loop0_114_rule(Parser *p)
     }
     ssize_t children_capacity = 1;
     ssize_t n = 0;
-    { // ',' del_target
-        expr_ty elem;
-        void *literal;
+    { // ',' kwarg_or_starred
+        KeywordOrStarred* elem;
+        Token * literal;
         while (
             (literal = _PyPegen_expect_token(p, 12))
             &&
-            (elem = del_target_rule(p))
+            (elem = kwarg_or_starred_rule(p))
         )
         {
             res = elem;
@@ -14556,7 +15457,7 @@ _loop0_114_rule(Parser *p)
     return seq;
 }
 
-// _gather_113: del_target _loop0_114
+// _gather_113: kwarg_or_starred _loop0_114
 static asdl_seq *
 _gather_113_rule(Parser *p)
 {
@@ -14565,11 +15466,11 @@ _gather_113_rule(Parser *p)
     }
     asdl_seq * res = NULL;
     int mark = p->mark;
-    { // del_target _loop0_114
-        expr_ty elem;
+    { // kwarg_or_starred _loop0_114
+        KeywordOrStarred* elem;
         asdl_seq * seq;
         if (
-            (elem = del_target_rule(p))
+            (elem = kwarg_or_starred_rule(p))
             &&
             (seq = _loop0_114_rule(p))
         )
@@ -14584,7 +15485,7 @@ _gather_113_rule(Parser *p)
     return res;
 }
 
-// _loop0_116: ',' target
+// _loop0_116: ',' kwarg_or_double_starred
 static asdl_seq *
 _loop0_116_rule(Parser *p)
 {
@@ -14601,13 +15502,13 @@ _loop0_116_rule(Parser *p)
     }
     ssize_t children_capacity = 1;
     ssize_t n = 0;
-    { // ',' target
-        expr_ty elem;
-        void *literal;
+    { // ',' kwarg_or_double_starred
+        KeywordOrStarred* elem;
+        Token * literal;
         while (
             (literal = _PyPegen_expect_token(p, 12))
             &&
-            (elem = target_rule(p))
+            (elem = kwarg_or_double_starred_rule(p))
         )
         {
             res = elem;
@@ -14641,7 +15542,7 @@ _loop0_116_rule(Parser *p)
     return seq;
 }
 
-// _gather_115: target _loop0_116
+// _gather_115: kwarg_or_double_starred _loop0_116
 static asdl_seq *
 _gather_115_rule(Parser *p)
 {
@@ -14650,11 +15551,11 @@ _gather_115_rule(Parser *p)
     }
     asdl_seq * res = NULL;
     int mark = p->mark;
-    { // target _loop0_116
-        expr_ty elem;
+    { // kwarg_or_double_starred _loop0_116
+        KeywordOrStarred* elem;
         asdl_seq * seq;
         if (
-            (elem = target_rule(p))
+            (elem = kwarg_or_double_starred_rule(p))
             &&
             (seq = _loop0_116_rule(p))
         )
@@ -14669,9 +15570,510 @@ _gather_115_rule(Parser *p)
     return res;
 }
 
-// _tmp_117: args | expression for_if_clauses
+// _loop0_118: ',' kwarg_or_starred
+static asdl_seq *
+_loop0_118_rule(Parser *p)
+{
+    if (p->error_indicator) {
+        return NULL;
+    }
+    void *res = NULL;
+    int mark = p->mark;
+    int start_mark = p->mark;
+    void **children = PyMem_Malloc(sizeof(void *));
+    if (!children) {
+        PyErr_Format(PyExc_MemoryError, "Parser out of memory");
+        return NULL;
+    }
+    ssize_t children_capacity = 1;
+    ssize_t n = 0;
+    { // ',' kwarg_or_starred
+        KeywordOrStarred* elem;
+        Token * literal;
+        while (
+            (literal = _PyPegen_expect_token(p, 12))
+            &&
+            (elem = kwarg_or_starred_rule(p))
+        )
+        {
+            res = elem;
+            if (res == NULL && PyErr_Occurred()) {
+                p->error_indicator = 1;
+                PyMem_Free(children);
+                return NULL;
+            }
+            if (n == children_capacity) {
+                children_capacity *= 2;
+                children = PyMem_Realloc(children, children_capacity*sizeof(void *));
+                if (!children) {
+                    PyErr_Format(PyExc_MemoryError, "realloc None");
+                    return NULL;
+                }
+            }
+            children[n++] = res;
+            mark = p->mark;
+        }
+        p->mark = mark;
+    }
+    asdl_seq *seq = _Py_asdl_seq_new(n, p->arena);
+    if (!seq) {
+        PyErr_Format(PyExc_MemoryError, "asdl_seq_new _loop0_118");
+        PyMem_Free(children);
+        return NULL;
+    }
+    for (int i = 0; i < n; i++) asdl_seq_SET(seq, i, children[i]);
+    PyMem_Free(children);
+    _PyPegen_insert_memo(p, start_mark, _loop0_118_type, seq);
+    return seq;
+}
+
+// _gather_117: kwarg_or_starred _loop0_118
+static asdl_seq *
+_gather_117_rule(Parser *p)
+{
+    if (p->error_indicator) {
+        return NULL;
+    }
+    asdl_seq * res = NULL;
+    int mark = p->mark;
+    { // kwarg_or_starred _loop0_118
+        KeywordOrStarred* elem;
+        asdl_seq * seq;
+        if (
+            (elem = kwarg_or_starred_rule(p))
+            &&
+            (seq = _loop0_118_rule(p))
+        )
+        {
+            res = _PyPegen_seq_insert_in_front(p, elem, seq);
+            goto done;
+        }
+        p->mark = mark;
+    }
+    res = NULL;
+  done:
+    return res;
+}
+
+// _loop0_120: ',' kwarg_or_double_starred
+static asdl_seq *
+_loop0_120_rule(Parser *p)
+{
+    if (p->error_indicator) {
+        return NULL;
+    }
+    void *res = NULL;
+    int mark = p->mark;
+    int start_mark = p->mark;
+    void **children = PyMem_Malloc(sizeof(void *));
+    if (!children) {
+        PyErr_Format(PyExc_MemoryError, "Parser out of memory");
+        return NULL;
+    }
+    ssize_t children_capacity = 1;
+    ssize_t n = 0;
+    { // ',' kwarg_or_double_starred
+        KeywordOrStarred* elem;
+        Token * literal;
+        while (
+            (literal = _PyPegen_expect_token(p, 12))
+            &&
+            (elem = kwarg_or_double_starred_rule(p))
+        )
+        {
+            res = elem;
+            if (res == NULL && PyErr_Occurred()) {
+                p->error_indicator = 1;
+                PyMem_Free(children);
+                return NULL;
+            }
+            if (n == children_capacity) {
+                children_capacity *= 2;
+                children = PyMem_Realloc(children, children_capacity*sizeof(void *));
+                if (!children) {
+                    PyErr_Format(PyExc_MemoryError, "realloc None");
+                    return NULL;
+                }
+            }
+            children[n++] = res;
+            mark = p->mark;
+        }
+        p->mark = mark;
+    }
+    asdl_seq *seq = _Py_asdl_seq_new(n, p->arena);
+    if (!seq) {
+        PyErr_Format(PyExc_MemoryError, "asdl_seq_new _loop0_120");
+        PyMem_Free(children);
+        return NULL;
+    }
+    for (int i = 0; i < n; i++) asdl_seq_SET(seq, i, children[i]);
+    PyMem_Free(children);
+    _PyPegen_insert_memo(p, start_mark, _loop0_120_type, seq);
+    return seq;
+}
+
+// _gather_119: kwarg_or_double_starred _loop0_120
+static asdl_seq *
+_gather_119_rule(Parser *p)
+{
+    if (p->error_indicator) {
+        return NULL;
+    }
+    asdl_seq * res = NULL;
+    int mark = p->mark;
+    { // kwarg_or_double_starred _loop0_120
+        KeywordOrStarred* elem;
+        asdl_seq * seq;
+        if (
+            (elem = kwarg_or_double_starred_rule(p))
+            &&
+            (seq = _loop0_120_rule(p))
+        )
+        {
+            res = _PyPegen_seq_insert_in_front(p, elem, seq);
+            goto done;
+        }
+        p->mark = mark;
+    }
+    res = NULL;
+  done:
+    return res;
+}
+
+// _loop0_121: (',' star_target)
+static asdl_seq *
+_loop0_121_rule(Parser *p)
+{
+    if (p->error_indicator) {
+        return NULL;
+    }
+    void *res = NULL;
+    int mark = p->mark;
+    int start_mark = p->mark;
+    void **children = PyMem_Malloc(sizeof(void *));
+    if (!children) {
+        PyErr_Format(PyExc_MemoryError, "Parser out of memory");
+        return NULL;
+    }
+    ssize_t children_capacity = 1;
+    ssize_t n = 0;
+    { // (',' star_target)
+        void *_tmp_147_var;
+        while (
+            (_tmp_147_var = _tmp_147_rule(p))
+        )
+        {
+            res = _tmp_147_var;
+            if (n == children_capacity) {
+                children_capacity *= 2;
+                children = PyMem_Realloc(children, children_capacity*sizeof(void *));
+                if (!children) {
+                    PyErr_Format(PyExc_MemoryError, "realloc None");
+                    return NULL;
+                }
+            }
+            children[n++] = res;
+            mark = p->mark;
+        }
+        p->mark = mark;
+    }
+    asdl_seq *seq = _Py_asdl_seq_new(n, p->arena);
+    if (!seq) {
+        PyErr_Format(PyExc_MemoryError, "asdl_seq_new _loop0_121");
+        PyMem_Free(children);
+        return NULL;
+    }
+    for (int i = 0; i < n; i++) asdl_seq_SET(seq, i, children[i]);
+    PyMem_Free(children);
+    _PyPegen_insert_memo(p, start_mark, _loop0_121_type, seq);
+    return seq;
+}
+
+// _loop0_123: ',' star_target
+static asdl_seq *
+_loop0_123_rule(Parser *p)
+{
+    if (p->error_indicator) {
+        return NULL;
+    }
+    void *res = NULL;
+    int mark = p->mark;
+    int start_mark = p->mark;
+    void **children = PyMem_Malloc(sizeof(void *));
+    if (!children) {
+        PyErr_Format(PyExc_MemoryError, "Parser out of memory");
+        return NULL;
+    }
+    ssize_t children_capacity = 1;
+    ssize_t n = 0;
+    { // ',' star_target
+        expr_ty elem;
+        Token * literal;
+        while (
+            (literal = _PyPegen_expect_token(p, 12))
+            &&
+            (elem = star_target_rule(p))
+        )
+        {
+            res = elem;
+            if (res == NULL && PyErr_Occurred()) {
+                p->error_indicator = 1;
+                PyMem_Free(children);
+                return NULL;
+            }
+            if (n == children_capacity) {
+                children_capacity *= 2;
+                children = PyMem_Realloc(children, children_capacity*sizeof(void *));
+                if (!children) {
+                    PyErr_Format(PyExc_MemoryError, "realloc None");
+                    return NULL;
+                }
+            }
+            children[n++] = res;
+            mark = p->mark;
+        }
+        p->mark = mark;
+    }
+    asdl_seq *seq = _Py_asdl_seq_new(n, p->arena);
+    if (!seq) {
+        PyErr_Format(PyExc_MemoryError, "asdl_seq_new _loop0_123");
+        PyMem_Free(children);
+        return NULL;
+    }
+    for (int i = 0; i < n; i++) asdl_seq_SET(seq, i, children[i]);
+    PyMem_Free(children);
+    _PyPegen_insert_memo(p, start_mark, _loop0_123_type, seq);
+    return seq;
+}
+
+// _gather_122: star_target _loop0_123
+static asdl_seq *
+_gather_122_rule(Parser *p)
+{
+    if (p->error_indicator) {
+        return NULL;
+    }
+    asdl_seq * res = NULL;
+    int mark = p->mark;
+    { // star_target _loop0_123
+        expr_ty elem;
+        asdl_seq * seq;
+        if (
+            (elem = star_target_rule(p))
+            &&
+            (seq = _loop0_123_rule(p))
+        )
+        {
+            res = _PyPegen_seq_insert_in_front(p, elem, seq);
+            goto done;
+        }
+        p->mark = mark;
+    }
+    res = NULL;
+  done:
+    return res;
+}
+
+// _tmp_124: !'*' star_target
 static void *
-_tmp_117_rule(Parser *p)
+_tmp_124_rule(Parser *p)
+{
+    if (p->error_indicator) {
+        return NULL;
+    }
+    void * res = NULL;
+    int mark = p->mark;
+    { // !'*' star_target
+        expr_ty star_target_var;
+        if (
+            _PyPegen_lookahead_with_int(0, _PyPegen_expect_token, p, 16)
+            &&
+            (star_target_var = star_target_rule(p))
+        )
+        {
+            res = star_target_var;
+            goto done;
+        }
+        p->mark = mark;
+    }
+    res = NULL;
+  done:
+    return res;
+}
+
+// _loop0_126: ',' del_target
+static asdl_seq *
+_loop0_126_rule(Parser *p)
+{
+    if (p->error_indicator) {
+        return NULL;
+    }
+    void *res = NULL;
+    int mark = p->mark;
+    int start_mark = p->mark;
+    void **children = PyMem_Malloc(sizeof(void *));
+    if (!children) {
+        PyErr_Format(PyExc_MemoryError, "Parser out of memory");
+        return NULL;
+    }
+    ssize_t children_capacity = 1;
+    ssize_t n = 0;
+    { // ',' del_target
+        expr_ty elem;
+        Token * literal;
+        while (
+            (literal = _PyPegen_expect_token(p, 12))
+            &&
+            (elem = del_target_rule(p))
+        )
+        {
+            res = elem;
+            if (res == NULL && PyErr_Occurred()) {
+                p->error_indicator = 1;
+                PyMem_Free(children);
+                return NULL;
+            }
+            if (n == children_capacity) {
+                children_capacity *= 2;
+                children = PyMem_Realloc(children, children_capacity*sizeof(void *));
+                if (!children) {
+                    PyErr_Format(PyExc_MemoryError, "realloc None");
+                    return NULL;
+                }
+            }
+            children[n++] = res;
+            mark = p->mark;
+        }
+        p->mark = mark;
+    }
+    asdl_seq *seq = _Py_asdl_seq_new(n, p->arena);
+    if (!seq) {
+        PyErr_Format(PyExc_MemoryError, "asdl_seq_new _loop0_126");
+        PyMem_Free(children);
+        return NULL;
+    }
+    for (int i = 0; i < n; i++) asdl_seq_SET(seq, i, children[i]);
+    PyMem_Free(children);
+    _PyPegen_insert_memo(p, start_mark, _loop0_126_type, seq);
+    return seq;
+}
+
+// _gather_125: del_target _loop0_126
+static asdl_seq *
+_gather_125_rule(Parser *p)
+{
+    if (p->error_indicator) {
+        return NULL;
+    }
+    asdl_seq * res = NULL;
+    int mark = p->mark;
+    { // del_target _loop0_126
+        expr_ty elem;
+        asdl_seq * seq;
+        if (
+            (elem = del_target_rule(p))
+            &&
+            (seq = _loop0_126_rule(p))
+        )
+        {
+            res = _PyPegen_seq_insert_in_front(p, elem, seq);
+            goto done;
+        }
+        p->mark = mark;
+    }
+    res = NULL;
+  done:
+    return res;
+}
+
+// _loop0_128: ',' target
+static asdl_seq *
+_loop0_128_rule(Parser *p)
+{
+    if (p->error_indicator) {
+        return NULL;
+    }
+    void *res = NULL;
+    int mark = p->mark;
+    int start_mark = p->mark;
+    void **children = PyMem_Malloc(sizeof(void *));
+    if (!children) {
+        PyErr_Format(PyExc_MemoryError, "Parser out of memory");
+        return NULL;
+    }
+    ssize_t children_capacity = 1;
+    ssize_t n = 0;
+    { // ',' target
+        expr_ty elem;
+        Token * literal;
+        while (
+            (literal = _PyPegen_expect_token(p, 12))
+            &&
+            (elem = target_rule(p))
+        )
+        {
+            res = elem;
+            if (res == NULL && PyErr_Occurred()) {
+                p->error_indicator = 1;
+                PyMem_Free(children);
+                return NULL;
+            }
+            if (n == children_capacity) {
+                children_capacity *= 2;
+                children = PyMem_Realloc(children, children_capacity*sizeof(void *));
+                if (!children) {
+                    PyErr_Format(PyExc_MemoryError, "realloc None");
+                    return NULL;
+                }
+            }
+            children[n++] = res;
+            mark = p->mark;
+        }
+        p->mark = mark;
+    }
+    asdl_seq *seq = _Py_asdl_seq_new(n, p->arena);
+    if (!seq) {
+        PyErr_Format(PyExc_MemoryError, "asdl_seq_new _loop0_128");
+        PyMem_Free(children);
+        return NULL;
+    }
+    for (int i = 0; i < n; i++) asdl_seq_SET(seq, i, children[i]);
+    PyMem_Free(children);
+    _PyPegen_insert_memo(p, start_mark, _loop0_128_type, seq);
+    return seq;
+}
+
+// _gather_127: target _loop0_128
+static asdl_seq *
+_gather_127_rule(Parser *p)
+{
+    if (p->error_indicator) {
+        return NULL;
+    }
+    asdl_seq * res = NULL;
+    int mark = p->mark;
+    { // target _loop0_128
+        expr_ty elem;
+        asdl_seq * seq;
+        if (
+            (elem = target_rule(p))
+            &&
+            (seq = _loop0_128_rule(p))
+        )
+        {
+            res = _PyPegen_seq_insert_in_front(p, elem, seq);
+            goto done;
+        }
+        p->mark = mark;
+    }
+    res = NULL;
+  done:
+    return res;
+}
+
+// _tmp_129: args | expression for_if_clauses
+static void *
+_tmp_129_rule(Parser *p)
 {
     if (p->error_indicator) {
         return NULL;
@@ -14708,9 +16110,9 @@ _tmp_117_rule(Parser *p)
     return res;
 }
 
-// _tmp_118: '=' annotated_rhs
+// _tmp_130: '=' annotated_rhs
 static void *
-_tmp_118_rule(Parser *p)
+_tmp_130_rule(Parser *p)
 {
     if (p->error_indicator) {
         return NULL;
@@ -14719,7 +16121,7 @@ _tmp_118_rule(Parser *p)
     int mark = p->mark;
     { // '=' annotated_rhs
         expr_ty annotated_rhs_var;
-        void *literal;
+        Token * literal;
         if (
             (literal = _PyPegen_expect_token(p, 22))
             &&
@@ -14736,9 +16138,9 @@ _tmp_118_rule(Parser *p)
     return res;
 }
 
-// _tmp_119: '=' | augassign
+// _tmp_131: '=' | augassign
 static void *
-_tmp_119_rule(Parser *p)
+_tmp_131_rule(Parser *p)
 {
     if (p->error_indicator) {
         return NULL;
@@ -14746,7 +16148,7 @@ _tmp_119_rule(Parser *p)
     void * res = NULL;
     int mark = p->mark;
     { // '='
-        void *literal;
+        Token * literal;
         if (
             (literal = _PyPegen_expect_token(p, 22))
         )
@@ -14772,9 +16174,9 @@ _tmp_119_rule(Parser *p)
     return res;
 }
 
-// _tmp_120: yield_expr | star_expressions
+// _tmp_132: yield_expr | star_expressions
 static void *
-_tmp_120_rule(Parser *p)
+_tmp_132_rule(Parser *p)
 {
     if (p->error_indicator) {
         return NULL;
@@ -14808,9 +16210,9 @@ _tmp_120_rule(Parser *p)
     return res;
 }
 
-// _tmp_121: '[' | '(' | '{'
+// _tmp_133: '[' | '(' | '{'
 static void *
-_tmp_121_rule(Parser *p)
+_tmp_133_rule(Parser *p)
 {
     if (p->error_indicator) {
         return NULL;
@@ -14818,7 +16220,7 @@ _tmp_121_rule(Parser *p)
     void * res = NULL;
     int mark = p->mark;
     { // '['
-        void *literal;
+        Token * literal;
         if (
             (literal = _PyPegen_expect_token(p, 9))
         )
@@ -14829,7 +16231,7 @@ _tmp_121_rule(Parser *p)
         p->mark = mark;
     }
     { // '('
-        void *literal;
+        Token * literal;
         if (
             (literal = _PyPegen_expect_token(p, 7))
         )
@@ -14840,7 +16242,7 @@ _tmp_121_rule(Parser *p)
         p->mark = mark;
     }
     { // '{'
-        void *literal;
+        Token * literal;
         if (
             (literal = _PyPegen_expect_token(p, 25))
         )
@@ -14855,37 +16257,58 @@ _tmp_121_rule(Parser *p)
     return res;
 }
 
-// _tmp_122: plain_names ','
-static void *
-_tmp_122_rule(Parser *p)
+// _loop0_134: param_no_default
+static asdl_seq *
+_loop0_134_rule(Parser *p)
 {
     if (p->error_indicator) {
         return NULL;
     }
-    void * res = NULL;
+    void *res = NULL;
     int mark = p->mark;
-    { // plain_names ','
-        void *literal;
-        asdl_seq* plain_names_var;
-        if (
-            (plain_names_var = plain_names_rule(p))
-            &&
-            (literal = _PyPegen_expect_token(p, 12))
+    int start_mark = p->mark;
+    void **children = PyMem_Malloc(sizeof(void *));
+    if (!children) {
+        PyErr_Format(PyExc_MemoryError, "Parser out of memory");
+        return NULL;
+    }
+    ssize_t children_capacity = 1;
+    ssize_t n = 0;
+    { // param_no_default
+        arg_ty param_no_default_var;
+        while (
+            (param_no_default_var = param_no_default_rule(p))
         )
         {
-            res = _PyPegen_dummy_name(p, plain_names_var, literal);
-            goto done;
+            res = param_no_default_var;
+            if (n == children_capacity) {
+                children_capacity *= 2;
+                children = PyMem_Realloc(children, children_capacity*sizeof(void *));
+                if (!children) {
+                    PyErr_Format(PyExc_MemoryError, "realloc None");
+                    return NULL;
+                }
+            }
+            children[n++] = res;
+            mark = p->mark;
         }
         p->mark = mark;
     }
-    res = NULL;
-  done:
-    return res;
+    asdl_seq *seq = _Py_asdl_seq_new(n, p->arena);
+    if (!seq) {
+        PyErr_Format(PyExc_MemoryError, "asdl_seq_new _loop0_134");
+        PyMem_Free(children);
+        return NULL;
+    }
+    for (int i = 0; i < n; i++) asdl_seq_SET(seq, i, children[i]);
+    PyMem_Free(children);
+    _PyPegen_insert_memo(p, start_mark, _loop0_134_type, seq);
+    return seq;
 }
 
-// _tmp_123: slash_with_default | names_with_default
+// _tmp_135: slash_with_default | param_with_default+
 static void *
-_tmp_123_rule(Parser *p)
+_tmp_135_rule(Parser *p)
 {
     if (p->error_indicator) {
         return NULL;
@@ -14903,13 +16326,13 @@ _tmp_123_rule(Parser *p)
         }
         p->mark = mark;
     }
-    { // names_with_default
-        asdl_seq* names_with_default_var;
+    { // param_with_default+
+        asdl_seq * _loop1_148_var;
         if (
-            (names_with_default_var = names_with_default_rule(p))
+            (_loop1_148_var = _loop1_148_rule(p))
         )
         {
-            res = names_with_default_var;
+            res = _loop1_148_var;
             goto done;
         }
         p->mark = mark;
@@ -14919,9 +16342,9 @@ _tmp_123_rule(Parser *p)
     return res;
 }
 
-// _tmp_124: star_targets '='
+// _tmp_136: star_targets '='
 static void *
-_tmp_124_rule(Parser *p)
+_tmp_136_rule(Parser *p)
 {
     if (p->error_indicator) {
         return NULL;
@@ -14929,7 +16352,7 @@ _tmp_124_rule(Parser *p)
     void * res = NULL;
     int mark = p->mark;
     { // star_targets '='
-        void *literal;
+        Token * literal;
         expr_ty z;
         if (
             (z = star_targets_rule(p))
@@ -14951,9 +16374,9 @@ _tmp_124_rule(Parser *p)
     return res;
 }
 
-// _tmp_125: '.' | '...'
+// _tmp_137: '.' | '...'
 static void *
-_tmp_125_rule(Parser *p)
+_tmp_137_rule(Parser *p)
 {
     if (p->error_indicator) {
         return NULL;
@@ -14961,7 +16384,7 @@ _tmp_125_rule(Parser *p)
     void * res = NULL;
     int mark = p->mark;
     { // '.'
-        void *literal;
+        Token * literal;
         if (
             (literal = _PyPegen_expect_token(p, 23))
         )
@@ -14972,7 +16395,7 @@ _tmp_125_rule(Parser *p)
         p->mark = mark;
     }
     { // '...'
-        void *literal;
+        Token * literal;
         if (
             (literal = _PyPegen_expect_token(p, 52))
         )
@@ -14987,9 +16410,9 @@ _tmp_125_rule(Parser *p)
     return res;
 }
 
-// _tmp_126: '.' | '...'
+// _tmp_138: '.' | '...'
 static void *
-_tmp_126_rule(Parser *p)
+_tmp_138_rule(Parser *p)
 {
     if (p->error_indicator) {
         return NULL;
@@ -14997,7 +16420,7 @@ _tmp_126_rule(Parser *p)
     void * res = NULL;
     int mark = p->mark;
     { // '.'
-        void *literal;
+        Token * literal;
         if (
             (literal = _PyPegen_expect_token(p, 23))
         )
@@ -15008,7 +16431,7 @@ _tmp_126_rule(Parser *p)
         p->mark = mark;
     }
     { // '...'
-        void *literal;
+        Token * literal;
         if (
             (literal = _PyPegen_expect_token(p, 52))
         )
@@ -15023,36 +16446,9 @@ _tmp_126_rule(Parser *p)
     return res;
 }
 
-// _tmp_127: plain_name !'='
+// _tmp_139: '@' named_expression NEWLINE
 static void *
-_tmp_127_rule(Parser *p)
-{
-    if (p->error_indicator) {
-        return NULL;
-    }
-    void * res = NULL;
-    int mark = p->mark;
-    { // plain_name !'='
-        arg_ty plain_name_var;
-        if (
-            (plain_name_var = plain_name_rule(p))
-            &&
-            _PyPegen_lookahead_with_int(0, _PyPegen_expect_token, p, 22)
-        )
-        {
-            res = plain_name_var;
-            goto done;
-        }
-        p->mark = mark;
-    }
-    res = NULL;
-  done:
-    return res;
-}
-
-// _tmp_128: '@' named_expression NEWLINE
-static void *
-_tmp_128_rule(Parser *p)
+_tmp_139_rule(Parser *p)
 {
     if (p->error_indicator) {
         return NULL;
@@ -15061,8 +16457,8 @@ _tmp_128_rule(Parser *p)
     int mark = p->mark;
     { // '@' named_expression NEWLINE
         expr_ty f;
-        void *literal;
-        void *newline_var;
+        Token * literal;
+        Token * newline_var;
         if (
             (literal = _PyPegen_expect_token(p, 49))
             &&
@@ -15085,9 +16481,9 @@ _tmp_128_rule(Parser *p)
     return res;
 }
 
-// _tmp_129: ',' star_expression
+// _tmp_140: ',' star_expression
 static void *
-_tmp_129_rule(Parser *p)
+_tmp_140_rule(Parser *p)
 {
     if (p->error_indicator) {
         return NULL;
@@ -15096,7 +16492,7 @@ _tmp_129_rule(Parser *p)
     int mark = p->mark;
     { // ',' star_expression
         expr_ty c;
-        void *literal;
+        Token * literal;
         if (
             (literal = _PyPegen_expect_token(p, 12))
             &&
@@ -15117,9 +16513,9 @@ _tmp_129_rule(Parser *p)
     return res;
 }
 
-// _tmp_130: ',' expression
+// _tmp_141: ',' expression
 static void *
-_tmp_130_rule(Parser *p)
+_tmp_141_rule(Parser *p)
 {
     if (p->error_indicator) {
         return NULL;
@@ -15128,7 +16524,7 @@ _tmp_130_rule(Parser *p)
     int mark = p->mark;
     { // ',' expression
         expr_ty c;
-        void *literal;
+        Token * literal;
         if (
             (literal = _PyPegen_expect_token(p, 12))
             &&
@@ -15149,9 +16545,9 @@ _tmp_130_rule(Parser *p)
     return res;
 }
 
-// _tmp_131: lambda_plain_name !'='
+// _tmp_142: lambda_plain_name !'='
 static void *
-_tmp_131_rule(Parser *p)
+_tmp_142_rule(Parser *p)
 {
     if (p->error_indicator) {
         return NULL;
@@ -15176,9 +16572,9 @@ _tmp_131_rule(Parser *p)
     return res;
 }
 
-// _tmp_132: 'or' conjunction
+// _tmp_143: 'or' conjunction
 static void *
-_tmp_132_rule(Parser *p)
+_tmp_143_rule(Parser *p)
 {
     if (p->error_indicator) {
         return NULL;
@@ -15187,7 +16583,7 @@ _tmp_132_rule(Parser *p)
     int mark = p->mark;
     { // 'or' conjunction
         expr_ty c;
-        void *keyword;
+        Token * keyword;
         if (
             (keyword = _PyPegen_expect_token(p, 532))
             &&
@@ -15208,9 +16604,9 @@ _tmp_132_rule(Parser *p)
     return res;
 }
 
-// _tmp_133: 'and' inversion
+// _tmp_144: 'and' inversion
 static void *
-_tmp_133_rule(Parser *p)
+_tmp_144_rule(Parser *p)
 {
     if (p->error_indicator) {
         return NULL;
@@ -15219,7 +16615,7 @@ _tmp_133_rule(Parser *p)
     int mark = p->mark;
     { // 'and' inversion
         expr_ty c;
-        void *keyword;
+        Token * keyword;
         if (
             (keyword = _PyPegen_expect_token(p, 533))
             &&
@@ -15240,134 +16636,9 @@ _tmp_133_rule(Parser *p)
     return res;
 }
 
-// _tmp_134: ASYNC? 'for' star_targets 'in' disjunction (('if' disjunction))*
+// _tmp_145: 'if' disjunction
 static void *
-_tmp_134_rule(Parser *p)
-{
-    if (p->error_indicator) {
-        return NULL;
-    }
-    void * res = NULL;
-    int mark = p->mark;
-    { // ASYNC? 'for' star_targets 'in' disjunction (('if' disjunction))*
-        expr_ty a;
-        expr_ty b;
-        asdl_seq * c;
-        void *keyword;
-        void *keyword_1;
-        void *y;
-        if (
-            (y = _PyPegen_expect_token(p, ASYNC), 1)
-            &&
-            (keyword = _PyPegen_expect_token(p, 517))
-            &&
-            (a = star_targets_rule(p))
-            &&
-            (keyword_1 = _PyPegen_expect_token(p, 518))
-            &&
-            (b = disjunction_rule(p))
-            &&
-            (c = _loop0_136_rule(p))
-        )
-        {
-            res = _Py_comprehension ( a , b , c , y != NULL , p -> arena );
-            if (res == NULL && PyErr_Occurred()) {
-                p->error_indicator = 1;
-                return NULL;
-            }
-            goto done;
-        }
-        p->mark = mark;
-    }
-    res = NULL;
-  done:
-    return res;
-}
-
-// _tmp_135: ',' star_target
-static void *
-_tmp_135_rule(Parser *p)
-{
-    if (p->error_indicator) {
-        return NULL;
-    }
-    void * res = NULL;
-    int mark = p->mark;
-    { // ',' star_target
-        expr_ty c;
-        void *literal;
-        if (
-            (literal = _PyPegen_expect_token(p, 12))
-            &&
-            (c = star_target_rule(p))
-        )
-        {
-            res = c;
-            if (res == NULL && PyErr_Occurred()) {
-                p->error_indicator = 1;
-                return NULL;
-            }
-            goto done;
-        }
-        p->mark = mark;
-    }
-    res = NULL;
-  done:
-    return res;
-}
-
-// _loop0_136: ('if' disjunction)
-static asdl_seq *
-_loop0_136_rule(Parser *p)
-{
-    if (p->error_indicator) {
-        return NULL;
-    }
-    void *res = NULL;
-    int mark = p->mark;
-    int start_mark = p->mark;
-    void **children = PyMem_Malloc(sizeof(void *));
-    if (!children) {
-        PyErr_Format(PyExc_MemoryError, "Parser out of memory");
-        return NULL;
-    }
-    ssize_t children_capacity = 1;
-    ssize_t n = 0;
-    { // ('if' disjunction)
-        void *_tmp_137_var;
-        while (
-            (_tmp_137_var = _tmp_137_rule(p))
-        )
-        {
-            res = _tmp_137_var;
-            if (n == children_capacity) {
-                children_capacity *= 2;
-                children = PyMem_Realloc(children, children_capacity*sizeof(void *));
-                if (!children) {
-                    PyErr_Format(PyExc_MemoryError, "realloc None");
-                    return NULL;
-                }
-            }
-            children[n++] = res;
-            mark = p->mark;
-        }
-        p->mark = mark;
-    }
-    asdl_seq *seq = _Py_asdl_seq_new(n, p->arena);
-    if (!seq) {
-        PyErr_Format(PyExc_MemoryError, "asdl_seq_new _loop0_136");
-        PyMem_Free(children);
-        return NULL;
-    }
-    for (int i = 0; i < n; i++) asdl_seq_SET(seq, i, children[i]);
-    PyMem_Free(children);
-    _PyPegen_insert_memo(p, start_mark, _loop0_136_type, seq);
-    return seq;
-}
-
-// _tmp_137: 'if' disjunction
-static void *
-_tmp_137_rule(Parser *p)
+_tmp_145_rule(Parser *p)
 {
     if (p->error_indicator) {
         return NULL;
@@ -15375,7 +16646,7 @@ _tmp_137_rule(Parser *p)
     void * res = NULL;
     int mark = p->mark;
     { // 'if' disjunction
-        void *keyword;
+        Token * keyword;
         expr_ty z;
         if (
             (keyword = _PyPegen_expect_token(p, 510))
@@ -15397,6 +16668,123 @@ _tmp_137_rule(Parser *p)
     return res;
 }
 
+// _tmp_146: 'if' disjunction
+static void *
+_tmp_146_rule(Parser *p)
+{
+    if (p->error_indicator) {
+        return NULL;
+    }
+    void * res = NULL;
+    int mark = p->mark;
+    { // 'if' disjunction
+        Token * keyword;
+        expr_ty z;
+        if (
+            (keyword = _PyPegen_expect_token(p, 510))
+            &&
+            (z = disjunction_rule(p))
+        )
+        {
+            res = z;
+            if (res == NULL && PyErr_Occurred()) {
+                p->error_indicator = 1;
+                return NULL;
+            }
+            goto done;
+        }
+        p->mark = mark;
+    }
+    res = NULL;
+  done:
+    return res;
+}
+
+// _tmp_147: ',' star_target
+static void *
+_tmp_147_rule(Parser *p)
+{
+    if (p->error_indicator) {
+        return NULL;
+    }
+    void * res = NULL;
+    int mark = p->mark;
+    { // ',' star_target
+        expr_ty c;
+        Token * literal;
+        if (
+            (literal = _PyPegen_expect_token(p, 12))
+            &&
+            (c = star_target_rule(p))
+        )
+        {
+            res = c;
+            if (res == NULL && PyErr_Occurred()) {
+                p->error_indicator = 1;
+                return NULL;
+            }
+            goto done;
+        }
+        p->mark = mark;
+    }
+    res = NULL;
+  done:
+    return res;
+}
+
+// _loop1_148: param_with_default
+static asdl_seq *
+_loop1_148_rule(Parser *p)
+{
+    if (p->error_indicator) {
+        return NULL;
+    }
+    void *res = NULL;
+    int mark = p->mark;
+    int start_mark = p->mark;
+    void **children = PyMem_Malloc(sizeof(void *));
+    if (!children) {
+        PyErr_Format(PyExc_MemoryError, "Parser out of memory");
+        return NULL;
+    }
+    ssize_t children_capacity = 1;
+    ssize_t n = 0;
+    { // param_with_default
+        NameDefaultPair* param_with_default_var;
+        while (
+            (param_with_default_var = param_with_default_rule(p))
+        )
+        {
+            res = param_with_default_var;
+            if (n == children_capacity) {
+                children_capacity *= 2;
+                children = PyMem_Realloc(children, children_capacity*sizeof(void *));
+                if (!children) {
+                    PyErr_Format(PyExc_MemoryError, "realloc None");
+                    return NULL;
+                }
+            }
+            children[n++] = res;
+            mark = p->mark;
+        }
+        p->mark = mark;
+    }
+    if (n == 0) {
+        PyMem_Free(children);
+        return NULL;
+    }
+    asdl_seq *seq = _Py_asdl_seq_new(n, p->arena);
+    if (!seq) {
+        PyErr_Format(PyExc_MemoryError, "asdl_seq_new _loop1_148");
+        PyMem_Free(children);
+        return NULL;
+    }
+    for (int i = 0; i < n; i++) asdl_seq_SET(seq, i, children[i]);
+    PyMem_Free(children);
+    _PyPegen_insert_memo(p, start_mark, _loop1_148_type, seq);
+    return seq;
+}
+
 void *
 _PyPegen_parse(Parser *p)
 {
@@ -15412,6 +16800,8 @@ _PyPegen_parse(Parser *p)
         result = interactive_rule(p);
     } else if (p->start_rule == Py_eval_input) {
         result = eval_rule(p);
+    } else if (p->start_rule == Py_func_type_input) {
+        result = func_type_rule(p);
     } else if (p->start_rule == Py_fstring_input) {
         result = fstring_rule(p);
     }
