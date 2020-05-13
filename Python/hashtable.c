@@ -58,22 +58,6 @@
         ((_Py_hashtable_entry_t *)_Py_SLIST_HEAD(&(HT)->buckets[BUCKET]))
 #define ENTRY_NEXT(ENTRY) \
         ((_Py_hashtable_entry_t *)_Py_SLIST_ITEM_NEXT(ENTRY))
-#define HASHTABLE_ITEM_SIZE(HT) \
-        (sizeof(_Py_hashtable_entry_t) + (HT)->key_size + (HT)->data_size)
-
-#define ENTRY_READ_PDATA(TABLE, ENTRY, DATA_SIZE, PDATA) \
-    do { \
-        assert((DATA_SIZE) == (TABLE)->data_size); \
-        memcpy((PDATA), _Py_HASHTABLE_ENTRY_PDATA(TABLE, (ENTRY)), \
-                  (DATA_SIZE)); \
-    } while (0)
-
-#define ENTRY_WRITE_PDATA(TABLE, ENTRY, DATA_SIZE, PDATA) \
-    do { \
-        assert((DATA_SIZE) == (TABLE)->data_size); \
-        memcpy((void *)_Py_HASHTABLE_ENTRY_PDATA((TABLE), (ENTRY)), \
-                  (PDATA), (DATA_SIZE)); \
-    } while (0)
 
 /* Forward declaration */
 static void hashtable_rehash(_Py_hashtable_t *ht);
@@ -105,20 +89,16 @@ _Py_slist_remove(_Py_slist_t *list, _Py_slist_item_t *previous,
 
 
 Py_uhash_t
-_Py_hashtable_hash_ptr(struct _Py_hashtable_t *ht, const void *pkey)
+_Py_hashtable_hash_ptr(const void *key)
 {
-    void *key;
-    _Py_HASHTABLE_READ_KEY(ht, pkey, key);
-    return (Py_uhash_t)_Py_HashPointer(key);
+    return (Py_uhash_t)_Py_HashPointerRaw(key);
 }
 
 
 int
-_Py_hashtable_compare_direct(_Py_hashtable_t *ht, const void *pkey,
-                             const _Py_hashtable_entry_t *entry)
+_Py_hashtable_compare_direct(const void *key1, const void *key2)
 {
-    const void *pkey2 = _Py_HASHTABLE_ENTRY_PKEY(entry);
-    return (memcmp(pkey, pkey2, ht->key_size) == 0);
+    return (key1 == key2);
 }
 
 
@@ -137,7 +117,7 @@ round_size(size_t s)
 
 
 size_t
-_Py_hashtable_size(_Py_hashtable_t *ht)
+_Py_hashtable_size(const _Py_hashtable_t *ht)
 {
     size_t size;
 
@@ -147,7 +127,7 @@ _Py_hashtable_size(_Py_hashtable_t *ht)
     size += ht->num_buckets * sizeof(_Py_hashtable_entry_t *);
 
     /* entries */
-    size += ht->entries * HASHTABLE_ITEM_SIZE(ht);
+    size += ht->entries * sizeof(_Py_hashtable_entry_t);
 
     return size;
 }
@@ -195,16 +175,16 @@ _Py_hashtable_print_stats(_Py_hashtable_t *ht)
 
 
 _Py_hashtable_entry_t *
-_Py_hashtable_get_entry_generic(_Py_hashtable_t *ht, const void *pkey)
+_Py_hashtable_get_entry_generic(_Py_hashtable_t *ht, const void *key)
 {
-    Py_uhash_t key_hash = ht->hash_func(ht, pkey);
+    Py_uhash_t key_hash = ht->hash_func(key);
     size_t index = key_hash & (ht->num_buckets - 1);
     _Py_hashtable_entry_t *entry = entry = TABLE_HEAD(ht, index);
     while (1) {
         if (entry == NULL) {
             return NULL;
         }
-        if (entry->key_hash == key_hash && ht->compare_func(ht, pkey, entry)) {
+        if (entry->key_hash == key_hash && ht->compare_func(key, entry->key)) {
             break;
         }
         entry = ENTRY_NEXT(entry);
@@ -213,75 +193,88 @@ _Py_hashtable_get_entry_generic(_Py_hashtable_t *ht, const void *pkey)
 }
 
 
-static int
-_Py_hashtable_pop_entry(_Py_hashtable_t *ht, size_t key_size, const void *pkey,
-                        void *data, size_t data_size)
+// Specialized for:
+// hash_func == _Py_hashtable_hash_ptr
+// compare_func == _Py_hashtable_compare_direct
+static _Py_hashtable_entry_t *
+_Py_hashtable_get_entry_ptr(_Py_hashtable_t *ht, const void *key)
 {
-    Py_uhash_t key_hash;
-    size_t index;
-    _Py_hashtable_entry_t *entry, *previous;
-
-    assert(key_size == ht->key_size);
-
-    key_hash = ht->hash_func(ht, pkey);
-    index = key_hash & (ht->num_buckets - 1);
-
-    previous = NULL;
-    for (entry = TABLE_HEAD(ht, index); entry != NULL; entry = ENTRY_NEXT(entry)) {
-        if (entry->key_hash == key_hash && ht->compare_func(ht, pkey, entry))
+    Py_uhash_t key_hash = _Py_hashtable_hash_ptr(key);
+    size_t index = key_hash & (ht->num_buckets - 1);
+    _Py_hashtable_entry_t *entry = entry = TABLE_HEAD(ht, index);
+    while (1) {
+        if (entry == NULL) {
+            return NULL;
+        }
+        // Compare directly keys (ignore entry->key_hash)
+        if (entry->key == key) {
             break;
-        previous = entry;
+        }
+        entry = ENTRY_NEXT(entry);
     }
+    return entry;
+}
 
-    if (entry == NULL)
-        return 0;
+
+void*
+_Py_hashtable_steal(_Py_hashtable_t *ht, const void *key)
+{
+    Py_uhash_t key_hash = ht->hash_func(key);
+    size_t index = key_hash & (ht->num_buckets - 1);
+
+    _Py_hashtable_entry_t *entry = TABLE_HEAD(ht, index);
+    _Py_hashtable_entry_t *previous = NULL;
+    while (1) {
+        if (entry == NULL) {
+            // not found
+            return NULL;
+        }
+        if (entry->key_hash == key_hash && ht->compare_func(key, entry->key)) {
+            break;
+        }
+        previous = entry;
+        entry = ENTRY_NEXT(entry);
+    }
 
     _Py_slist_remove(&ht->buckets[index], (_Py_slist_item_t *)previous,
                      (_Py_slist_item_t *)entry);
     ht->entries--;
 
-    if (data != NULL)
-        ENTRY_READ_PDATA(ht, entry, data_size, data);
+    void *value = entry->value;
     ht->alloc.free(entry);
 
-    if ((float)ht->entries / (float)ht->num_buckets < HASHTABLE_LOW)
+    if ((float)ht->entries / (float)ht->num_buckets < HASHTABLE_LOW) {
         hashtable_rehash(ht);
-    return 1;
+    }
+    return value;
 }
 
 
 int
-_Py_hashtable_set(_Py_hashtable_t *ht, size_t key_size, const void *pkey,
-                  size_t data_size, const void *data)
+_Py_hashtable_set(_Py_hashtable_t *ht, const void *key, void *value)
 {
-    Py_uhash_t key_hash;
-    size_t index;
     _Py_hashtable_entry_t *entry;
 
-    assert(key_size == ht->key_size);
-
-    assert(data != NULL || data_size == 0);
 #ifndef NDEBUG
     /* Don't write the assertion on a single line because it is interesting
        to know the duplicated entry if the assertion failed. The entry can
        be read using a debugger. */
-    entry = ht->get_entry_func(ht, pkey);
+    entry = ht->get_entry_func(ht, key);
     assert(entry == NULL);
 #endif
 
-    key_hash = ht->hash_func(ht, pkey);
-    index = key_hash & (ht->num_buckets - 1);
+    Py_uhash_t key_hash = ht->hash_func(key);
+    size_t index = key_hash & (ht->num_buckets - 1);
 
-    entry = ht->alloc.malloc(HASHTABLE_ITEM_SIZE(ht));
+    entry = ht->alloc.malloc(sizeof(_Py_hashtable_entry_t));
     if (entry == NULL) {
         /* memory allocation failed */
         return -1;
     }
 
     entry->key_hash = key_hash;
-    memcpy((void *)_Py_HASHTABLE_ENTRY_PKEY(entry), pkey, ht->key_size);
-    if (data)
-        ENTRY_WRITE_PDATA(ht, entry, data_size, data);
+    entry->key = (void *)key;
+    entry->value = value;
 
     _Py_slist_prepend(&ht->buckets[index], (_Py_slist_item_t*)entry);
     ht->entries++;
@@ -292,101 +285,30 @@ _Py_hashtable_set(_Py_hashtable_t *ht, size_t key_size, const void *pkey,
 }
 
 
-int
-_Py_hashtable_get_generic(_Py_hashtable_t *ht, const void *pkey, void *data)
+void*
+_Py_hashtable_get(_Py_hashtable_t *ht, const void *key)
 {
-    assert(data != NULL);
-    _Py_hashtable_entry_t *entry = ht->get_entry_func(ht, pkey);
+    _Py_hashtable_entry_t *entry = ht->get_entry_func(ht, key);
     if (entry != NULL) {
-        ENTRY_READ_PDATA(ht, entry, ht->data_size, data);
-        return 1;
+        return entry->value;
     }
     else {
-        return 0;
+        return NULL;
     }
 }
-
-
-// Specialized for:
-// key_size == sizeof(void*)
-// hash_func == _Py_hashtable_hash_ptr
-// compare_func == _Py_hashtable_compare_direct
-_Py_hashtable_entry_t *
-_Py_hashtable_get_entry_ptr(_Py_hashtable_t *ht, const void *pkey)
-{
-    Py_uhash_t key_hash = _Py_hashtable_hash_ptr(ht, pkey);
-    size_t index = key_hash & (ht->num_buckets - 1);
-    _Py_hashtable_entry_t *entry = entry = TABLE_HEAD(ht, index);
-    while (1) {
-        if (entry == NULL) {
-            return NULL;
-        }
-        if (entry->key_hash == key_hash) {
-            const void *pkey2 = _Py_HASHTABLE_ENTRY_PKEY(entry);
-            if (memcmp(pkey, pkey2, sizeof(void*)) == 0) {
-                break;
-            }
-        }
-        entry = ENTRY_NEXT(entry);
-    }
-    return entry;
-}
-
-
-// Specialized for:
-// key_size == sizeof(void*)
-// hash_func == _Py_hashtable_hash_ptr
-// compare_func == _Py_hashtable_compare_direct
-int
-_Py_hashtable_get_ptr(_Py_hashtable_t *ht, const void *pkey, void *data)
-{
-    assert(data != NULL);
-    _Py_hashtable_entry_t *entry = _Py_hashtable_get_entry_ptr(ht, pkey);
-    if (entry != NULL) {
-        ENTRY_READ_PDATA(ht, entry, ht->data_size, data);
-        return 1;
-    }
-    else {
-        return 0;
-    }
-}
-
-
-int
-_Py_hashtable_pop(_Py_hashtable_t *ht, size_t key_size, const void *pkey,
-                  size_t data_size, void *data)
-{
-    assert(data != NULL);
-    return _Py_hashtable_pop_entry(ht, key_size, pkey, data, data_size);
-}
-
-
-/* Code commented since the function is not needed in Python */
-#if 0
-void
-_Py_hashtable_delete(_Py_hashtable_t *ht, size_t key_size, const void *pkey)
-{
-#ifndef NDEBUG
-    int found = _Py_hashtable_pop_entry(ht, key_size, pkey, NULL, 0);
-    assert(found);
-#else
-    (void)_Py_hashtable_pop_entry(ht, key_size, pkey, NULL, 0);
-#endif
-}
-#endif
 
 
 int
 _Py_hashtable_foreach(_Py_hashtable_t *ht,
                       _Py_hashtable_foreach_func func,
-                      void *arg)
+                      void *user_data)
 {
     _Py_hashtable_entry_t *entry;
     size_t hv;
 
     for (hv = 0; hv < ht->num_buckets; hv++) {
         for (entry = TABLE_HEAD(ht, hv); entry; entry = ENTRY_NEXT(entry)) {
-            int res = func(ht, entry, arg);
+            int res = func(ht, entry->key, entry->value, user_data);
             if (res)
                 return res;
         }
@@ -427,7 +349,7 @@ hashtable_rehash(_Py_hashtable_t *ht)
             size_t entry_index;
 
 
-            assert(ht->hash_func(ht, _Py_HASHTABLE_ENTRY_PKEY(entry)) == entry->key_hash);
+            assert(ht->hash_func(entry->key) == entry->key_hash);
             next = ENTRY_NEXT(entry);
             entry_index = entry->key_hash & (new_size - 1);
 
@@ -440,10 +362,10 @@ hashtable_rehash(_Py_hashtable_t *ht)
 
 
 _Py_hashtable_t *
-_Py_hashtable_new_full(size_t key_size, size_t data_size,
-                       size_t init_size,
-                       _Py_hashtable_hash_func hash_func,
+_Py_hashtable_new_full(_Py_hashtable_hash_func hash_func,
                        _Py_hashtable_compare_func compare_func,
+                       _Py_hashtable_destroy_func key_destroy_func,
+                       _Py_hashtable_destroy_func value_destroy_func,
                        _Py_hashtable_allocator_t *allocator)
 {
     _Py_hashtable_t *ht;
@@ -462,10 +384,8 @@ _Py_hashtable_new_full(size_t key_size, size_t data_size,
     if (ht == NULL)
         return ht;
 
-    ht->num_buckets = round_size(init_size);
+    ht->num_buckets = HASHTABLE_MIN_SIZE;
     ht->entries = 0;
-    ht->key_size = key_size;
-    ht->data_size = data_size;
 
     buckets_size = ht->num_buckets * sizeof(ht->buckets[0]);
     ht->buckets = alloc.malloc(buckets_size);
@@ -475,16 +395,15 @@ _Py_hashtable_new_full(size_t key_size, size_t data_size,
     }
     memset(ht->buckets, 0, buckets_size);
 
-    ht->get_func = _Py_hashtable_get_generic;
     ht->get_entry_func = _Py_hashtable_get_entry_generic;
     ht->hash_func = hash_func;
     ht->compare_func = compare_func;
+    ht->key_destroy_func = key_destroy_func;
+    ht->value_destroy_func = value_destroy_func;
     ht->alloc = alloc;
-    if (ht->key_size == sizeof(void*)
-        && ht->hash_func == _Py_hashtable_hash_ptr
+    if (ht->hash_func == _Py_hashtable_hash_ptr
         && ht->compare_func == _Py_hashtable_compare_direct)
     {
-        ht->get_func = _Py_hashtable_get_ptr;
         ht->get_entry_func = _Py_hashtable_get_entry_ptr;
     }
     return ht;
@@ -492,14 +411,24 @@ _Py_hashtable_new_full(size_t key_size, size_t data_size,
 
 
 _Py_hashtable_t *
-_Py_hashtable_new(size_t key_size, size_t data_size,
-                  _Py_hashtable_hash_func hash_func,
+_Py_hashtable_new(_Py_hashtable_hash_func hash_func,
                   _Py_hashtable_compare_func compare_func)
 {
-    return _Py_hashtable_new_full(key_size, data_size,
-                                  HASHTABLE_MIN_SIZE,
-                                  hash_func, compare_func,
-                                  NULL);
+    return _Py_hashtable_new_full(hash_func, compare_func,
+                                  NULL, NULL, NULL);
+}
+
+
+static void
+_Py_hashtable_destroy_entry(_Py_hashtable_t *ht, _Py_hashtable_entry_t *entry)
+{
+    if (ht->key_destroy_func) {
+        ht->key_destroy_func(entry->key);
+    }
+    if (ht->value_destroy_func) {
+        ht->value_destroy_func(entry->value);
+    }
+    ht->alloc.free(entry);
 }
 
 
@@ -512,7 +441,7 @@ _Py_hashtable_clear(_Py_hashtable_t *ht)
     for (i=0; i < ht->num_buckets; i++) {
         for (entry = TABLE_HEAD(ht, i); entry != NULL; entry = next) {
             next = ENTRY_NEXT(entry);
-            ht->alloc.free(entry);
+            _Py_hashtable_destroy_entry(ht, entry);
         }
         _Py_slist_init(&ht->buckets[i]);
     }
@@ -524,51 +453,15 @@ _Py_hashtable_clear(_Py_hashtable_t *ht)
 void
 _Py_hashtable_destroy(_Py_hashtable_t *ht)
 {
-    size_t i;
-
-    for (i = 0; i < ht->num_buckets; i++) {
-        _Py_slist_item_t *entry = ht->buckets[i].head;
+    for (size_t i = 0; i < ht->num_buckets; i++) {
+        _Py_hashtable_entry_t *entry = TABLE_HEAD(ht, i);
         while (entry) {
-            _Py_slist_item_t *entry_next = entry->next;
-            ht->alloc.free(entry);
+            _Py_hashtable_entry_t *entry_next = ENTRY_NEXT(entry);
+            _Py_hashtable_destroy_entry(ht, entry);
             entry = entry_next;
         }
     }
 
     ht->alloc.free(ht->buckets);
     ht->alloc.free(ht);
-}
-
-
-_Py_hashtable_t *
-_Py_hashtable_copy(_Py_hashtable_t *src)
-{
-    const size_t key_size = src->key_size;
-    const size_t data_size = src->data_size;
-    _Py_hashtable_t *dst;
-    _Py_hashtable_entry_t *entry;
-    size_t bucket;
-    int err;
-
-    dst = _Py_hashtable_new_full(key_size, data_size,
-                                 src->num_buckets,
-                                 src->hash_func,
-                                 src->compare_func,
-                                 &src->alloc);
-    if (dst == NULL)
-        return NULL;
-
-    for (bucket=0; bucket < src->num_buckets; bucket++) {
-        entry = TABLE_HEAD(src, bucket);
-        for (; entry; entry = ENTRY_NEXT(entry)) {
-            const void *pkey = _Py_HASHTABLE_ENTRY_PKEY(entry);
-            const void *pdata = _Py_HASHTABLE_ENTRY_PDATA(src, entry);
-            err = _Py_hashtable_set(dst, key_size, pkey, data_size, pdata);
-            if (err) {
-                _Py_hashtable_destroy(dst);
-                return NULL;
-            }
-        }
-    }
-    return dst;
 }
