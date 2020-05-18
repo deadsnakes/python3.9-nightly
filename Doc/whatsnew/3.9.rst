@@ -542,6 +542,10 @@ most platforms.  On Fedora and SuSE, it is equal to ``"lib64"`` on 64-bit
 platforms.
 (Contributed by Jan Matějek, Matěj Cepl, Charalampos Stratakis and Victor Stinner in :issue:`1294959`.)
 
+Previously, :attr:`sys.stderr` was block-buffered when non-interactive. Now
+``stderr`` defaults to always being line-buffered.
+(Contributed by Jendrik Seipp in :issue:`13601`.)
+
 
 typing
 ------
@@ -887,6 +891,14 @@ Build Changes
 * On non-Windows platforms, the :c:func:`setenv` and :c:func:`unsetenv`
   functions are now required to build Python.
   (Contributed by Victor Stinner in :issue:`39395`.)
+
+* The ``OBJC`` and ``OBJCXX`` standard command line options for the configure
+  script are now supported. This allows building fot macOS with a third-party
+  compiler, like GNU `gcc`, for everything except for the several
+  system-specific source files that need system headers that require the
+  Apple-supplied compile chain (e.g. the ``_scproxy`` helper module and
+  ``PythonLauncher.app``).
+  (Contributed by Jeffrey Kintscher in :issue:`26317`.)
 
 
 C API Changes
