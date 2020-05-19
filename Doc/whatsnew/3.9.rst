@@ -282,6 +282,12 @@ that schedules a shutdown for the default executor that waits on the
 Added :class:`asyncio.PidfdChildWatcher`, a Linux-specific child watcher
 implementation that polls process file descriptors. (:issue:`38692`)
 
+Added a new :term:`coroutine` :func:`asyncio.to_thread`. It is mainly used for
+running IO-bound functions in a separate thread to avoid blocking the event
+loop, and essentially works as a high-level version of
+:meth:`~asyncio.loop.run_in_executor` that can directly take keyword arguments.
+(Contributed by Kyle Stanley and Yury Selivanov in :issue:`32309`.)
+
 compileall
 ----------
 
@@ -846,11 +852,6 @@ Changes in the Python API
   :class:`ftplib.FTP_TLS` as a keyword-only parameter, and the default encoding
   is changed from Latin-1 to UTF-8 to follow :rfc:`2640`.
 
-* :func:`inspect.getdoc` no longer returns docstring inherited from the type
-  of the object or from parent class if it is a class if it is not defined
-  in the object itself.
-  (Contributed by Serhiy Storchaka in :issue:`40257`.)
-
 * :meth:`asyncio.loop.shutdown_default_executor` has been added to
   :class:`~asyncio.AbstractEventLoop`, meaning alternative event loops that
   inherit from it should have this method defined.
@@ -891,14 +892,6 @@ Build Changes
 * On non-Windows platforms, the :c:func:`setenv` and :c:func:`unsetenv`
   functions are now required to build Python.
   (Contributed by Victor Stinner in :issue:`39395`.)
-
-* The ``OBJC`` and ``OBJCXX`` standard command line options for the configure
-  script are now supported. This allows building fot macOS with a third-party
-  compiler, like GNU `gcc`, for everything except for the several
-  system-specific source files that need system headers that require the
-  Apple-supplied compile chain (e.g. the ``_scproxy`` helper module and
-  ``PythonLauncher.app``).
-  (Contributed by Jeffrey Kintscher in :issue:`26317`.)
 
 
 C API Changes
