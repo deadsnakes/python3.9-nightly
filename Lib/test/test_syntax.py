@@ -136,6 +136,18 @@ SyntaxError: cannot assign to operator
 Traceback (most recent call last):
 SyntaxError: cannot assign to conditional expression
 
+>>> True = True = 3
+Traceback (most recent call last):
+SyntaxError: cannot assign to True
+
+>>> x = y = True = z = 3
+Traceback (most recent call last):
+SyntaxError: cannot assign to True
+
+>>> x = y = yield = 1
+Traceback (most recent call last):
+SyntaxError: assignment to yield expression not possible
+
 >>> a, b += 1, 2
 Traceback (most recent call last):
 SyntaxError: 'tuple' is an illegal expression for augmented assignment
@@ -148,13 +160,16 @@ SyntaxError: 'tuple' is an illegal expression for augmented assignment
 Traceback (most recent call last):
 SyntaxError: 'list' is an illegal expression for augmented assignment
 
+>>> p = p =
+Traceback (most recent call last):
+SyntaxError: invalid syntax
+
 From compiler_complex_args():
 
 >>> def f(None=1):
 ...     pass
 Traceback (most recent call last):
 SyntaxError: invalid syntax
-
 
 From ast_for_arguments():
 
