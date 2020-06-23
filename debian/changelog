@@ -1,3 +1,9 @@
+python3.9 (3.9.0~b3-63-gcd696201ff-1+bionic1) bionic; urgency=medium
+
+  * Update to v3.9.0b3-63-gcd696201ff (2020-06-23).
+
+ -- Anthony Sottile <asottile@umich.edu>  Tue, 23 Jun 2020 12:29:52 -0700
+
 python3.9 (3.9.0~b3-61-gc916c48afc-1+bionic1) bionic; urgency=medium
 
   * Update to v3.9.0b3-61-gc916c48afc (2020-06-22).
