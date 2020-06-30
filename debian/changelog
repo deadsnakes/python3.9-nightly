@@ -1,3 +1,9 @@
+python3.9 (3.9.0~b3-105-g2ea6a9928e-1+xenial1) xenial; urgency=medium
+
+  * Update to v3.9.0b3-105-g2ea6a9928e (2020-06-30).
+
+ -- Anthony Sottile <asottile@umich.edu>  Tue, 30 Jun 2020 09:21:55 -0700
+
 python3.9 (3.9.0~b3-96-g1497bf66f9-1+xenial1) xenial; urgency=medium
 
   * Update to v3.9.0b3-96-g1497bf66f9 (2020-06-28).
