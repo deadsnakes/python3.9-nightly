@@ -27,3 +27,4 @@ pydoc-use-pager.diff
 build-math-object.diff
 argparse-no-shutil.diff
 0029-Revert-bpo-40874-Update-the-required-libmpdec-versio.patch
+0030-sysconfigdata-name.patch
