@@ -1,3 +1,9 @@
+python3.9 (3.9.0-194-g2837241f22-1+xenial1) xenial; urgency=medium
+
+  * Update to v3.9.0-194-g2837241f22 (2020-11-15).
+
+ -- Anthony Sottile (deadsnakes) <asottile+deadsnakes@umich.edu>  Sun, 15 Nov 2020 08:50:42 +0000
+
 python3.9 (3.9.0-193-gfaadc52e75-1+xenial1) xenial; urgency=medium
 
   * Update to v3.9.0-193-gfaadc52e75 (2020-11-14).
