@@ -65,7 +65,7 @@ index 7a87cfe..ad3d377 100644
  	-rm -r $(DESTDIR)$(DESTSHARED)/__pycache__
  
 diff --git a/configure.ac b/configure.ac
-index 3378210..59c3510 100644
+index 31f4b74..2645490 100644
 --- a/configure.ac
 +++ b/configure.ac
 @@ -75,7 +75,7 @@ if test "$cross_compiling" = yes; then
