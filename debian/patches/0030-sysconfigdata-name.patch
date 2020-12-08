@@ -25,7 +25,7 @@ index d15e9b2..35314d3 100644
      ))
      _temp = __import__(name, globals(), locals(), ['build_time_vars'], 0)
 diff --git a/Lib/sysconfig.py b/Lib/sysconfig.py
-index b0f72a1..7085cb9 100644
+index 5ad5448..d65d0c8 100644
 --- a/Lib/sysconfig.py
 +++ b/Lib/sysconfig.py
 @@ -343,9 +343,8 @@ def get_makefile_filename():
