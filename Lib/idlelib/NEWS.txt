@@ -1,12 +1,20 @@
-What's New in IDLE 3.9.1
-Released on 2020-12-07?
+What's New in IDLE 3.9.2
+Released on 2021-02-15?
 ======================================
 
+
+bpo-43008: Make IDLE invoke :func:`sys.excepthook` in normal,
+2-process mode.
 
 bpo-33065: Fix problem debugging user classes with __repr__ method.
 
 bpo-32631: Finish zzdummy example extension module: make menu entries
 work; add docstrings and tests with 100% coverage.
+
+
+What's New in IDLE 3.9.1
+Released on 2020-12-07
+======================================
 
 bpo-42508: Keep IDLE running on macOS.  Remove obsolete workaround
 that prevented running files with shortcuts when using new universal2
