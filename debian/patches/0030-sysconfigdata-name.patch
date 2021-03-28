@@ -65,10 +65,10 @@ index 5b6fec3..8c30d1b 100644
  	-rm -r $(DESTDIR)$(DESTSHARED)/__pycache__
  
 diff --git a/configure.ac b/configure.ac
-index f45595e..d278639 100644
+index dee9d75..ffdf5ef 100644
 --- a/configure.ac
 +++ b/configure.ac
-@@ -75,7 +75,7 @@ if test "$cross_compiling" = yes; then
+@@ -82,7 +82,7 @@ if test "$cross_compiling" = yes; then
  	    AC_MSG_ERROR([python$PACKAGE_VERSION interpreter not found])
  	fi
          AC_MSG_RESULT($interp)
