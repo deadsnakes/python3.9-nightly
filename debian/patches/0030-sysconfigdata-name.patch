@@ -40,10 +40,10 @@ index f3dd3c6..bd91dc3 100644
      ))
  
 diff --git a/Makefile.pre.in b/Makefile.pre.in
-index 5b6fec3..8c30d1b 100644
+index f778d45..2ac2e8d 100644
 --- a/Makefile.pre.in
 +++ b/Makefile.pre.in
-@@ -1538,8 +1538,10 @@ libinstall:	build_all $(srcdir)/Modules/xxmodule.c
+@@ -1547,8 +1547,10 @@ libinstall:	build_all $(srcdir)/Modules/xxmodule.c
  			esac; \
  		done; \
  	done
@@ -56,7 +56,7 @@ index 5b6fec3..8c30d1b 100644
  	$(INSTALL_DATA) $(srcdir)/LICENSE $(DESTDIR)$(LIBDEST)/LICENSE.txt
  	if test -d $(DESTDIR)$(LIBDEST)/distutils/tests; then \
  		$(INSTALL_DATA) $(srcdir)/Modules/xxmodule.c \
-@@ -1694,6 +1696,7 @@ sharedinstall: sharedmods
+@@ -1703,6 +1705,7 @@ sharedinstall: sharedmods
  		--install-scripts=$(BINDIR) \
  		--install-platlib=$(DESTSHARED) \
  		--root=$(DESTDIR)/
