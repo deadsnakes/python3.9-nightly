@@ -40,10 +40,10 @@ index f3dd3c6..bd91dc3 100644
      ))
  
 diff --git a/Makefile.pre.in b/Makefile.pre.in
-index ef0e18c..e6fc216 100644
+index 957e2d2..51a05eb 100644
 --- a/Makefile.pre.in
 +++ b/Makefile.pre.in
-@@ -1545,8 +1545,10 @@ libinstall:	build_all $(srcdir)/Modules/xxmodule.c
+@@ -1558,8 +1558,10 @@ libinstall:	build_all $(srcdir)/Modules/xxmodule.c
  			esac; \
  		done; \
  	done
@@ -56,7 +56,7 @@ index ef0e18c..e6fc216 100644
  	$(INSTALL_DATA) $(srcdir)/LICENSE $(DESTDIR)$(LIBDEST)/LICENSE.txt
  	if test -d $(DESTDIR)$(LIBDEST)/distutils/tests; then \
  		$(INSTALL_DATA) $(srcdir)/Modules/xxmodule.c \
-@@ -1701,6 +1703,7 @@ sharedinstall: sharedmods
+@@ -1714,6 +1716,7 @@ sharedinstall: sharedmods
  		--install-scripts=$(BINDIR) \
  		--install-platlib=$(DESTSHARED) \
  		--root=$(DESTDIR)/
@@ -65,7 +65,7 @@ index ef0e18c..e6fc216 100644
  	-rm -r $(DESTDIR)$(DESTSHARED)/__pycache__
  
 diff --git a/configure.ac b/configure.ac
-index dee9d75..ffdf5ef 100644
+index 5592cc7..9e1237f 100644
 --- a/configure.ac
 +++ b/configure.ac
 @@ -82,7 +82,7 @@ if test "$cross_compiling" = yes; then
