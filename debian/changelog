@@ -1,3 +1,9 @@
+python3.9 (3.9.5-102-g5a8ddcc452-1+bionic1) bionic; urgency=medium
+
+  * Update to v3.9.5-102-g5a8ddcc452 (2021-06-03).
+
+ -- Anthony Sottile (deadsnakes) <asottile+deadsnakes@umich.edu>  Thu, 03 Jun 2021 09:42:35 +0000
+
 python3.9 (3.9.5-98-g9a68862497-1+bionic1) bionic; urgency=medium
 
   * Update to v3.9.5-98-g9a68862497 (2021-06-02).
