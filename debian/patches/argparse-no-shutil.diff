@@ -7,7 +7,7 @@ Subject: argparse-no-shutil
  1 file changed, 6 insertions(+), 3 deletions(-)
 
 diff --git a/Lib/argparse.py b/Lib/argparse.py
-index b8011ce..a907aa5 100644
+index bd1436a..1759f52 100644
 --- a/Lib/argparse.py
 +++ b/Lib/argparse.py
 @@ -175,9 +175,12 @@ class HelpFormatter(object):
