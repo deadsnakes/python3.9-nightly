@@ -1,3 +1,9 @@
+python3.9 (3.9.7-58-g5822ab672a-1+focal1) focal; urgency=medium
+
+  * Update to v3.9.7-58-g5822ab672a (2021-09-20).
+
+ -- Anthony Sottile (deadsnakes) <asottile+deadsnakes@umich.edu>  Mon, 20 Sep 2021 08:50:56 +0000
+
 python3.9 (3.9.7-42-g471b3811fe-1+focal1) focal; urgency=medium
 
   * Update to v3.9.7-42-g471b3811fe (2021-09-16).
