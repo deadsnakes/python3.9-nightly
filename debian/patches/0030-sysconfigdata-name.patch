@@ -65,7 +65,7 @@ index fb2defc..f27905a 100644
  	-rm -r $(DESTDIR)$(DESTSHARED)/__pycache__
  
 diff --git a/configure.ac b/configure.ac
-index 1b2c0e4..e92d997 100644
+index a3375b8..b4c85ad 100644
 --- a/configure.ac
 +++ b/configure.ac
 @@ -82,7 +82,7 @@ if test "$cross_compiling" = yes; then
