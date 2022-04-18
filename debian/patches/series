@@ -9,7 +9,6 @@ gdbm-import.diff
 link-opt.diff
 setup-modules.diff
 bdist-wininst-notfound.diff
-profiled-build.diff
 langpack-gettext.diff
 disable-sem-check.diff
 lib-argparse.diff
@@ -26,4 +25,6 @@ reproducible-buildinfo.diff
 pydoc-use-pager.diff
 build-math-object.diff
 argparse-no-shutil.diff
-0029-Revert-bpo-40874-Update-the-required-libmpdec-versio.patch
+0036-allow-older-libmpdec.patch
+0028-sysconfigdata-name.patch
+0029-destshared-location.patch

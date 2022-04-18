@@ -1,9 +1,7 @@
 From: Anthony Sottile <asottile@umich.edu>
-Date: Tue, 30 Jun 2020 09:23:43 -0700
-Subject: Revert "bpo-40874 Update the required libmpdec version for the
- decimal module (GH-21202) "
+Date: Mon, 6 Jul 2020 12:53:20 -0700
+Subject: allow-older-libmpdec
 
-This reverts commit 119de0eba839993cf6a909dba5d60202ad5566d6.
 ---
  Modules/_decimal/_decimal.c | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)

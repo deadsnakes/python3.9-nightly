@@ -81,6 +81,7 @@ Description: Minimal subset of the Python language (version 3.9)
  be used in the boot process for some basic tasks.
  See /usr/share/doc/python3.9-minimal/README.Debian for a list of the modules
  contained in this package.
+XB-Cnf-Visible-Pkgname: python3.9
 
 Package: libpython3.9-minimal
 Architecture: any
@@ -149,7 +150,7 @@ Package: libpython3.9-testsuite
 Section: libdevel
 Architecture: all
 Depends: python3.9 (>= ${binary:Version}), ${misc:Depends}, net-tools
-Suggests: pythonpython3.9-gdbm, pythonpython3.9-tk
+Suggests: python3.9-gdbm, python3.9-tk
 Description: Testsuite for the Python standard library (v3.9)
  The complete testsuite for the Python standard library.  Note that
  a subset is found in the libpython3.9-stdlib package, which should
@@ -173,7 +174,7 @@ Architecture: any
 Multi-Arch: allowed
 Depends: python3.9 (= ${binary:Version}), libpython3.9-dbg (= ${binary:Version}), ${shlibs:Depends}, ${misc:Depends}
 Recommends: gdb
-Suggests: pythonpython3.9-gdbm-dbg, pythonpython3.9-tk-dbg
+Suggests: python3.9-gdbm-dbg, python3.9-tk-dbg
 Description: Debug Build of the Python Interpreter (version 3.9)
  The package holds two things:
  .
@@ -274,7 +275,7 @@ Depends: python3.9 (= ${binary:Version}),
   python3.9-tk,
   ca-certificates,
   ${shlibs:Depends}, ${misc:Depends}
-Recommends: python3.9-doc, python3.9-examples,
+Recommends: python3.9-examples,
 Suggests: python3.9-dev
 Description: Python Interpreter with complete class library (version 3.9)
  Python, the high-level, interactive object oriented language,
