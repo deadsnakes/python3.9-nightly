@@ -1,3 +1,9 @@
+python3.9 (3.9.12-91-g0e16105af6-1+jammy1) jammy; urgency=medium
+
+  * Update to v3.9.12-91-g0e16105af6 (2022-04-28).
+
+ -- Anthony Sottile (deadsnakes) <asottile+deadsnakes@umich.edu>  Thu, 28 Apr 2022 09:05:51 +0000
+
 python3.9 (3.9.12-87-g081e95165e-1+jammy1) jammy; urgency=medium
 
   * Update to v3.9.12-87-g081e95165e (2022-04-27).
